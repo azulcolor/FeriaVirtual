@@ -1,4 +1,3 @@
-// @ts-nocheck
 const mysql = require('mysql'); 
 
 const database = require("../config/keys.config.js");
@@ -8,7 +7,7 @@ const pool = mysql.createConnection(database);
 //Conexión a la base de datos
 pool.connect(err => {
     if (err) throw err;
-    console.log("Successful connedted to the database: " + database.db);
+    console.log("Successful connected to the database: " + database.db);
 });
 
 module.exports = pool;
