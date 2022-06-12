@@ -14,6 +14,29 @@ Universidad.getAll = (result) => {
           }
           result(null, res);
     });
-}
+};
+
+Universidad.getById = (id, result) => {
+    const urlYoutube = "https://www.youtube.com/watch?v=";
+
+    let query = `SELECT universidad.Nombre, universidad.Ruta_Escudo, video.Titulo, video.Recurso FROM universidad INNER JOIN video ON universidad.ID = video.Universidad_ID WHERE video.Seccion_ID = ${id}`;
+
+    pool.query(query, (err, res) => {
+        if(err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        
+        const data = res.map(dataUni => {
+            return {
+                ...dataUni,
+                Recurso: urlYoutube + dataUni.Recurso
+            }
+        });
+
+        result(null, data);
+    });
+};
 
 module.exports = Universidad;

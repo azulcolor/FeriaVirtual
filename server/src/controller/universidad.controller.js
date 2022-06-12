@@ -10,7 +10,18 @@ exports.findAll = (req, res) => {
       else {
         res.send(data);
       }
-    })
+    });
+};
 
-
-}
+exports.findById = (req, res) => {
+  Universidad.getById(req.params.id, (err, data) => {
+    if (err) {
+      res.status(500).send({
+        message:
+          err.message || "Ocurrio un error al obtener los datos de la universidad"
+      });
+    } else {
+      res.send(data);
+    }
+  });
+};
