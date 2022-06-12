@@ -19,7 +19,7 @@ Universidad.getAll = (result) => {
 Universidad.getById = (id, result) => {
     const urlYoutube = "https://www.youtube.com/watch?v=";
 
-    let query = `SELECT universidad.Nombre, universidad.Ruta_Escudo, video.Titulo, video.Recurso FROM universidad INNER JOIN video ON universidad.ID = video.Universidad_ID WHERE video.Seccion_ID = ${id}`;
+    let query = `SELECT universidad.Nombre, universidad.Ruta_Escudo, video.Titulo, video.Recurso FROM universidad INNER JOIN video ON universidad.ID = video.Universidad_ID WHERE video.Seccion_ID = 1 AND universidad.ID = ${id}`;
 
     pool.query(query, (err, res) => {
         if(err) {
@@ -30,12 +30,13 @@ Universidad.getById = (id, result) => {
         
         const data = res.map(dataUni => {
             return {
+                id: id,
                 ...dataUni,
                 Recurso: urlYoutube + dataUni.Recurso
             }
         });
 
-        result(null, data);
+        result(null, data[0]);
     });
 };
 
