@@ -1,4 +1,4 @@
-import 'package:feriavirtual/screens/homePage.dart';
+import 'package:feriavirtual/screens/mainPage.dart';
 import 'package:flutter/material.dart';
 import './utils/color.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: backgroundColor,
       ),
-      home: HomePage(),
+      home: const MainPage(),
     );
   }
 }
