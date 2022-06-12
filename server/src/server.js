@@ -17,6 +17,7 @@ app.use(cors());
 
 //Routes
 app.use('/v1/testvocacional', require('./routes/testVocacional.routes'));
+app.use('/v1/universidad', require('./routes/universidad.routes'));
 
 //Activar el servidor
 app.listen(app.get('port'), () => {
