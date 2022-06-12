@@ -1,25 +1,8 @@
-//@ts-check
-const express = require("express"); // Crear el servidor, manejar rutas.
-const morgan = require("morgan"); // Ver los datos de las peticiones.
-const cors = require("cors"); // Da acceso al consumo de la api. 
+const app = require('./app.js');
 
-//Inicialitazations
-const app = express();
-
-//Settings
-app.set('port', process.env.PORT || 4000); //Puerto del servidor
-
-//Middleweres
-app.use(express.json()); //* Se configura express, para utilizar JSON
-app.use(express.urlencoded({ extended: false }));
-app.use(morgan('dev'));
-app.use(cors());
-
-//Routes
-app.use('/v1/testvocacional', require('./routes/testVocacional.routes'));
-app.use('/v1/universidad', require('./routes/universidad.routes'));
+const port = app.get('port');
 
 //Activar el servidor
-app.listen(app.get('port'), () => {
-    console.log('Server is running on port ', app.get('port'));
+app.listen(port, () => {
+    console.log('Server is running on port ', port);
 });
