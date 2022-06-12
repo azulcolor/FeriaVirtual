@@ -1,4 +1,0 @@
-#Sat Jun 11 19:49:01 EST 2022
-base.0=C\:\\Users\\Eduardo\\Desktop\\feriaVirtual\\frontEnd\\feriavirtual\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-renamed.0=classes.dex
-path.0=classes.dex
