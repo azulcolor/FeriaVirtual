@@ -1,5 +1,6 @@
 import 'package:feriavirtual/screens/homePage.dart';
 import 'package:flutter/material.dart';
+import 'package:feriavirtual/components/header.dart';
 import '/utils/color.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -28,6 +29,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const Header(),
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
