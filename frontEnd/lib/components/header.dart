@@ -11,10 +11,10 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          color: primaryColor,
-          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+      body: Container(
+        color: primaryColor,
+        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+        child: SafeArea(
           child: Row(children: [
             //Logo
             Image.asset(
