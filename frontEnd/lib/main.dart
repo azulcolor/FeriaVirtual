@@ -1,4 +1,5 @@
 import 'package:feriavirtual/screens/mainPage.dart';
+import 'package:feriavirtual/components/header.dart';
 import 'package:flutter/material.dart';
 import './utils/color.dart';
 
