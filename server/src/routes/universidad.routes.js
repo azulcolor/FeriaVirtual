@@ -10,4 +10,6 @@ router.get("/ofertaeducativa/:id", universidad.getOfertaEducativa);
 
 router.get("/multimedia/:id", universidad.getMultimedia);
 
+router.get("/direccion/:id", universidad.getDireccion);
+
 module.exports = router;

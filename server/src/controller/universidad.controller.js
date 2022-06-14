@@ -51,3 +51,16 @@ exports.getMultimedia = (req, res) => {
     }
   })
 }
+
+exports.getDireccion = (req, res) => {
+  Universidad.getDireccion(req.params.id, (err, data) => {
+    if(err){
+      res.status(500).send({
+        message:
+        err.message || "Ocurrio un error al obtener la ubicación"
+      });
+    } else {
+      res.send(data);
+    }
+  });
+}
