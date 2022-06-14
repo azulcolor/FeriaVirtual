@@ -25,3 +25,16 @@ exports.findById = (req, res) => {
     }
   });
 };
+
+exports.getOfertaEducativa = (req, res) => {
+  Universidad.getOfertaEducativa(req.params.id, (err, data) => {
+    if(err){
+      res.status(500).send({
+        message:
+        err.message || "Ocurrio un error al obtener al oferta educativa"
+      });
+    } else {
+      res.send(data);
+    }
+  });
+}
