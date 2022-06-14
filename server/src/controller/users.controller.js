@@ -18,13 +18,13 @@ exports.registrarUsuario = (req, res) => {
     } = req.body;
 
     const user = new Users({ 
-        Nombre: Nombre,
-        Apellido_P: Apellido_P,
-        Apellido_M: Apellido_M,
-        Correo_Electronico: Correo_Electronico,
+        Nombre: Nombre.toUpperCase(),
+        Apellido_P: Apellido_P.toUpperCase(),
+        Apellido_M: Apellido_M.toUpperCase(),
+        Correo_Electronico: Correo_Electronico.toUpperCase(),
         Telefono: Telefono,
         Motivo: Motivo,
-        Escuela: Escuela,
+        Escuela: Escuela.toUpperCase(),
         Area_ID: Area_ID,
     });
 
