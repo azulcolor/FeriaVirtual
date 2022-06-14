@@ -24,4 +24,20 @@ Users.create = (newUser, result) => {
     });
 }
 
+Users.login = (email, result) => {
+    pool.query(`SELECT Correo_Electronico FROM registrado WHERE Correo_Electronico = '${email}'`, (err, res) => {
+        if (err) {
+            console.log(err);
+            result(err, null);
+            return;
+        }
+        if (res.length>0) {
+                result(null, res[0]);
+                return;
+        } else {
+            result({ kind: 'user_not_found' }, null);
+        }
+    });
+}
+
 module.exports = Users;

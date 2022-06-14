@@ -1,4 +1,4 @@
-const Users = require('../model/user.model');
+const Users = require('../model/users.model');
 
 exports.registrarUsuario = (req, res) => {
     if (!req.body) {
@@ -37,7 +37,29 @@ exports.registrarUsuario = (req, res) => {
             res.send(data);
         }
     });
+
+    
+
 console.log(user);
 
 
+}
+
+exports.login = (req, res) => {
+    if (!req.body) {
+        res.status(400).send({
+          message: "No puede estar vacio"
+        });
+    }
+    const email = req.body.Correo_Electronico;
+
+    Users.login(email, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Usuario o contraseña incorrectos"
+            });
+        } else {
+            res.status(200).send( {data, success: true});
+        }
+    })
 }

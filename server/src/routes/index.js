@@ -1,7 +1,7 @@
 
 const universidadRouter = require('./universidad.routes');
 const testVocacionalRouter = require('./testVocacional.routes');
-const userRouter = require('./user.routes');
+const userRouter = require('./users.routes');
 
 function routerApi(app) {
     app.use('/v1/testvocacional', testVocacionalRouter);
