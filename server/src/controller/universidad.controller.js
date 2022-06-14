@@ -25,3 +25,42 @@ exports.findById = (req, res) => {
     }
   });
 };
+
+exports.getOfertaEducativa = (req, res) => {
+  Universidad.getOfertaEducativa(req.params.id, (err, data) => {
+    if(err){
+      res.status(500).send({
+        message:
+        err.message || "Ocurrio un error al obtener al oferta educativa"
+      });
+    } else {
+      res.send(data);
+    }
+  });
+}
+
+exports.getMultimedia = (req, res) => {
+  Universidad.getMultimedia(req.params.id, (err, data) => {
+    if(err){
+      res.status(500).send({
+        message:
+        err.message || "Ocurrio un error al obtener los recursos multimedia"
+      });
+    } else {
+      res.send(data);
+    }
+  })
+}
+
+exports.getDireccion = (req, res) => {
+  Universidad.getDireccion(req.params.id, (err, data) => {
+    if(err){
+      res.status(500).send({
+        message:
+        err.message || "Ocurrio un error al obtener la ubicación"
+      });
+    } else {
+      res.send(data);
+    }
+  });
+}

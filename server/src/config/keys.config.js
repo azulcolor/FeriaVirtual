@@ -1,6 +1,6 @@
 module.exports = {
     HOST: "localhost",
     USER: "root",
-    PASSWORD: "",
-    DB: "feria"
+    PASSWORD: "Unrealengine5",
+    DB: "feria2"
   };
