@@ -38,3 +38,16 @@ exports.getOfertaEducativa = (req, res) => {
     }
   });
 }
+
+exports.getMultimedia = (req, res) => {
+  Universidad.getMultimedia(req.params.id, (err, data) => {
+    if(err){
+      res.status(500).send({
+        message:
+        err.message || "Ocurrio un error al obtener los recursos multimedia"
+      });
+    } else {
+      res.send(data);
+    }
+  })
+}

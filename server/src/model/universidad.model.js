@@ -50,7 +50,68 @@ Universidad.getOfertaEducativa = (id, result) => {
             return;
         }
         result(null, res);
-    })
+    });
+}
+
+Universidad.getMultimedia = (id, result) => {
+
+    getFotos(id, (err, linksFotos) => {
+        if(err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        getVideos(id, (err, linksVideos) => {
+            if(err) {
+                console.log("error: ", err);
+                result(null, err);
+                return;
+            }
+            const data = {
+                linksFotos,
+                linksVideos
+            }
+
+            result(null, data);
+        });
+    });
+
+}
+
+getFotos = (id, result) => {
+    let queryFoto = `SELECT foto.Universidad_ID, foto.Titulo, foto.Recurso FROM foto WHERE foto.Universidad_ID = ${id}`;
+
+    pool.query(queryFoto, (err, res) => {
+        if(err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        result(null, res);
+    });
+}
+
+getVideos = (id, result) => {
+    const urlYoutube = "https://www.youtube.com/watch?v=";
+
+    let queryVideo = `SELECT video.Universidad_ID, video.ID, video.Titulo, video.Recurso FROM video WHERE video.Universidad_ID = ${id}`;
+
+    pool.query(queryVideo, (err, res) => {
+        if(err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+
+        const data = res.map(dataUni => {
+            return {
+                ...dataUni,
+                Recurso: urlYoutube + dataUni.Recurso
+            }
+        });
+
+        result(null, data);
+    });
 }
 
 module.exports = Universidad;
