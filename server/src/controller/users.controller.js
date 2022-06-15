@@ -3,7 +3,7 @@ const Users = require('../model/users.model');
 exports.registrarUsuario = (req, res) => {
     if (!req.body) {
         res.status(400).send({
-          message: "No puede estar vacio"
+          message: "No se recibieron datos"
         });
     }
     const {
@@ -16,6 +16,8 @@ exports.registrarUsuario = (req, res) => {
         Escuela,
         Area_ID,
     } = req.body;
+
+    
 
     const user = new Users({ 
         Nombre: Nombre.toUpperCase(),
@@ -34,13 +36,13 @@ exports.registrarUsuario = (req, res) => {
                 message: err.message || "Error al crear el usuario"
             });
         } else {
-            res.send(data);
+            res.status(201).send(data);
         }
     });
 
     
 
-console.log(user);
+        console.log(user);
 
 
 }
@@ -53,7 +55,7 @@ exports.login = (req, res) => {
     }
     const email = req.body.Correo_Electronico;
 
-    Users.login(email, (err, data) => {
+    Users.checkEmail(email, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: err.message || "Usuario o contraseña incorrectos"
@@ -62,4 +64,29 @@ exports.login = (req, res) => {
             res.status(200).send( {data, success: true});
         }
     })
+}
+
+exports.checkDuplicateEmail = (req, res, next) => {
+    if (!req.body) {
+        res.status(400).send({
+          msg: "No puede estar vacio"
+        });
+    }
+    const email = req.body.Correo_Electronico;
+    Users.checkEmail(email, (err, datacheck) => {
+        if (err) {
+            res.status(500).send({
+                msg: err.message || "error al crear el usuario"
+            });
+        } else {
+            if (datacheck) {
+                res.status(400).send({
+                    msg: "El correo electronico ya fue registrado anteriormente"
+                });
+                return
+            }
+            next();
+        }
+    })
+    
 }

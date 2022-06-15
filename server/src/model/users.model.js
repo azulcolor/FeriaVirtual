@@ -19,12 +19,11 @@ Users.create = (newUser, result) => {
             result(err, null);
             return;
         }
-        console.log('Se ha creado un nuevo usuario');
         result(null, { id: res.insertId, ...newUser });
     });
 }
 
-Users.login = (email, result) => {
+Users.checkEmail = (email, result) => {
     pool.query(`SELECT Correo_Electronico FROM registrado WHERE Correo_Electronico = '${email}'`, (err, res) => {
         if (err) {
             console.log(err);
@@ -35,7 +34,7 @@ Users.login = (email, result) => {
                 result(null, res[0]);
                 return;
         } else {
-            result({ kind: 'user_not_found' }, null);
+            result(null, false);
         }
     });
 }
