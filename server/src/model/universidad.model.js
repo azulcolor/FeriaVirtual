@@ -17,7 +17,7 @@
      pool.query(query, (err, res) => {
          if (err) {
              console.log("error: ", err);
-             result(null, err);
+             result(null, {message: "Ocurrio un error en la base de datos"});
              return;
          }
          result(null, res);
@@ -37,9 +37,9 @@
  
      pool.query(query, (err, res) => {
          if (err) {
-             console.log("error: ", err);
-             result(null, err);
-             return;
+            console.log("error: ", err);
+            result(null, {message: "Ocurrio un error en la base de datos"});
+            return;
          }
  
          const data = res.map(dataUni => {
@@ -65,7 +65,7 @@
      pool.query(query, (err, res) => {
          if (err) {
              console.log("error: ", err);
-             result(null, err);
+             result(null, {message: "Ocurrio un error en la base de datos"});
              return;
          }
          result(null, res);
@@ -83,13 +83,13 @@
      getFotos(id, (err, linksFotos) => {
          if (err) {
              console.log("error: ", err);
-             result(null, err);
+             result(null, {message: "Ocurrio un error en la base de datos"});
              return;
          }
          getVideos(id, (err, linksVideos) => {
              if (err) {
                  console.log("error: ", err);
-                 result(null, err);
+                 result(null, {message: "Ocurrio un error en la base de datos"});
                  return;
              }
              const data = {
@@ -115,7 +115,7 @@
      pool.query(query, (err, res) => {
          if (err) {
              console.log("error: ", err);
-             result(null, err);
+             result(null, {message: "Ocurrio un error en la base de datos"});
              return;
          }
  
@@ -142,7 +142,7 @@
      pool.query(queryFoto, (err, res) => {
          if (err) {
              console.log("error: ", err);
-             result(null, err);
+             result({message: "Ocurrio un error en la base de datos"}, null);
              return;
          }
          result(null, res);
@@ -162,7 +162,7 @@
      pool.query(queryVideo, (err, res) => {
          if (err) {
              console.log("error: ", err);
-             result(null, err);
+             result({message: "Ocurrio un error en la base de datos"},null);
              return;
          }
  
