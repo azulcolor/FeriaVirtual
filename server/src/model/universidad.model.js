@@ -17,7 +17,7 @@
      pool.query(query, (err, res) => {
          if (err) {
              console.log("error: ", err);
-             result(null, {message: "Ocurrio un error en la base de datos"});
+             result(null, {message: "Ocurrio un error al obtener las universidades"});
              return;
          }
          result(null, res);
@@ -38,7 +38,7 @@
      pool.query(query, (err, res) => {
          if (err) {
             console.log("error: ", err);
-            result(null, {message: "Ocurrio un error en la base de datos"});
+            result(null, {message: "Ocurrio un error al obtener los datos de la universidad"});
             return;
          }
  
@@ -65,7 +65,7 @@
      pool.query(query, (err, res) => {
          if (err) {
              console.log("error: ", err);
-             result(null, {message: "Ocurrio un error en la base de datos"});
+             result(null, {message: "Ocurrio un error al obtener la oferta educativa de la universidad"});
              return;
          }
          result(null, res);
@@ -83,13 +83,15 @@
      getFotos(id, (err, linksFotos) => {
          if (err) {
              console.log("error: ", err);
-             result(null, {message: "Ocurrio un error en la base de datos"});
+             result(null, {
+                message: "Ocurrio un error al obtener los links de las fotos"
+            });
              return;
          }
          getVideos(id, (err, linksVideos) => {
              if (err) {
                  console.log("error: ", err);
-                 result(null, {message: "Ocurrio un error en la base de datos"});
+                 result(null, {message: "Ocurrio un error al obtener los links de las videos"});
                  return;
              }
              const data = {
@@ -115,7 +117,9 @@
      pool.query(query, (err, res) => {
          if (err) {
              console.log("error: ", err);
-             result(null, {message: "Ocurrio un error en la base de datos"});
+             result(null, {
+                message: "Ocurrio un error al obtener la dirección"
+            });
              return;
          }
  
