@@ -22,11 +22,7 @@ app.use(cors());
 routerApi(app);
 
 app.use((req, res, next) => {
-    res.status(404).send({
-        title: 'Error 404',
-        code: 404,
-        message: 'Recurso no encontrado'
-    });
+    res.status(404).send({ message: 'Page not found' });
     next();
 });
 
