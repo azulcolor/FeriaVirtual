@@ -140,6 +140,38 @@ Universidad.getDireccion = (id, result) => {
 }
 
 /**
+ * Obtiene la url de google maps guardada en la base de datos.
+ * @param {string} id Se utiliza para obtner la url de maps de la universidad solicitada.
+ * @param {callback} result Se encarga de manerjar los errores y responder la url de maps de la universidad solicitada.
+ */
+Universidad.getUbicacion = (id, result) => {
+    let query = `SELECT ubicacion.Universidad_ID, ubicacion.url_Maps FROM ubicacion WHERE ubicacion.Universidad_ID = ${id}`;
+    pool.query(query, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, {
+                message: "Ocurrio un error al obtener la ubicación"
+            });
+            return;
+        }
+
+        if(Object.entries(res).length === 0){
+            result({ message: "No existe el recurso en la base de datos" }, null);
+            return;
+        }
+
+        const data = res.map(dataUni => {
+            return {
+                Universidad_ID: dataUni.Universidad_ID,
+                url_Maps: dataUni.url_Maps.substring(13, dataUni.url_Maps.length - 88)
+            }
+        })
+
+        result(null, data[0]);
+    })
+}
+
+/**
  * Se encarga de obtener los links de las fotos en la base de datos.
  * @function getFotos
  * @param {string} id Necesita el id la funcion para buscan en la base de datos todas las fotos de la universidad requerida.

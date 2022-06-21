@@ -65,3 +65,21 @@ exports.getDireccion = (req, res) => {
     }
   });
 }
+
+exports.getUrlMaps = (req, res) => {
+  if(isNaN(req.params.id)){
+    res.status(400).send({
+      message: "El id debe ser un numero"
+    });
+  } else {
+    Universidad.getUbicacion(req.params.id, (err, data) => {
+      if (err) {
+        res.status(500).send({
+          message: "Ocurrio un error al obtener la ubicación"
+        });
+      } else {
+        res.send(data);
+      }
+    });
+  }
+}
