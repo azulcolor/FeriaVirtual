@@ -73,6 +73,12 @@ Universidad.getOfertaEducativa = (id, result) => {
             result(null, { message: "Ocurrio un error al obtener la oferta educativa de la universidad" });
             return;
         }
+
+        if(Object.entries(res).length === 0){
+            result({ message: "No existe el id en la base de datos" }, null);
+            return;
+        }
+        
         result(null, res);
     });
 }
@@ -87,16 +93,14 @@ Universidad.getMultimedia = (id, result) => {
 
     getFotos(id, (err, linksFotos) => {
         if (err) {
-            console.log("error: ", err);
-            result(null, {
-                message: "Ocurrio un error al obtener los links de las fotos"
-            });
+            //console.log("error: ", err);
+            result({message: "Ocurrio un error al obtener los links de las fotos"}, null);
             return;
         }
         getVideos(id, (err, linksVideos) => {
             if (err) {
                 console.log("error: ", err);
-                result(null, { message: "Ocurrio un error al obtener los links de las videos" });
+                result({message: "Ocurrio un error al obtener los links de las fotos"}, null);
                 return;
             }
             const data = {
@@ -128,6 +132,11 @@ Universidad.getDireccion = (id, result) => {
             return;
         }
 
+        if(Object.entries(res).length === 0){
+            result({ message: "No existe el id en la base de datos" }, null);
+            return;
+        }
+
         const direccion = res[0].Num_Interior + " " + res[0].Num_Exterior + " " + res[0].Calle + " " + res[0].Colonia + " " + res[0].estado + " " + res[0].Nombre + " " + res[0].Ciudad + " " + res[0].Codigo_Postal;
 
         const Direccion = {
@@ -156,7 +165,7 @@ Universidad.getUbicacion = (id, result) => {
         }
 
         if(Object.entries(res).length === 0){
-            result({ message: "No existe el recurso en la base de datos" }, null);
+            result({ message: "No existe el id en la base de datos" }, null);
             return;
         }
 
@@ -186,13 +195,19 @@ getFotos = (id, result) => {
             result({ message: "Ocurrio un error en la base de datos" }, null);
             return;
         }
+
+        if(Object.entries(res).length === 0){
+            result({ message: "No existe el id en la base de datos" }, null);
+            return;
+        }
+
         result(null, res);
     });
 }
 
 /**
  * Se encarga de obtener los links de los videos en la base de datos.
- * @function getFotos
+ * @function getVideos
  * @param {string} id Necesita el id la funcion para buscan en la base de datos todas los videos de la universidad requerida.
  * @param {callback} result Se encarga de manejar los errores y responde los links de los videos.
  */
@@ -204,6 +219,11 @@ getVideos = (id, result) => {
         if (err) {
             console.log("error: ", err);
             result({ message: "Ocurrio un error en la base de datos" }, null);
+            return;
+        }
+
+        if(Object.entries(res).length === 0){
+            result({ message: "No existe el id en la base de datos" }, null);
             return;
         }
 

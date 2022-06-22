@@ -37,6 +37,72 @@ describe('GET /v1/universidad/:id', () => {
     })
 });
 
+describe('GET /v1/universidad/ofertaeducativa/:id', () => {
+    test('should respond with a 200 status code', async () => {
+        const response = await request(app).get('/v1/universidad/ofertaeducativa/1').send();
+        expect(response.status).toBe(200);
+    })
+
+    test('should respond with a 400 status code', async () => {
+        const response = await request(app).get('/v1/universidad/ofertaeducativa/as').send();
+        expect(response.status).toBe(400);
+    })
+
+    test('should respond with a 500 status code', async () => {
+        const response = await request(app).get('/v1/universidad/ofertaeducativa/1000').send();
+        expect(response.status).toBe(500);
+    })
+
+    test('should respond with a Object', async () => {
+    const response = await request(app).get('/v1/universidad/ofertaeducativa/1').send();
+    expect(response.body).toBeInstanceOf(Object);
+    })
+});
+
+describe('GET /v1/universidad/multimedia/:id', () => {
+    test('should respond with a 200 status code', async () => {
+        const response = await request(app).get('/v1/universidad/multimedia/1').send();
+        expect(response.status).toBe(200);
+    })
+
+    test('should respond with a 400 status code', async () => {
+        const response = await request(app).get('/v1/universidad/multimedia/as').send();
+        expect(response.status).toBe(400);
+    })
+
+    test('should respond with a 500 status code', async () => {
+        const response = await request(app).get('/v1/universidad/multimedia/1000').send();
+        expect(response.status).toBe(500);
+    })
+
+    test('should respond with a Object', async () => {
+    const response = await request(app).get('/v1/universidad/multimedia/1').send();
+    expect(response.body).toBeInstanceOf(Object);
+    })
+});
+
+describe('GET /v1/universidad/direccion/:id', () => {
+    test('should respond with a 200 status code', async () => {
+        const response = await request(app).get('/v1/universidad/direccion/1').send();
+        expect(response.status).toBe(200);
+    })
+
+    test('should respond with a 400 status code', async () => {
+        const response = await request(app).get('/v1/universidad/direccion/as').send();
+        expect(response.status).toBe(400);
+    })
+
+    test('should respond with a 500 status code', async () => {
+        const response = await request(app).get('/v1/universidad/direccion/1000').send();
+        expect(response.status).toBe(500);
+    })
+
+    test('should respond with a Object', async () => {
+    const response = await request(app).get('/v1/universidad/direccion/1').send();
+    expect(response.body).toBeInstanceOf(Object);
+    })
+});
+
 describe('GET /v1/universidad/maps/:id', () => {
     test('should respond with a 200 status code', async () => {
         const response = await request(app).get('/v1/universidad/maps/1').send();
