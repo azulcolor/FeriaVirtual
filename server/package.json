@@ -4,23 +4,28 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/server.js",
-    "docs": "jsdoc -c jsdoc.json"
+    "dev": "cross-env NODE_ENV=development nodemon src/server.js",
+    "docs": "jsdoc -c jsdoc.json",
+    "start": "cross-env NODE_ENV=production node src/server.js",
+    "test": "cross-env NODE_ENV=test jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "2.8.5",
-    "docdash": "^1.2.0",
+    "cross-env": "7.0.3",
     "express": "4.18.1",
-    "joi": "^17.6.0",
-    "jsdoc": "3.6.10",
+    "joi": "17.6.0",
     "morgan": "1.10.0",
     "mysql": "2.18.1"
   },
   "devDependencies": {
+    "docdash": "1.2.0",
+    "jest": "28.1.1",
+    "jsdoc": "3.6.10",
     "jsdoc-http-plugin": "0.3.2",
-    "nodemon": "2.0.16"
+    "nodemon": "2.0.16",
+    "supertest": "6.2.3"
   }
 }

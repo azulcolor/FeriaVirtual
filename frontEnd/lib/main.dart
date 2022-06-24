@@ -1,6 +1,6 @@
 import 'package:feriavirtual/screens/mainPage.dart';
 import 'package:flutter/material.dart';
-import './utils/color.dart';
+import 'package:feriavirtual/constants/global_variables.dart';
 
 import 'package:feriavirtual/screens/homePageLogged.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Feria Virtual',
       theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: backgroundColor,
+        scaffoldBackgroundColor: GlobalVariables.backgroundColor,
       ),
       home: const HomePageLogged(),
     );
