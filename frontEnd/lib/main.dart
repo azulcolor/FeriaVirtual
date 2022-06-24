@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: GlobalVariables.backgroundColor,
       ),
-      home: const HomePageLogged(),
+      home: const MainPage(),
     );
   }
 }
