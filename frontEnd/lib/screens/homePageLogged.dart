@@ -1,4 +1,3 @@
-import 'package:feriavirtual/components/header.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 
@@ -9,7 +8,6 @@ class HomePageLogged extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: Header(),
       body: Center(
         child: ScreenWidget(screenWidth: screenWidth),
       ),

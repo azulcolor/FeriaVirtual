@@ -2,8 +2,6 @@ import 'package:feriavirtual/screens/mainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 
-import 'package:feriavirtual/screens/homePageLogged.dart';
-
 void main() {
   runApp(const MyApp());
 }

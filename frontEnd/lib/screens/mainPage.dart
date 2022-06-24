@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:feriavirtual/components/header.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:feriavirtual/screens/homePageLogged.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _MainPageState extends State<MainPage> {
   List<Widget> screens = [
     const homePage(),
     const homePage(),
-    const homePage(),
+    const HomePageLogged(),
   ];
 
   void onTap(int index) {
