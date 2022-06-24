@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:feriavirtual/components/header.dart';
-import '/utils/color.dart';
-import 'package:google_fonts/google_fonts.dart';
-=======
 import 'package:feriavirtual/constants/global_variables.dart';
->>>>>>> 2a24400202c43dac33d90320aa7091087dd4b8d3
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
   const Header({Key? key}) : super(key: key);
