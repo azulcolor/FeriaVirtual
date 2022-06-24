@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:feriavirtual/components/header.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+//Importaciones para probar pantallas
 import 'package:feriavirtual/screens/homePageLogged.dart';
+import 'package:feriavirtual/screens/universities.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -16,7 +19,7 @@ class _MainPageState extends State<MainPage> {
   int currentIndex = 1;
 
   List<Widget> screens = [
-    const homePage(),
+    const Universities(),
     const homePage(),
     const HomePageLogged(),
   ];

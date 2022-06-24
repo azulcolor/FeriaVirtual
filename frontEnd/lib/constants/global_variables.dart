@@ -36,17 +36,17 @@ class GlobalVariables {
     fontWeight: FontWeight.w600,
   );
   static var h3W = GoogleFonts.quicksand(
-    fontSize: 32,
+    fontSize: 14,
     color: backgroundColor,
     fontWeight: FontWeight.w600,
   );
   static var h3B = GoogleFonts.quicksand(
-    fontSize: 32,
+    fontSize: 14,
     color: blackColor,
     fontWeight: FontWeight.w700,
   );
   static var h3Blue = GoogleFonts.quicksand(
-    fontSize: 32,
+    fontSize: 14,
     color: primaryColor,
     fontWeight: FontWeight.w700,
   );
@@ -75,9 +75,15 @@ class GlobalVariables {
     color: grayColor,
     fontWeight: FontWeight.w500,
   );
+
+  static var mediumTextGreen = GoogleFonts.inter(
+    fontSize: 12,
+    color: greenColor,
+    fontWeight: FontWeight.w500,
+  );
   static var smallTextB = GoogleFonts.inter(
     fontSize: 10,
-    color: blackColor,
+    color: grayColor,
     fontWeight: FontWeight.w500,
   );
 }
