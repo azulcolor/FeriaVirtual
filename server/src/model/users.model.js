@@ -24,13 +24,14 @@ Users.create = (newUser, result) => {
 }
 
 Users.checkEmail = (email, result) => {
-    pool.query(`SELECT Correo_Electronico FROM registrado WHERE Correo_Electronico = '${email}'`, (err, res) => {
+    pool.query(`SELECT * FROM registrado WHERE Correo_Electronico = '${email}' LIMIT 1`, (err, res) => {
         if (err) {
             console.log(err);
             result(err, null);
             return;
         }
         if (res.length>0) {
+            console.log(res);
                 result(null, res[0]);
                 return;
         } else {
@@ -39,4 +40,31 @@ Users.checkEmail = (email, result) => {
     });
 }
 
+Users.findById = (id, result) => {
+    pool.query(`SELECT * FROM registrado WHERE ID='${id}'`,
+    (err, res) => {
+        if (err) {
+            console.log(err);
+            result(err, null);
+            return;
+        }
+            console.log(res);
+        if (res.length>0) {
+            result(null, true);
+            return;
+        }
+    })
+
+}
+
+Users.findByIdGet = (id, result) => {
+    pool.query(`SELECT * FROM registrado WHERE ID='${id}'`,
+    (err, res) => {
+        if (err) {
+            result(err, null);
+        } else {
+            result(null, res[0]);
+        }
+    })
+}
 module.exports = Users;

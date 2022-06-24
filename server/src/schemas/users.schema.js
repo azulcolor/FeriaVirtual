@@ -67,6 +67,7 @@ module.exports = {
             'number.base': `"El campo Area" debe ser de tipo 'numero'`,
             'any.required': `"El Area" es un campo requerido`,
           }),
+        token: joi.string().allow('').optional(),//no lo almacenamos pero lo necesitamos para validar
     }),
     updateUserSchema: joi.object({
         Nombre: joi.string().max(80)
@@ -113,5 +114,6 @@ module.exports = {
         .messages({
             'number.base': `"El campo Area" debe ser de tipo 'numero'`,
         }),
+        token: joi.string().allow('').optional(),//no lo almacenamos pero lo necesitamos para validar
     }),
 }
