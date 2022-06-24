@@ -1,8 +1,9 @@
 import 'package:feriavirtual/screens/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/components/header.dart';
-import '/utils/color.dart';
+import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:feriavirtual/screens/homePageLogged.dart';
 import 'package:feriavirtual/features/auth/test_screens/tauth_screen.dart';
 
 class MainPage extends StatefulWidget {
@@ -61,9 +62,9 @@ class _MainPageState extends State<MainPage> {
         elevation: 0,
         currentIndex: currentIndex,
         onTap: onTap,
-        backgroundColor: primaryColor,
-        unselectedItemColor: backgroundColor,
-        selectedItemColor: yellowColor,
+        backgroundColor: GlobalVariables.primaryColor,
+        unselectedItemColor: GlobalVariables.backgroundColor,
+        selectedItemColor: GlobalVariables.yellowColor,
       ),
     );
   }

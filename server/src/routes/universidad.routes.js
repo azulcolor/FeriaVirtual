@@ -64,5 +64,7 @@
   * @response {JSON} Ubicación Muestra la direccion de la universidad.
   */
  router.get("/direccion/:id", universidad.getDireccion);
+
+ router.get("/maps/:id", universidad.getUrlMaps);
  
  module.exports = router;

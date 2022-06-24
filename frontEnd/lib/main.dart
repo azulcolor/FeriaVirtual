@@ -4,8 +4,8 @@ import 'package:feriavirtual/providers/user_provider.dart';
 import 'package:feriavirtual/screens/mainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import './utils/color.dart';
 import 'package:feriavirtual/router.dart';
+import 'package:feriavirtual/constants/global_variables.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Feria Virtual',
       theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: backgroundColor,
+        scaffoldBackgroundColor: GlobalVariables.backgroundColor,
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
