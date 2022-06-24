@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:feriavirtual/components/header.dart';
 import '/utils/color.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:feriavirtual/features/auth/test_screens/tauth_screen.dart';
 
 class MainPage extends StatefulWidget {
+  static const String routeName = '/mainPage';
   const MainPage({Key? key}) : super(key: key);
 
   @override
@@ -17,7 +19,7 @@ class _MainPageState extends State<MainPage> {
   List<Widget> screens = [
     const homePage(),
     const homePage(),
-    const homePage(),
+    const AuthScreen(),
   ];
 
   void onTap(int index) {

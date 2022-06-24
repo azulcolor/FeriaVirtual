@@ -1,4 +1,5 @@
 const Users = require('../model/users.model');
+const jwt = require('jsonwebtoken');
 
 exports.registrarUsuario = (req, res) => {
     if (!req.body) {
@@ -14,7 +15,7 @@ exports.registrarUsuario = (req, res) => {
         Telefono,
         Motivo,
         Escuela,
-        Area_ID,
+        Area_ID
     } = req.body;
 
     
@@ -33,17 +34,12 @@ exports.registrarUsuario = (req, res) => {
     Users.create(user, (err, data) => {
         if (err) {
             res.status(500).send({
-                message: err.message || "Error al crear el usuario"
+                error: err.message || "Error al crear el usuario"
             });
         } else {
             res.status(201).send(data);
         }
     });
-
-    
-
-        console.log(user);
-
 
 }
 
@@ -58,10 +54,15 @@ exports.login = (req, res) => {
     Users.checkEmail(email, (err, data) => {
         if (err) {
             res.status(500).send({
-                message: err.message || "Usuario o contraseña incorrectos"
+                error: err.message || "El correo electronico no esta registrado"
             });
         } else {
-            res.status(200).send( {data, success: true});
+            if (data) {
+            const token = jwt.sign({ id: data.ID }, "UPQROOKey");
+            res.status(200).send( { token, ...data._doc });
+            } else {
+                res.status(400).send({msg: "El correo electronico no esta registrado" })
+            }
         }
     })
 }
@@ -76,7 +77,7 @@ exports.checkDuplicateEmail = (req, res, next) => {
     Users.checkEmail(email, (err, datacheck) => {
         if (err) {
             res.status(500).send({
-                msg: err.message || "error al crear el usuario"
+                error: err.message || "error al crear el usuario"
             });
         } else {
             if (datacheck) {
@@ -89,4 +90,46 @@ exports.checkDuplicateEmail = (req, res, next) => {
         }
     })
     
+}
+
+exports.verifyToken = (req, res) => {
+    try {
+        const token = req.header('x-auth-token');
+
+        if (!token) return res.json(false)
+
+        const verified = jwt.verify(token, 'UPQROOKey');
+
+        if (!verified) return res.json(false)
+
+        Users.findById(verified.id, (err, data) => {
+            if (err)  {
+                return res.json(false)
+            }
+            else {
+                return res.json(true)
+            }
+        })
+    } catch (err) {
+        res.status(500).json(
+            false //si no se puede verificar el token se manda false sencillamente
+        );
+    }
+        
+}
+
+exports.getUserData = (req, res) => {
+    try {console.log(req.user)
+        Users.findByIdGet(req.user, (err, data) => {
+            if (err) {
+                res.status(500).send({
+                    error: err.message || 'Intenra de nuevo mas tarde'
+                })
+            } else {
+                res.status(200).json({...user._doc, token: req.token});
+            }
+        }); 
+    } catch (err) {
+        res.status(500).json('Intenta de nuevo más tarde');
+    }
 }

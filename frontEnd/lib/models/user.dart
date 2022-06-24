@@ -1,53 +1,55 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class User {
-  final String id;
-  final String firstName;
-  final String lastNameP;
-  final String lasNameM;
-  final String email;
-  final String phoneNumber;
-  final String school;
-  final String facility;
-  final String motive;
+  final String Nombre;
+  final String Apellido_P;
+  final String Apellido_M;
+  final String Correo_Electronico;
+  final String Telefono;
+  final String Escuela;
+  final String Area_ID;
+  final String Motivo;
+  final String token;
   User({
-    required this.id,
-    required this.firstName,
-    required this.lastNameP,
-    required this.lasNameM,
-    required this.email,
-    required this.phoneNumber,
-    required this.school,
-    required this.facility,
-    required this.motive,
+    required this.Nombre,
+    required this.Apellido_P,
+    required this.Apellido_M,
+    required this.Correo_Electronico,
+    required this.Telefono,
+    required this.Escuela,
+    required this.Area_ID,
+    required this.Motivo,
+    required this.token,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'firstName': firstName,
-      'lastNameP': lastNameP,
-      'lasNameM': lasNameM,
-      'email': email,
-      'phoneNumber': phoneNumber,
-      'school': school,
-      'facility': facility,
-      'motive': motive,
+      'Nombre': Nombre,
+      'Apellido_P': Apellido_P,
+      'Apellido_M': Apellido_M,
+      'Correo_Electronico': Correo_Electronico,
+      'Telefono': Telefono,
+      'Escuela': Escuela,
+      'Area_ID': Area_ID,
+      'Motivo': Motivo,
+      'token': token,
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      id: map['ID'] as String,
-      firstName: map['firstName'] as String,
-      lastNameP: map['lastNameP'] as String,
-      lasNameM: map['lasNameM'] as String,
-      email: map['email'] as String,
-      phoneNumber: map['phoneNumber'] as String,
-      school: map['school'] as String,
-      facility: map['facility'] as String,
-      motive: map['motive'] as String,
+      Nombre: map['Nombre'] as String,
+      Apellido_P: map['Apellido_P'] as String,
+      Apellido_M: map['Apellido_M'] as String,
+      Correo_Electronico: map['Correo_Electronico'] as String,
+      Telefono: map['Telefono'] as String,
+      Escuela: map['Escuela'] as String,
+      Area_ID: map['Area_ID'] as String,
+      Motivo: map['Motivo'] as String,
+      token: map['token'] as String,
     );
   }
 

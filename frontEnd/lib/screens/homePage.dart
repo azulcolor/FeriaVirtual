@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class homePage extends StatelessWidget {
+  static const String routeName = '/home';
   const homePage({Key? key}) : super(key: key);
 
   @override
