@@ -1,3 +1,6 @@
+/**
+ * @module UsersModel
+ */
 const pool = require('./connectDatabase');
 
 const Users = function(user) {
@@ -11,7 +14,11 @@ const Users = function(user) {
     this.Area_ID = user.Area_ID;
 }
 
-
+/**
+ * Crea un nuevo usuario.
+ * @function  create
+ * @param {callback} result Maneja el error valida los campos, si esta es exitosa crea un nuevo usuario.
+ */
 Users.create = (newUser, result) => {
     pool.query('INSERT INTO registrado SET ?', newUser, (err, res) => {
         if (err) {
@@ -22,7 +29,11 @@ Users.create = (newUser, result) => {
         result(null, { id: res.insertId, ...newUser });
     });
 }
-
+/**
+ * Verifica si el usuario esta registrado en la base de datos.
+ * @function  checkEmail
+ * @param {callback} result Maneja el error y la respuesta, si esta es exitosa.
+ */
 Users.checkEmail = (email, result) => {
     pool.query(`SELECT * FROM registrado WHERE Correo_Electronico = '${email}' LIMIT 1`, (err, res) => {
         if (err) {
@@ -31,7 +42,6 @@ Users.checkEmail = (email, result) => {
             return;
         }
         if (res.length>0) {
-            console.log(res);
                 result(null, res[0]);
                 return;
         } else {
@@ -40,6 +50,12 @@ Users.checkEmail = (email, result) => {
     });
 }
 
+/**
+ * Verifica si el ID del usuario, segun el token esta registrado.
+ * @function  findById
+ * @param {string} ID Id del usuario (proporcionado por el token).
+ * @param {callback} result Maneja el error y la respuesta, si esta es exitosa (true o false).
+ */
 Users.findById = (id, result) => {
     pool.query(`SELECT * FROM registrado WHERE ID='${id}'`,
     (err, res) => {
@@ -56,7 +72,12 @@ Users.findById = (id, result) => {
     })
 
 }
-
+/**
+ * Obtiene la lista de universidades con sus datos mas relevantes.
+ * @function  findByIdGet
+ * @param {string} id ID del usuario proporcionado por el token.
+ * @param {callback} result Maneja el error y la respuesta, si esta es exitosa.
+ */
 Users.findByIdGet = (id, result) => {
     pool.query(`SELECT * FROM registrado WHERE ID='${id}'`,
     (err, res) => {

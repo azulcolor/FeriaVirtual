@@ -1,7 +1,7 @@
-const Users = require('../model/users.model');
+const Users = require('../model/usuarios.model');
 const jwt = require('jsonwebtoken');
 
-exports.registrarUsuario = (req, res) => {
+exports.signUp = (req, res) => {
     if (!req.body) {
         res.status(400).send({
           message: "No se recibieron datos"
@@ -116,20 +116,4 @@ exports.verifyToken = (req, res) => {
         );
     }
         
-}
-
-exports.getUserData = (req, res) => {
-    try {console.log(req.user)
-        Users.findByIdGet(req.user, (err, data) => {
-            if (err) {
-                res.status(500).send({
-                    error: err.message || 'Intenra de nuevo mas tarde'
-                })
-            } else {
-                res.status(200).json({...user._doc, token: req.token});
-            }
-        }); 
-    } catch (err) {
-        res.status(500).json('Intenta de nuevo más tarde');
-    }
 }
