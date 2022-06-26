@@ -10,6 +10,9 @@ void httpErrorHandle({
   required VoidCallback onSuccess,
 }) {
   switch (response.statusCode) {
+    case 200:
+      onSuccess();
+      break;
     case 201:
       onSuccess();
       break;
@@ -23,7 +26,7 @@ void httpErrorHandle({
       //
       break;
     case 404:
-      //
+      showSnackBar(context, 'Verificar la ruta en la peticion http');
       break;
     case 500:
       showSnackBar(context, jsonDecode(response.body)['error']);

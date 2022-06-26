@@ -37,7 +37,8 @@ exports.signUp = (req, res) => {
                 error: err.message || "Error al crear el usuario"
             });
         } else {
-            res.status(201).send(data);
+            if (data) res.status(201).send({msg: 'Bienvenido '+data.Nombre+' ya puedes ingresar a la feria virtual'});
+            else res.status(400).send({msg: 'Intentalo de nuevo más tarde.'})
         }
     });
 
@@ -59,7 +60,7 @@ exports.login = (req, res) => {
         } else {
             if (data) {
             const token = jwt.sign({ id: data.ID }, "UPQROOKey");
-            res.status(200).send( { token, ...data._doc });
+            res.status(200).json({ token, ...data._doc });
             } else {
                 res.status(400).send({msg: "El correo electronico no esta registrado" })
             }

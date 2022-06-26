@@ -6,11 +6,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 //Importaciones para probar pantallas
 import 'package:feriavirtual/screens/homePageLogged.dart';
-<<<<<<< HEAD
 import 'package:feriavirtual/screens/universities.dart';
-=======
 import 'package:feriavirtual/features/auth/test_screens/tauth_screen.dart';
->>>>>>> dcd967d086fa46fee18997b7f00fd72b6d2f4e90
 
 class MainPage extends StatefulWidget {
   static const String routeName = '/mainPage';

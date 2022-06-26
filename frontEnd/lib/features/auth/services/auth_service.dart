@@ -41,7 +41,7 @@ class AuthService {
       );
 
       http.Response res = await http.post(
-        Uri.parse('$uri/users'),
+        Uri.parse('$uri/auth/signup'),
         body: user.toJson(),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -69,7 +69,7 @@ class AuthService {
   }) async {
     try {
       http.Response res = await http.post(
-        Uri.parse('$uri/users/login'),
+        Uri.parse('$uri/auth/signin'),
         body: jsonEncode({'Correo_Electronico': Correo_Electronico}),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -85,8 +85,8 @@ class AuthService {
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
           Navigator.pushNamedAndRemoveUntil(
             context,
-            '/mainPage',
-            ModalRoute.withName('/'),
+            MainPage.routeName,
+            (route) => false,
           );
         },
       );
@@ -108,7 +108,7 @@ class AuthService {
       }
 
       var tokenRes = await http.post(
-        Uri.parse('$uri/verifyToken'),
+        Uri.parse('$uri/auth/verifyToken'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': token!

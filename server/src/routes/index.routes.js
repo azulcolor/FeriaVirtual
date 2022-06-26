@@ -8,7 +8,7 @@ function routerApi(app) {
     app.use('/v1/testvocacional', testVocacionalRouter);
     app.use('/v1/universidad', universidadRouter);
     app.use('/v1/usuarios', userRouter);
-    app.use('v1/auth', authRouter)
+    app.use('/v1/auth', authRouter)
 }
 
 module.exports = routerApi;
