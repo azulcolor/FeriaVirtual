@@ -2,7 +2,7 @@ module.exports = {
     database: {
         host: 'localhost',
         user: 'root',
-        password: '',
-        database: 'feria'
+        password: 'Unrealengine5',
+        database: 'feria2'
     }
 };

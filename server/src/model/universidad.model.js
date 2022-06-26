@@ -27,7 +27,7 @@ Universidad.getAll = (result) => {
 /**
  * Se encarga de consultar los datos de una universidad especifica y responder tales datos.
  * @function getById
- * @param {strinf} id Id de la universidad, la cual se quiera obtener sus datos.
+ * @param {string} id Id de la universidad, la cual se quiera obtener sus datos.
  * @param {callback} result Maneja los errores y responde, si todo va bien.
  */
 Universidad.getById = (id, result) => {
@@ -42,7 +42,7 @@ Universidad.getById = (id, result) => {
             return;
         }
 
-        if(Object.entries(res).length === 0){
+        if (Object.entries(res).length === 0) {
             result({ message: "No existe el id en la base de datos" }, null);
             return;
         }
@@ -56,6 +56,31 @@ Universidad.getById = (id, result) => {
         });
 
         result(null, data[0]);
+    });
+};
+
+/**
+ * Retorna una lista de universidades las cuales tengan una o mas carreras con respecto al area.
+ * @function getByArea
+ * @param {string} id Id del area.
+ * @param {callback} result Maneja los errores y responde, si todo va bien.
+ */
+Universidad.getByArea = (id, result) => {
+    let query = `SELECT DISTINCT universidad.ID AS Universidad_ID, universidad.Nombre, universidad.Ruta_Escudo, IF(universidad.Tipo=0,'Publica','Privada') AS Tipo, carrera.Nombre FROM carrera INNER JOIN carrera_area ON carrera_area.Carrera_ID=carrera.ID INNER JOIN universidad ON carrera.Universidad_ID=universidad.ID WHERE carrera_area.Area_ID =${id}`;
+
+    pool.query(query, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result({ message: "Ocurrio un error al obtener los datos de las universidades" }, null);
+            return;
+        }
+
+        if (Object.entries(res).length === 0) {
+            result({ message: "No existe el area en la base de datos" }, null);
+            return;
+        }
+
+        result(null, res);
     });
 };
 
@@ -74,11 +99,11 @@ Universidad.getOfertaEducativa = (id, result) => {
             return;
         }
 
-        if(Object.entries(res).length === 0){
+        if (Object.entries(res).length === 0) {
             result({ message: "No existe el id en la base de datos" }, null);
             return;
         }
-        
+
         result(null, res);
     });
 }
@@ -94,13 +119,13 @@ Universidad.getMultimedia = (id, result) => {
     getFotos(id, (err, linksFotos) => {
         if (err) {
             //console.log("error: ", err);
-            result({message: "Ocurrio un error al obtener los links de las fotos"}, null);
+            result({ message: "Ocurrio un error al obtener los links de las fotos" }, null);
             return;
         }
         getVideos(id, (err, linksVideos) => {
             if (err) {
                 console.log("error: ", err);
-                result({message: "Ocurrio un error al obtener los links de las fotos"}, null);
+                result({ message: "Ocurrio un error al obtener los links de las fotos" }, null);
                 return;
             }
             const data = {
@@ -132,7 +157,7 @@ Universidad.getDireccion = (id, result) => {
             return;
         }
 
-        if(Object.entries(res).length === 0){
+        if (Object.entries(res).length === 0) {
             result({ message: "No existe el id en la base de datos" }, null);
             return;
         }
@@ -164,7 +189,7 @@ Universidad.getUbicacion = (id, result) => {
             return;
         }
 
-        if(Object.entries(res).length === 0){
+        if (Object.entries(res).length === 0) {
             result({ message: "No existe el id en la base de datos" }, null);
             return;
         }
@@ -196,7 +221,7 @@ getFotos = (id, result) => {
             return;
         }
 
-        if(Object.entries(res).length === 0){
+        if (Object.entries(res).length === 0) {
             result({ message: "No existe el id en la base de datos" }, null);
             return;
         }
@@ -222,7 +247,7 @@ getVideos = (id, result) => {
             return;
         }
 
-        if(Object.entries(res).length === 0){
+        if (Object.entries(res).length === 0) {
             result({ message: "No existe el id en la base de datos" }, null);
             return;
         }

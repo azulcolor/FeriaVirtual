@@ -24,11 +24,29 @@ exports.findById = (req, res) => {
           message: "Ocurrio un error al obtener los datos de la universidad"
         });
       } else {
-        res.send(data);
+        res.status(200).send(data);
       }
     });
   }
 };
+
+exports.findByArea = (req, res) => {
+  if (isNaN(req.params.id)) {
+    res.status(400).send({
+      message: "El id debe ser un numero"
+    });
+  } else {
+    Universidad.getByArea(req.params.id, (err, data) => {
+      if (err) {
+        res.status(500).send({
+          message: "Ocurrio un error al obtener los datos de las universidades"
+        });
+      } else {
+        res.send(data);
+      }
+    });
+  }
+}
 
 exports.getOfertaEducativa = (req, res) => {
   if (isNaN(req.params.id)) {
