@@ -66,7 +66,7 @@ Universidad.getById = (id, result) => {
  * @param {callback} result Maneja los errores y responde, si todo va bien.
  */
 Universidad.getByArea = (id, result) => {
-    let query = `SELECT DISTINCT universidad.ID AS Universidad_ID, universidad.Nombre, universidad.Ruta_Escudo, IF(universidad.Tipo=0,'Publica','Privada') AS Tipo, carrera.Nombre FROM carrera INNER JOIN carrera_area ON carrera_area.Carrera_ID=carrera.ID INNER JOIN universidad ON carrera.Universidad_ID=universidad.ID WHERE carrera_area.Area_ID =${id}`;
+    let query = `SELECT DISTINCT universidad.ID AS Universidad_ID, universidad.Nombre AS Nombre, universidad.Ruta_Escudo, IF(universidad.Tipo=0,'Publica','Privada') AS Tipo, carrera.Nombre AS carrera FROM carrera INNER JOIN carrera_area ON carrera_area.Carrera_ID=carrera.ID INNER JOIN universidad ON carrera.Universidad_ID=universidad.ID WHERE carrera_area.Area_ID =${id}`;
 
     pool.query(query, (err, res) => {
         if (err) {
