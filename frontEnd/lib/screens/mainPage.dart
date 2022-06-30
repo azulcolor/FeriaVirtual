@@ -59,7 +59,7 @@ class _MainPageState extends State<MainPage> {
               child: Icon(FontAwesomeIcons.rightToBracket, size: 23),
             ),
             label: 'Ingresar',
-          ),
+          )
         ],
         type: BottomNavigationBarType.fixed,
         elevation: 0,
