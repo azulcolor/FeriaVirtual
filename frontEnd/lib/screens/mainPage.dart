@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //Importaciones para probar pantallas
 import 'package:feriavirtual/screens/homePageLogged.dart';
 import 'package:feriavirtual/screens/universities.dart';
-import 'package:feriavirtual/features/auth/test_screens/tauth_screen.dart';
+import 'package:feriavirtual/screens/authScreen.dart';
 
 class MainPage extends StatefulWidget {
   static const String routeName = '/mainPage';
@@ -35,7 +35,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const Header(),
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

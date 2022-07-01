@@ -12,7 +12,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
     return Scaffold(
       body: Container(
         color: GlobalVariables.primaryColor,
-        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
         child: SafeArea(
           child: Row(children: [
             //Logo
@@ -23,7 +23,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
 
             //App Name
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Text(
                 'Feria virtual',
                 style: GlobalVariables.h2W,

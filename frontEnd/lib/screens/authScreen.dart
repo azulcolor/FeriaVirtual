@@ -1,5 +1,5 @@
-import 'package:feriavirtual/features/auth/test_screens/widgets_test/custom_button.dart';
-import 'package:feriavirtual/features/auth/test_screens/widgets_test/custom_textfield.dart';
+import 'package:feriavirtual/components/customButton.dart';
+import 'package:feriavirtual/components/customTextfield.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:feriavirtual/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -80,13 +80,24 @@ class _AuthScreenState extends State<AuthScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Center(
-                      child: Text(
-                        '¡Bienvenido!',
-                        textAlign: TextAlign.center,
-                        style: GlobalVariables.h1B,
-                      ),
+                      child: Column(children: [
+                        Padding(
+                          padding: const EdgeInsets.all(6),
+                          child: Image.asset(
+                            'assets/images/logo.png',
+                            width: 56,
+                          ),
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.all(6),
+                            child: Text(
+                              '¡Bienvenido!',
+                              textAlign: TextAlign.center,
+                              style: GlobalVariables.h1B,
+                            ))
+                      ]),
                     ),
                   ),
                   ListTile(
