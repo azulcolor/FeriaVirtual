@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-String uri = 'http://localhost:4000/v1';
+String uri = 'http://192.168.1.64:4000/v1';
 
 class GlobalVariables {
   // COLORS
