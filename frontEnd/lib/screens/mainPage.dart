@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> {
 
   List<Widget> screens = [
     const Universities(),
-    const homePage(),
+    const HomePageLogged(),
     const AuthScreen(),
   ];
 
