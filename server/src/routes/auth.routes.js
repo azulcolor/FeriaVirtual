@@ -16,7 +16,7 @@
   * @name verifyToken
   * @service {authController}
   * @path {POST} /v1/auth/verifyToken
-  * @header {Content-Type: application/json}
+  * @header {application/json}
   * @header {x-auth-token} Es el toquen que indica que el usuario esta logueado.
   * @params {headers}
   */
