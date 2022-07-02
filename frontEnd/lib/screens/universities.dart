@@ -22,17 +22,23 @@ class _UniversitiesState extends State<Universities> {
           color: GlobalVariables.backgroundColor,
           child: Column(
             children: [
+              const SizedBox(height: 20),
               Image.asset(
                 'assets/images/universidadTest.jpg',
               ),
+              const SizedBox(height: 5),
               Text(
                 'Universidad Partenón de Cozumel',
                 textAlign: TextAlign.center,
                 style: GlobalVariables.h3B,
               ),
-              EducativeOfferWidget(),
-              EducativeOfferWidget(),
-              EducativeOfferWidget(),
+              const SizedBox(height: 5),
+              const EducativeOfferWidget(),
+              const SizedBox(height: 5),
+              const EducativeOfferWidget(),
+              const SizedBox(height: 5),
+              const EducativeOfferWidget(),
+              const SizedBox(height: 5),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -40,10 +46,12 @@ class _UniversitiesState extends State<Universities> {
                   style: GlobalVariables.mediumTextGreen,
                 ),
               ),
+              const SizedBox(height: 5),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   decoration: BoxDecoration(
                       border: Border.all(color: GlobalVariables.grayColor),
                       borderRadius: BorderRadius.circular(50)),
@@ -75,11 +83,12 @@ class _EducativeOfferWidgetState extends State<EducativeOfferWidget> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(
+        const Icon(
           FontAwesomeIcons.graduationCap,
           size: 12,
           color: GlobalVariables.grayColor,
         ),
+        const SizedBox(width: 5),
         Text(
           '4 Licenciaturas',
           style: GlobalVariables.mediumTextG,
