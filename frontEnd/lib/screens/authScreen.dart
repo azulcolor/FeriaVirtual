@@ -3,6 +3,8 @@ import 'package:feriavirtual/components/customTextfield.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:feriavirtual/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dropdown_textfield/dropdown_textfield.dart';
 
 enum Auth {
   signin,
@@ -32,6 +34,8 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _EscuelaController = TextEditingController();
   final TextEditingController _Area_IDController = TextEditingController();
   final TextEditingController _MotivoController = TextEditingController();
+  late SingleValueDropDownController _cntController =
+      SingleValueDropDownController();
 
   @override
   void dispose() {
@@ -44,6 +48,7 @@ class _AuthScreenState extends State<AuthScreen> {
     _EscuelaController.dispose();
     _Area_IDController.dispose();
     _MotivoController.dispose();
+    _cntController.dispose();
   }
 
   void signUpUser() {
@@ -55,7 +60,7 @@ class _AuthScreenState extends State<AuthScreen> {
       Correo_Electronico: _Correo_ElectronicoController.text,
       Telefono: _TelefonoController.text,
       Escuela: _EscuelaController.text,
-      Area_ID: _Area_IDController.text,
+      Area_ID: _cntController.dropDownValue.toString(),
       Motivo: _MotivoController.text,
     );
   }
@@ -65,6 +70,12 @@ class _AuthScreenState extends State<AuthScreen> {
       context: context,
       Correo_Electronico: _Correo_ElectronicoController.text,
     );
+  }
+
+  @override
+  void initState() {
+    _cntController = SingleValueDropDownController();
+    super.initState();
   }
 
   @override
@@ -234,6 +245,63 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                       ),
                     ),
+                  DropdownSearch<String>(
+                    popupProps: PopupProps.menu(
+                      showSelectedItems: true,
+                      disabledItemFn: (String s) => s.startsWith('I'),
+                    ),
+                    dropdownDecoratorProps: const DropDownDecoratorProps(
+                        dropdownSearchDecoration: InputDecoration(
+                            disabledBorder: InputBorder.none,
+                            hintText: "dropdownCityName",
+                            hintStyle:
+                                TextStyle(color: Colors.black, fontSize: 12))),
+                    items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                    onChanged: print,
+                    selectedItem: "Brazil",
+                  ),
+                  DropdownSearch<String>.multiSelection(
+                    items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                    popupProps: PopupPropsMultiSelection.menu(
+                      showSelectedItems: true,
+                      disabledItemFn: (String s) => s.startsWith('I'),
+                    ),
+                    onChanged: print,
+                    selectedItems: ["Brazil"],
+                  ),
+                  DropDownTextField(
+                    // initialValue: "name4",
+                    singleController: _cntController,
+                    clearOption: false,
+                    enableSearch: true,
+                    validator: (value) {
+                      if (value == null) {
+                        return "Required field";
+                      } else {
+                        return null;
+                      }
+                    },
+                    dropDownItemCount: 6,
+                    dropDownList: const [
+                      DropDownValueModel(name: 'name1', value: 1),
+                      DropDownValueModel(
+                          name: 'name2',
+                          value: 2,
+                          toolTipMsg:
+                              "DropDownButton is a widget that we can use to select one unique value from a set of values"),
+                      DropDownValueModel(name: 'name3', value: 3),
+                      DropDownValueModel(
+                          name: 'name4',
+                          value: 4,
+                          toolTipMsg:
+                              "DropDownButton is a widget that we can use to select one unique value from a set of values"),
+                      DropDownValueModel(name: 'name5', value: 5),
+                      DropDownValueModel(name: 'name6', value: 6),
+                      DropDownValueModel(name: 'name7', value: 7),
+                      DropDownValueModel(name: 'name8', value: 8),
+                    ],
+                    onChanged: (val) {},
+                  ),
                 ],
               ),
             ),

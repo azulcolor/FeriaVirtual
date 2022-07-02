@@ -10,7 +10,7 @@
   * Index Universidad, obtiene los datos de la universidades
   * 
   * @name Universidades
-  * @path {GET} /
+  * @path {GET} /v1/universidad/
   * @code {200} Si la solicitud es exitosa.
   * @code {400} Si el id no es un numero.
   * @code {500} Si la solicitud fallo por error en la base de datos.
@@ -22,7 +22,7 @@
   * Obtiene los datos de una universidad
   * 
   * @name Universidad
-  * @path {GET} /:id
+  * @path {GET} /v1/universidad/:id
   * @params {String} id Requiere el id de la universidad para poder realizar la consulta
   * @code {200} Si las solicitud es exitosa.
   * @code {500} Si la solicitud fallo por error en la base de datos.
@@ -33,7 +33,7 @@
  /**
   * Obtiene los datos de las universidades por area
   * @name dataArea
-  * @path {GET} /area/:id
+  * @path {GET} /v1/universidad/area/:id
   * @params {String} id Requiere el id de la area para poder realizar la consulta
   * @code {200} Si se encontraron los datos.
   * @code {400} Si el id no es un numero.
@@ -46,7 +46,7 @@ router.get("/area/:id", universidad.findByArea);
   * Obtiene los datos de una universidad
   * 
   * @name OfertaEducativa
-  * @path {GET} /ofertaeducativa/:id
+  * @path {GET} /v1/universidad/ofertaeducativa/:id
   * @params {String} id Requiere el id de la universidad para mostrar su oferta educativa
   * @code {200} Si las solicitud es exitosa.
   * @code {400} Si el id no es un numero.
@@ -59,7 +59,7 @@ router.get("/area/:id", universidad.findByArea);
   * Obtiene los recursos multimedia de la universidad solicitada, fotos y videos
   * 
   * @name Fotos/Videos
-  * @path {GET} /multimedia/:id
+  * @path {GET} /v1/universidad/multimedia/:id
   * @params {String} id Requiere el id de la universidad para mostrar los recursos multimedia
   * @code {200} Si las solicitud es exitosa.
   * @code {400} Si el id no es un numero.
@@ -72,7 +72,7 @@ router.get("/area/:id", universidad.findByArea);
   * Obtiene los datos de la dirección 
   * 
   * @name Dirección
-  * @path {GET} /direccion/:id
+  * @path {GET} /v1/universidad/direccion/:id
   * @params {String} id Requiere el id de la universidad para mostrar su dirección.
   * @code {200} Si las solicitud es exitosa.
   * @code {400} Si el id no es un numero.
@@ -84,7 +84,7 @@ router.get("/area/:id", universidad.findByArea);
  /**
   * Obtiene el link de google maps de la universidad solicitada
   * @name Maps link de google maps
-  * @path {GET} /maps/:id
+  * @path {GET} /v1/universidad/maps/:id
   * @params {String} id Requiere el id de la universidad para mostrar su link de google maps.
   * @code {200} Si las solicitud es exitosa.
   * @code {400} Si el id no es un numero.

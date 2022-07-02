@@ -13,7 +13,7 @@ var router = require("express").Router();
   * 
   * @name UserGetData
   * @path {GET} /v1/users
-  * @header {Content-Type: application/json}
+  * @header {application/json}
   * @header {x-auth-token} Es el toquen que indica que el usuario esta logueado.
   * @auth Esta ruta requiere autenticación básica HTTP. Si la autenticación falla, devolverá un error 401.
   * @code {200} Si la solicitud es exitosa.
