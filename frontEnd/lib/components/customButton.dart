@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:feriavirtual/constants/global_variables.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -17,8 +18,8 @@ class CustomButton extends StatelessWidget {
       // ignore: sort_child_properties_last
       child: Text(
         text,
-        style: TextStyle(
-          color: color == null ? Colors.white : Colors.black,
+        style: const TextStyle(
+          color: GlobalVariables.backgroundColor,
         ),
       ),
       onPressed: onTap,

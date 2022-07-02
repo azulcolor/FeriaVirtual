@@ -1,7 +1,7 @@
-const Users = require('../model/users.model');
+const Users = require('../model/usuarios.model');
 const jwt = require('jsonwebtoken');
 
-exports.registrarUsuario = (req, res) => {
+exports.signUp = (req, res) => {
     if (!req.body) {
         res.status(400).send({
           message: "No se recibieron datos"
@@ -37,7 +37,8 @@ exports.registrarUsuario = (req, res) => {
                 error: err.message || "Error al crear el usuario"
             });
         } else {
-            res.status(201).send(data);
+            if (data) res.status(201).send({msg: 'Bienvenido '+data.Nombre+' ya puedes ingresar a la feria virtual'});
+            else res.status(400).send({msg: 'Intentalo de nuevo más tarde.'})
         }
     });
 
@@ -59,7 +60,7 @@ exports.login = (req, res) => {
         } else {
             if (data) {
             const token = jwt.sign({ id: data.ID }, "UPQROOKey");
-            res.status(200).send( { token, ...data._doc });
+            res.status(200).json({ token, ...data._doc });
             } else {
                 res.status(400).send({msg: "El correo electronico no esta registrado" })
             }
@@ -116,20 +117,4 @@ exports.verifyToken = (req, res) => {
         );
     }
         
-}
-
-exports.getUserData = (req, res) => {
-    try {console.log(req.user)
-        Users.findByIdGet(req.user, (err, data) => {
-            if (err) {
-                res.status(500).send({
-                    error: err.message || 'Intenra de nuevo mas tarde'
-                })
-            } else {
-                res.status(200).json({...user._doc, token: req.token});
-            }
-        }); 
-    } catch (err) {
-        res.status(500).json('Intenta de nuevo más tarde');
-    }
 }

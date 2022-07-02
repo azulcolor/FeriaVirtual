@@ -1,5 +1,5 @@
-import 'package:feriavirtual/features/auth/test_screens/widgets_test/custom_button.dart';
-import 'package:feriavirtual/features/auth/test_screens/widgets_test/custom_textfield.dart';
+import 'package:feriavirtual/components/customButton.dart';
+import 'package:feriavirtual/components/customTextfield.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:feriavirtual/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  Auth _auth = Auth.signup;
+  Auth _auth = Auth.signin;
   final _signUpFormKey = GlobalKey<FormState>();
   final _signInFormKey = GlobalKey<FormState>();
   final AuthService authService = AuthService();
@@ -70,7 +70,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: GlobalVariables.greyBackgroundCOlor,
+      backgroundColor: GlobalVariables.backgroundColor,
       body: ListView(
         children: [
           SafeArea(
@@ -79,103 +79,33 @@ class _AuthScreenState extends State<AuthScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      'Bienvenido',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    tileColor: _auth == Auth.signup
-                        ? GlobalVariables.backgroundColor
-                        : GlobalVariables.greyBackgroundCOlor,
-                    title: const Text(
-                      'Create Account',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    leading: Radio(
-                      activeColor: GlobalVariables.secondaryColor,
-                      value: Auth.signup,
-                      groupValue: _auth,
-                      onChanged: (Auth? val) {
-                        setState(() {
-                          _auth = val!;
-                        });
-                      },
-                    ),
-                  ),
-                  if (_auth == Auth.signup)
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      color: GlobalVariables.backgroundColor,
-                      child: Form(
-                        key: _signUpFormKey,
-                        child: Column(
-                          children: [
-                            CustomTextField(
-                              controller: _NombreController,
-                              hintText: 'Nombre',
-                            ),
-                            const SizedBox(height: 10),
-                            CustomTextField(
-                              controller: _Apellido_PController,
-                              hintText: 'Apellido Paterno',
-                            ),
-                            const SizedBox(height: 10),
-                            CustomTextField(
-                              controller: _lastNameMController,
-                              hintText: 'Apellido Materno',
-                            ),
-                            const SizedBox(height: 10),
-                            CustomTextField(
-                              controller: _Correo_ElectronicoController,
-                              hintText: 'Correo Electronico',
-                            ),
-                            const SizedBox(height: 10),
-                            CustomTextField(
-                              controller: _TelefonoController,
-                              hintText: 'Numero de Telefono',
-                            ),
-                            const SizedBox(height: 10),
-                            CustomTextField(
-                              controller: _EscuelaController,
-                              hintText: 'Escuela',
-                            ),
-                            const SizedBox(height: 10),
-                            CustomTextField(
-                              controller: _Area_IDController,
-                              hintText: 'Area',
-                            ),
-                            const SizedBox(height: 10),
-                            CustomTextField(
-                              controller: _MotivoController,
-                              hintText: 'Motivo',
-                            ),
-                            const SizedBox(height: 10),
-                            CustomButton(
-                              text: 'Sign Up',
-                              onTap: () {
-                                if (_signUpFormKey.currentState!.validate()) {
-                                  signUpUser();
-                                }
-                              },
-                            )
-                          ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Column(children: [
+                        Padding(
+                          padding: const EdgeInsets.all(6),
+                          child: Image.asset(
+                            'assets/images/logo.png',
+                            width: 56,
+                          ),
                         ),
-                      ),
+                        Padding(
+                            padding: const EdgeInsets.all(6),
+                            child: Text(
+                              '¡Bienvenido!',
+                              textAlign: TextAlign.center,
+                              style: GlobalVariables.h1B,
+                            ))
+                      ]),
                     ),
+                  ),
                   ListTile(
                     tileColor: _auth == Auth.signin
                         ? GlobalVariables.backgroundColor
-                        : GlobalVariables.greyBackgroundCOlor,
+                        : GlobalVariables.backgroundColor,
                     title: const Text(
-                      'Sign-In.',
+                      'Iniciar sesión',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -202,15 +132,103 @@ class _AuthScreenState extends State<AuthScreen> {
                             CustomTextField(
                               controller: _Correo_ElectronicoController,
                               hintText: 'Correo Electronico',
+                              icon: Icons.email,
                             ),
                             const SizedBox(height: 10),
                             CustomButton(
-                              text: 'Sign In',
+                              text: 'Iniciar sesión',
                               onTap: () {
                                 if (_signInFormKey.currentState!.validate()) {
                                   signInUser();
                                 }
                               },
+                              color: GlobalVariables.primaryColor,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ListTile(
+                    tileColor: _auth == Auth.signup
+                        ? GlobalVariables.backgroundColor
+                        : GlobalVariables.backgroundColor,
+                    title: const Text(
+                      'Crear una cuenta',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    leading: Radio(
+                      activeColor: GlobalVariables.secondaryColor,
+                      value: Auth.signup,
+                      groupValue: _auth,
+                      onChanged: (Auth? val) {
+                        setState(() {
+                          _auth = val!;
+                        });
+                      },
+                    ),
+                  ),
+                  if (_auth == Auth.signup)
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      color: GlobalVariables.backgroundColor,
+                      child: Form(
+                        key: _signUpFormKey,
+                        child: Column(
+                          children: [
+                            CustomTextField(
+                              controller: _NombreController,
+                              hintText: 'Nombre',
+                              icon: Icons.person,
+                            ),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              controller: _Apellido_PController,
+                              hintText: 'Apellido Paterno',
+                              icon: Icons.person,
+                            ),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              controller: _lastNameMController,
+                              hintText: 'Apellido Materno',
+                              icon: Icons.person,
+                            ),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              controller: _Correo_ElectronicoController,
+                              hintText: 'Correo Electronico',
+                              icon: Icons.mail,
+                            ),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                                controller: _TelefonoController,
+                                hintText: 'Numero de Telefono',
+                                icon: Icons.phone),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                                controller: _EscuelaController,
+                                hintText: 'Escuela',
+                                icon: Icons.school_rounded),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              controller: _Area_IDController,
+                              hintText: 'Area',
+                            ),
+                            const SizedBox(height: 10),
+                            CustomTextField(
+                              controller: _MotivoController,
+                              hintText: 'Motivo',
+                            ),
+                            const SizedBox(height: 10),
+                            CustomButton(
+                              text: 'Registrarte',
+                              onTap: () {
+                                if (_signUpFormKey.currentState!.validate()) {
+                                  signUpUser();
+                                }
+                              },
+                              color: GlobalVariables.primaryColor,
                             )
                           ],
                         ),

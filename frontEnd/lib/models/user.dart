@@ -26,7 +26,7 @@ class User {
   });
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'Nombre': Nombre,
       'Apellido_P': Apellido_P,
       'Apellido_M': Apellido_M,
@@ -41,15 +41,15 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      Nombre: map['Nombre'] as String,
-      Apellido_P: map['Apellido_P'] as String,
-      Apellido_M: map['Apellido_M'] as String,
-      Correo_Electronico: map['Correo_Electronico'] as String,
-      Telefono: map['Telefono'] as String,
-      Escuela: map['Escuela'] as String,
-      Area_ID: map['Area_ID'] as String,
-      Motivo: map['Motivo'] as String,
-      token: map['token'] as String,
+      Nombre: map['Nombre'] ?? '',
+      Apellido_P: map['Apellido_P'] ?? '',
+      Apellido_M: map['Apellido_M'] ?? '',
+      Correo_Electronico: map['Correo_Electronico'] ?? '',
+      Telefono: map['Telefono'] ?? '',
+      Escuela: map['Escuela'] ?? '',
+      Area_ID: map['Area_ID'] ?? '',
+      Motivo: map['Motivo'] ?? '',
+      token: map['token'] ?? '',
     );
   }
 

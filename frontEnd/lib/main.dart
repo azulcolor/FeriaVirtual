@@ -1,5 +1,6 @@
 import 'package:feriavirtual/features/auth/services/auth_service.dart';
-import 'package:feriavirtual/features/auth/test_screens/tauth_screen.dart';
+import 'package:feriavirtual/providers/universities_provider.dart';
+import 'package:feriavirtual/screens/authScreen.dart';
 import 'package:feriavirtual/providers/user_provider.dart';
 import 'package:feriavirtual/screens/mainPage.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +10,20 @@ import 'package:feriavirtual/constants/global_variables.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (context) => UserProvider(),
-    ),
+    ChangeNotifierProvider(create: (context) => UserProvider()),
+    ChangeNotifierProvider(create: (_) => UniversitiesProvider(), lazy: false),
   ], child: const MyApp()));
+}
+
+class AppState extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UniversitiesProvider())
+      ],
+    );
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -43,7 +54,7 @@ class _MyAppState extends State<MyApp> {
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const MainPage()
+          ? const AuthScreen()
           : const MainPage(),
     );
   }

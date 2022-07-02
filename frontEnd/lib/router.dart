@@ -1,4 +1,4 @@
-import 'package:feriavirtual/features/auth/test_screens/tauth_screen.dart';
+import 'package:feriavirtual/screens/authScreen.dart';
 import 'package:feriavirtual/screens/homePage.dart';
 import 'package:feriavirtual/screens/mainPage.dart';
 import 'package:flutter/material.dart';

@@ -1,3 +1,4 @@
+import 'package:feriavirtual/components/header.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -14,18 +15,21 @@ class homePage extends StatelessWidget {
       'assets/images/feriaVirtual4.jpg',
       'assets/images/feriaVirtual5.jpg',
     ];
-    return Center(
-      child: CarouselSlider.builder(
-          options: CarouselOptions(
-            height: 150,
-            autoPlay: true,
-          ),
-          itemCount: imagesRoutes.length,
-          itemBuilder: (context, index, realIndex) {
-            final imagesRoute = imagesRoutes[index];
+    return Scaffold(
+      appBar: const Header(),
+      body: Center(
+        child: CarouselSlider.builder(
+            options: CarouselOptions(
+              height: 150,
+              autoPlay: true,
+            ),
+            itemCount: imagesRoutes.length,
+            itemBuilder: (context, index, realIndex) {
+              final imagesRoute = imagesRoutes[index];
 
-            return buildImage(imagesRoute, index);
-          }),
+              return buildImage(imagesRoute, index);
+            }),
+      ),
     );
   }
 }
