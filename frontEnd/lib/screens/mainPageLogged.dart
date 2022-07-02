@@ -1,29 +1,25 @@
-import 'package:feriavirtual/screens/homePage.dart';
+import 'package:feriavirtual/screens/test.dart';
+import 'package:feriavirtual/screens/universities.dart';
 import 'package:flutter/material.dart';
-import 'package:feriavirtual/components/header.dart';
-import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-//Importaciones para probar pantallas
-import 'package:feriavirtual/screens/homePageLogged.dart';
-import 'package:feriavirtual/screens/universities.dart';
-import 'package:feriavirtual/screens/authScreen.dart';
+import '../constants/global_variables.dart';
+import 'homePageLogged.dart';
 
-class MainPage extends StatefulWidget {
-  static const String routeName = '/mainPage';
-  const MainPage({Key? key}) : super(key: key);
+class MainPageLogged extends StatefulWidget {
+  const MainPageLogged({Key? key}) : super(key: key);
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<MainPageLogged> createState() => _MainPageLoggedState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageLoggedState extends State<MainPageLogged> {
   int currentIndex = 1;
 
   List<Widget> screens = [
     const Universities(),
-    const homePage(),
-    const AuthScreen(),
+    const HomePageLogged(),
+    Test(),
   ];
 
   void onTap(int index) {
@@ -41,9 +37,9 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
             icon: Padding(
               padding: EdgeInsets.all(5.0),
-              child: Icon(FontAwesomeIcons.circleInfo, size: 23),
+              child: Icon(FontAwesomeIcons.schoolFlag, size: 23),
             ),
-            label: 'Info',
+            label: 'Escuelas',
           ),
           BottomNavigationBarItem(
             icon: Padding(
@@ -55,9 +51,9 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
             icon: Padding(
               padding: EdgeInsets.all(5.0),
-              child: Icon(FontAwesomeIcons.rightToBracket, size: 23),
+              child: Icon(FontAwesomeIcons.rectangleList, size: 23),
             ),
-            label: 'Ingresar',
+            label: 'Test',
           )
         ],
         type: BottomNavigationBarType.fixed,

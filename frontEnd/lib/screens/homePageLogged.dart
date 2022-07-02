@@ -1,13 +1,23 @@
+import 'package:feriavirtual/components/header.dart';
+import 'package:feriavirtual/screens/test.dart';
+import 'package:feriavirtual/screens/universities.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class HomePageLogged extends StatelessWidget {
+class HomePageLogged extends StatefulWidget {
   const HomePageLogged({Key? key}) : super(key: key);
 
+  @override
+  State<HomePageLogged> createState() => _HomePageLoggedState();
+}
+
+class _HomePageLoggedState extends State<HomePageLogged> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: const Header(),
       body: Center(
         child: ScreenWidget(screenWidth: screenWidth),
       ),
@@ -26,14 +36,14 @@ class ScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 100),
       width: screenWidth * 0.9,
       color: GlobalVariables.backgroundColor,
       child: Column(
         children: [
-          ImageWidget(),
+          const ImageWidget(),
           TitleWidget(screenWidth: screenWidth),
-          BodyTextWidget(),
-          ButtonWidget()
+          const BodyTextWidget(),
         ],
       ),
     );
@@ -88,7 +98,12 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => null,
+      onPressed: () => {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Universities()),
+        )
+      },
       style: ButtonStyle(
           foregroundColor:
               MaterialStateProperty.all<Color>(GlobalVariables.backgroundColor),
