@@ -25,7 +25,7 @@ class AuthService {
       required String Correo_Electronico,
       required String Telefono,
       required String Escuela, //escuela de procedencia
-      required String Area_ID, //area de interes
+      required String? Area_ID, //area de interes
       required String Motivo}) async {
     try {
       User user = User(

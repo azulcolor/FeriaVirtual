@@ -10,7 +10,7 @@ class User {
   final String Correo_Electronico;
   final String Telefono;
   final String Escuela;
-  final String Area_ID;
+  final String? Area_ID;
   final String Motivo;
   final String token;
   User({

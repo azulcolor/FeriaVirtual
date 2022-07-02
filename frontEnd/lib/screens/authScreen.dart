@@ -60,7 +60,7 @@ class _AuthScreenState extends State<AuthScreen> {
       Correo_Electronico: _Correo_ElectronicoController.text,
       Telefono: _TelefonoController.text,
       Escuela: _EscuelaController.text,
-      Area_ID: _cntController.dropDownValue.toString(),
+      Area_ID: _cntController.dropDownValue?.value.toString(),
       Motivo: _MotivoController.text,
     );
   }
@@ -232,6 +232,40 @@ class _AuthScreenState extends State<AuthScreen> {
                               hintText: 'Motivo',
                             ),
                             const SizedBox(height: 10),
+                            DropDownTextField(
+                              // initialValue: "name4",
+                              singleController: _cntController,
+                              clearOption: false,
+                              enableSearch: true,
+                              textFieldDecoration:
+                                  InputDecoration(hintText: "buenas"),
+                              validator: (val) {
+                                if (val == null || val.isEmpty) {
+                                  return "Ingresa tu Área";
+                                }
+                                return null;
+                              },
+                              dropDownItemCount: 6,
+                              dropDownList: const [
+                                DropDownValueModel(name: 'name1', value: 1),
+                                DropDownValueModel(
+                                    name: 'name2',
+                                    value: 2,
+                                    toolTipMsg:
+                                        "DropDownButton is a widget that we can use to select one unique value from a set of values"),
+                                DropDownValueModel(name: 'name3', value: 3),
+                                DropDownValueModel(
+                                    name: 'name4',
+                                    value: 4,
+                                    toolTipMsg:
+                                        "DropDownButton is a widget that we can use to select one unique value from a set of values"),
+                                DropDownValueModel(name: 'name5', value: 5),
+                                DropDownValueModel(name: 'name6', value: 6),
+                                DropDownValueModel(name: 'name7', value: 7),
+                                DropDownValueModel(name: 'name8', value: 8),
+                              ],
+                              onChanged: (val) {},
+                            ),
                             CustomButton(
                               text: 'Registrarte',
                               onTap: () {
@@ -240,68 +274,11 @@ class _AuthScreenState extends State<AuthScreen> {
                                 }
                               },
                               color: GlobalVariables.primaryColor,
-                            )
+                            ),
                           ],
                         ),
                       ),
                     ),
-                  DropdownSearch<String>(
-                    popupProps: PopupProps.menu(
-                      showSelectedItems: true,
-                      disabledItemFn: (String s) => s.startsWith('I'),
-                    ),
-                    dropdownDecoratorProps: const DropDownDecoratorProps(
-                        dropdownSearchDecoration: InputDecoration(
-                            disabledBorder: InputBorder.none,
-                            hintText: "dropdownCityName",
-                            hintStyle:
-                                TextStyle(color: Colors.black, fontSize: 12))),
-                    items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
-                    onChanged: print,
-                    selectedItem: "Brazil",
-                  ),
-                  DropdownSearch<String>.multiSelection(
-                    items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
-                    popupProps: PopupPropsMultiSelection.menu(
-                      showSelectedItems: true,
-                      disabledItemFn: (String s) => s.startsWith('I'),
-                    ),
-                    onChanged: print,
-                    selectedItems: ["Brazil"],
-                  ),
-                  DropDownTextField(
-                    // initialValue: "name4",
-                    singleController: _cntController,
-                    clearOption: false,
-                    enableSearch: true,
-                    validator: (value) {
-                      if (value == null) {
-                        return "Required field";
-                      } else {
-                        return null;
-                      }
-                    },
-                    dropDownItemCount: 6,
-                    dropDownList: const [
-                      DropDownValueModel(name: 'name1', value: 1),
-                      DropDownValueModel(
-                          name: 'name2',
-                          value: 2,
-                          toolTipMsg:
-                              "DropDownButton is a widget that we can use to select one unique value from a set of values"),
-                      DropDownValueModel(name: 'name3', value: 3),
-                      DropDownValueModel(
-                          name: 'name4',
-                          value: 4,
-                          toolTipMsg:
-                              "DropDownButton is a widget that we can use to select one unique value from a set of values"),
-                      DropDownValueModel(name: 'name5', value: 5),
-                      DropDownValueModel(name: 'name6', value: 6),
-                      DropDownValueModel(name: 'name7', value: 7),
-                      DropDownValueModel(name: 'name8', value: 8),
-                    ],
-                    onChanged: (val) {},
-                  ),
                 ],
               ),
             ),
