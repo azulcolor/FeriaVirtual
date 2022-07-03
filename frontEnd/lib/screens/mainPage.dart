@@ -18,10 +18,9 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int currentIndex = 1;
+  int currentIndex = 0;
 
   List<Widget> screens = [
-    const Universities(),
     const homePage(),
     const AuthScreen(),
   ];
@@ -38,13 +37,6 @@ class _MainPageState extends State<MainPage> {
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: EdgeInsets.all(5.0),
-              child: Icon(FontAwesomeIcons.circleInfo, size: 23),
-            ),
-            label: 'Info',
-          ),
           BottomNavigationBarItem(
             icon: Padding(
               padding: EdgeInsets.all(5.0),
