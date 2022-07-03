@@ -16,7 +16,7 @@ class _UniversitiesState extends State<Universities> {
     return Scaffold(
       appBar: const Header(),
       body: ListView.builder(
-        itemCount: 20,
+        itemCount: 5,
         itemBuilder: (_, int index) => const ShowUniversities(),
       ),
     );
@@ -38,21 +38,21 @@ class EducativeOfferWidget extends StatelessWidget {
 
     if (kindOf == 1) {
       if (number == 1) {
-        text = '$number licenciatura';
+        text = '$number Licenciatura';
       } else {
-        text = '$number licenciaturas';
+        text = '$number Licenciaturas';
       }
     } else if (kindOf == 2) {
       if (number == 1) {
-        text = '$number maestría';
+        text = '$number Maestría';
       } else {
-        text = '$number maestrías';
+        text = '$number Maestrías';
       }
     } else if (kindOf == 3) {
       if (number == 1) {
-        text = '$number doctorado';
+        text = '$number Doctorado';
       } else {
-        text = '$number doctorados';
+        text = '$number Doctorados';
       }
     }
 
@@ -112,21 +112,35 @@ class ShowUniversities extends StatelessWidget {
             const SizedBox(height: 5),
             Align(
               alignment: Alignment.centerLeft,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                decoration: BoxDecoration(
-                    border: Border.all(color: GlobalVariables.grayColor),
-                    borderRadius: BorderRadius.circular(50)),
-                child: Text(
-                  'Humanidades',
-                  style: GlobalVariables.smallTextB,
-                ),
-              ),
+              child: Wrap(spacing: 5, runSpacing: 5, children: [
+                for (int i = 0; i <= 4; i++)
+                  const AreaWidget(
+                    text: "Humanidades",
+                  )
+              ]),
             ),
             const SizedBox(height: 10),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class AreaWidget extends StatelessWidget {
+  final String text;
+  const AreaWidget({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      decoration: BoxDecoration(
+          border: Border.all(color: GlobalVariables.grayColor),
+          borderRadius: BorderRadius.circular(50)),
+      child: Text(
+        text,
+        style: GlobalVariables.smallTextB,
       ),
     );
   }
