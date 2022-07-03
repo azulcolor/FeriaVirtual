@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:feriavirtual/constants/utils.dart';
@@ -9,6 +10,7 @@ import 'package:feriavirtual/constants/error_handling.dart';
 import 'package:feriavirtual/models/user.dart';
 import 'package:feriavirtual/screens/homePage.dart';
 import 'package:feriavirtual/screens/mainPage.dart';
+import 'package:feriavirtual/screens/mainPageLogged.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -26,7 +28,7 @@ class AuthService {
       required String Telefono,
       required String Escuela, //escuela de procedencia
       required String? Area_ID, //area de interes
-      required String Motivo}) async {
+      required String? Motivo}) async {
     try {
       User user = User(
         Nombre: Nombre,
@@ -39,7 +41,7 @@ class AuthService {
         Motivo: Motivo,
         token: '',
       );
-
+      print('xd');
       http.Response res = await http.post(
         Uri.parse('$uri/auth/signup'),
         body: user.toJson(),
@@ -55,6 +57,12 @@ class AuthService {
             showSnackBar(
               context,
               'Usuario registrado correctamente',
+            );
+
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              MainPageLogged.routeName,
+              (route) => false,
             );
           });
     } catch (e) {
@@ -75,6 +83,7 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
+      print(res);
 
       httpErrorHandle(
         response: res,
@@ -85,7 +94,7 @@ class AuthService {
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
           Navigator.pushNamedAndRemoveUntil(
             context,
-            MainPage.routeName,
+            MainPageLogged.routeName,
             (route) => false,
           );
         },
@@ -130,7 +139,7 @@ class AuthService {
         userProvider.setUser(userRes.body);
       }
     } catch (e) {
-      showSnackBar(context, e.toString());
+      showSnackBar(context, 'No hay conexión a internet');
     }
   }
 }

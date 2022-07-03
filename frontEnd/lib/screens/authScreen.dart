@@ -33,7 +33,8 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _TelefonoController = TextEditingController();
   final TextEditingController _EscuelaController = TextEditingController();
   final TextEditingController _Area_IDController = TextEditingController();
-  final TextEditingController _MotivoController = TextEditingController();
+  late SingleValueDropDownController _mtvController =
+      SingleValueDropDownController();
   late SingleValueDropDownController _cntController =
       SingleValueDropDownController();
 
@@ -47,7 +48,7 @@ class _AuthScreenState extends State<AuthScreen> {
     _TelefonoController.dispose();
     _EscuelaController.dispose();
     _Area_IDController.dispose();
-    _MotivoController.dispose();
+    _mtvController.dispose();
     _cntController.dispose();
   }
 
@@ -61,7 +62,7 @@ class _AuthScreenState extends State<AuthScreen> {
       Telefono: _TelefonoController.text,
       Escuela: _EscuelaController.text,
       Area_ID: _cntController.dropDownValue?.value.toString(),
-      Motivo: _MotivoController.text,
+      Motivo: _mtvController.dropDownValue?.value.toString(),
     );
   }
 
@@ -74,6 +75,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   void initState() {
+    _mtvController = SingleValueDropDownController();
     _cntController = SingleValueDropDownController();
     super.initState();
   }
@@ -222,23 +224,29 @@ class _AuthScreenState extends State<AuthScreen> {
                                 hintText: 'Escuela',
                                 icon: Icons.school_rounded),
                             const SizedBox(height: 10),
-                            CustomTextField(
-                              controller: _Area_IDController,
-                              hintText: 'Area',
-                            ),
-                            const SizedBox(height: 10),
-                            CustomTextField(
-                              controller: _MotivoController,
-                              hintText: 'Motivo',
-                            ),
-                            const SizedBox(height: 10),
                             DropDownTextField(
                               // initialValue: "name4",
                               singleController: _cntController,
                               clearOption: false,
                               enableSearch: true,
-                              textFieldDecoration:
-                                  InputDecoration(hintText: "buenas"),
+                              textFieldDecoration: InputDecoration(
+                                fillColor: GlobalVariables.yellowColor,
+                                filled: true,
+                                hintText: 'Area de interes',
+                                prefixIcon: Icon(Icons.book),
+                                border: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                  color: Colors.black,
+                                )),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                labelStyle: TextStyle(
+                                  color: GlobalVariables.blackColor,
+                                ),
+                              ),
                               validator: (val) {
                                 if (val == null || val.isEmpty) {
                                   return "Ingresa tu Área";
@@ -247,25 +255,78 @@ class _AuthScreenState extends State<AuthScreen> {
                               },
                               dropDownItemCount: 6,
                               dropDownList: const [
-                                DropDownValueModel(name: 'name1', value: 1),
                                 DropDownValueModel(
-                                    name: 'name2',
+                                    name: 'Aire Libre', value: 1),
+                                DropDownValueModel(
+                                    name: 'Mecanica',
                                     value: 2,
                                     toolTipMsg:
                                         "DropDownButton is a widget that we can use to select one unique value from a set of values"),
-                                DropDownValueModel(name: 'name3', value: 3),
+                                DropDownValueModel(name: 'Calculo', value: 3),
                                 DropDownValueModel(
-                                    name: 'name4',
+                                    name: 'Cientifica',
                                     value: 4,
                                     toolTipMsg:
                                         "DropDownButton is a widget that we can use to select one unique value from a set of values"),
-                                DropDownValueModel(name: 'name5', value: 5),
-                                DropDownValueModel(name: 'name6', value: 6),
-                                DropDownValueModel(name: 'name7', value: 7),
-                                DropDownValueModel(name: 'name8', value: 8),
+                                DropDownValueModel(
+                                    name: 'Persuasiva', value: 5),
+                                DropDownValueModel(name: 'Artes', value: 6),
+                                DropDownValueModel(name: 'Literaria', value: 7),
+                                DropDownValueModel(name: 'Musical', value: 8),
+                                DropDownValueModel(name: 'Social', value: 9),
+                                DropDownValueModel(
+                                    name: 'Administrativa', value: 10),
                               ],
                               onChanged: (val) {},
                             ),
+                            const SizedBox(height: 10),
+                            DropDownTextField(
+                              // initialValue: "name4",
+                              singleController: _mtvController,
+                              clearOption: false,
+                              enableSearch: false,
+                              textFieldDecoration: InputDecoration(
+                                fillColor: GlobalVariables.yellowColor,
+                                filled: true,
+                                hintText: 'Motivo',
+                                prefixIcon: Icon(Icons.collections_bookmark),
+                                border: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                  color: Colors.black,
+                                )),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                labelStyle: TextStyle(
+                                  color: GlobalVariables.blackColor,
+                                ),
+                              ),
+                              validator: (val) {
+                                if (val == null || val.isEmpty) {
+                                  return "Ingresa tu Área";
+                                }
+                                return null;
+                              },
+                              dropDownItemCount: 6,
+                              dropDownList: const [
+                                DropDownValueModel(
+                                  name: 'Egresado o estudiando bachillerato',
+                                  value: 0,
+                                ),
+                                DropDownValueModel(
+                                  name: 'Padre o tutor',
+                                  value: 1,
+                                ),
+                                DropDownValueModel(
+                                  name: 'Trabajando y quiere estudiar',
+                                  value: 2,
+                                ),
+                              ],
+                              onChanged: (val) {},
+                            ),
+                            const SizedBox(height: 10),
                             CustomButton(
                               text: 'Registrarte',
                               onTap: () {

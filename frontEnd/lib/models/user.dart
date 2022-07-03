@@ -11,7 +11,7 @@ class User {
   final String Telefono;
   final String Escuela;
   final String? Area_ID;
-  final String Motivo;
+  final String? Motivo;
   final String token;
   User({
     required this.Nombre,
