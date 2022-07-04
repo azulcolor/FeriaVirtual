@@ -1,8 +1,6 @@
 import 'package:feriavirtual/features/auth/services/auth_service.dart';
 import 'package:feriavirtual/providers/universities_provider.dart';
-import 'package:feriavirtual/screens/authScreen.dart';
 import 'package:feriavirtual/providers/user_provider.dart';
-import 'package:feriavirtual/screens/homePageLogged.dart';
 import 'package:feriavirtual/screens/mainPage.dart';
 import 'package:feriavirtual/screens/mainPageLogged.dart';
 import 'package:flutter/material.dart';
