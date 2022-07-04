@@ -17,6 +17,13 @@ class UniversitiesResponse {
   int maestria;
   int doctorado;
 
+  get getUniversities {
+    if (this.universidadId == 17 || this.universidadId == 23) {
+      return null;
+    }
+    return UniversitiesResponse;
+  }
+
   factory UniversitiesResponse.fromJson(Map<String, dynamic> json) =>
       UniversitiesResponse(
         universidadId: json["Universidad_ID"],

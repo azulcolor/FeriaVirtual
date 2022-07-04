@@ -9,7 +9,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case AuthScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => AuthScreen(),
+        builder: (_) => const AuthScreen(),
       );
 
     case MainPage.routeName:
@@ -24,10 +24,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         builder: (_) => const MainPageLogged(),
       );
 
-    case homePage.routeName:
+    case HomePage.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => const homePage(),
+        builder: (_) => const HomePage(),
       );
 
     default:

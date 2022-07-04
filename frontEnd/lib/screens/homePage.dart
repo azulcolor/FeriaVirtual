@@ -2,9 +2,9 @@ import 'package:feriavirtual/components/header.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class homePage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   static const String routeName = '/home';
-  const homePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

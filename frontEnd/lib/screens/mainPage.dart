@@ -1,13 +1,8 @@
-import 'package:feriavirtual/screens/homePage.dart';
+import 'package:feriavirtual/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/components/header.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-//Importaciones para probar pantallas
-import 'package:feriavirtual/screens/homePageLogged.dart';
-import 'package:feriavirtual/screens/universities.dart';
-import 'package:feriavirtual/screens/authScreen.dart';
 
 class MainPage extends StatefulWidget {
   static const String routeName = '/mainPage';
@@ -21,7 +16,7 @@ class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
 
   List<Widget> screens = [
-    const homePage(),
+    const HomePage(),
     const AuthScreen(),
   ];
 

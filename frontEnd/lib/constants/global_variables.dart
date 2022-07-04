@@ -28,7 +28,6 @@ class GlobalVariables {
   static const grayColor = Color(0xFF565254);
   static const greenColor = Color(0xFF558B6E);
   static const yellowColor = Color(0xFFFFD166);
-  //hola
 
   static var h1B = GoogleFonts.quicksand(
     fontSize: 32,
@@ -99,6 +98,16 @@ class GlobalVariables {
   static var mediumTextRed = GoogleFonts.inter(
     fontSize: 12,
     color: Color.fromARGB(255, 180, 62, 54),
+    fontWeight: FontWeight.w500,
+  );
+  static var mediumTextBlue = GoogleFonts.inter(
+    fontSize: 12,
+    color: questionColor,
+    fontWeight: FontWeight.w500,
+  );
+  static var mediumTextYellow = GoogleFonts.inter(
+    fontSize: 12,
+    color: secondaryColor,
     fontWeight: FontWeight.w500,
   );
   static var smallTextB = GoogleFonts.inter(

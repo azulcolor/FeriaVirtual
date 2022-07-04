@@ -1,9 +1,7 @@
 import 'package:feriavirtual/components/header.dart';
-import 'package:feriavirtual/screens/test.dart';
-import 'package:feriavirtual/screens/universities.dart';
+import 'package:feriavirtual/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePageLogged extends StatefulWidget {
   const HomePageLogged({Key? key}) : super(key: key);
@@ -81,7 +79,7 @@ class TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: screenWidth * 0.5,
-      margin: EdgeInsets.only(top: 40),
+      margin: const EdgeInsets.only(top: 40),
       child: Text(
         "Bienvenido a la feria virtual 2022",
         textAlign: TextAlign.center,
@@ -127,12 +125,10 @@ class ImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.asset(
-            'assets/images/feriaVirtual1.jpg',
-          )),
-    );
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Image.asset(
+          'assets/images/feriaVirtual1.jpg',
+        ));
   }
 }

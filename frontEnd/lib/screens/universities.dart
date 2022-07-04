@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class Universities extends StatefulWidget {
   const Universities({Key? key}) : super(key: key);
@@ -111,6 +110,32 @@ class Becas extends StatelessWidget {
   }
 }
 
+class Tipo extends StatelessWidget {
+  String tipo;
+  Tipo({Key? key, required this.tipo}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (tipo == 'Privada') {
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          tipo,
+          style: GlobalVariables.mediumTextBlue,
+        ),
+      );
+    } else {
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          tipo,
+          style: GlobalVariables.mediumTextYellow,
+        ),
+      );
+    }
+  }
+}
+
 class ShowUniversities extends StatelessWidget {
   final List<UniversitiesResponse> universities;
   final int index;
@@ -123,54 +148,73 @@ class ShowUniversities extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Center(
-      child: Container(
-        width: screenWidth * 0.9,
-        color: GlobalVariables.backgroundColor,
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            SizedBox(
-              height: 150,
-              width: screenWidth * .5,
-              child: Image(
-                image: NetworkImage(universities[index].rutaEscudo),
-              ),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              universities[index].nombre,
-              textAlign: TextAlign.center,
-              style: GlobalVariables.h3B,
-            ),
-            const SizedBox(height: 5),
-            EducativeOfferWidget(
-                universities: universities, index: index, kindOf: 1),
-            const SizedBox(height: 5),
-            EducativeOfferWidget(
-                universities: universities, index: index, kindOf: 2),
-            const SizedBox(height: 5),
-            EducativeOfferWidget(
-                universities: universities, index: index, kindOf: 3),
-            const SizedBox(height: 5),
-            Becas(
-              beca: false,
-            ),
-            const SizedBox(height: 5),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Wrap(spacing: 5, runSpacing: 5, children: [
-                for (int i = 0; i <= 4; i++)
-                  const AreaWidget(
-                    text: "Humanidades",
-                  )
-              ]),
-            ),
-            const SizedBox(height: 10),
-          ],
+    if (universities.length < 20) {
+      return SizedBox(
+        width: double.infinity,
+        height: screenWidth * 0.5,
+        child: const Center(
+          child: CircularProgressIndicator(),
         ),
-      ),
-    );
+      );
+    }
+
+    if (universities[index].getUniversities == null) {
+      return Container();
+    } else {
+      return Center(
+        child: Container(
+          width: screenWidth * 0.9,
+          color: GlobalVariables.backgroundColor,
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              SizedBox(
+                  height: 150,
+                  width: screenWidth * .5,
+                  child: universities[index].rutaEscudo != "NA"
+                      ? Image(
+                          image: NetworkImage(universities[index].rutaEscudo),
+                        )
+                      : const Image(
+                          image: AssetImage('assets/images/logo.png'),
+                        )),
+              const SizedBox(height: 5),
+              Text(
+                universities[index].nombre,
+                textAlign: TextAlign.center,
+                style: GlobalVariables.h3B,
+              ),
+              const SizedBox(height: 5),
+              EducativeOfferWidget(
+                  universities: universities, index: index, kindOf: 1),
+              const SizedBox(height: 5),
+              EducativeOfferWidget(
+                  universities: universities, index: index, kindOf: 2),
+              const SizedBox(height: 5),
+              EducativeOfferWidget(
+                  universities: universities, index: index, kindOf: 3),
+              const SizedBox(height: 5),
+              Tipo(tipo: universities[index].tipo),
+              const SizedBox(height: 5),
+              Becas(
+                beca: false,
+              ),
+              const SizedBox(height: 5),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Wrap(spacing: 5, runSpacing: 5, children: [
+                  for (int i = 0; i <= 4; i++)
+                    const AreaWidget(
+                      text: "Humanidades",
+                    )
+                ]),
+              ),
+              const SizedBox(height: 10),
+            ],
+          ),
+        ),
+      );
+    }
   }
 }
 

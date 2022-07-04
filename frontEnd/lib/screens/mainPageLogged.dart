@@ -1,12 +1,8 @@
-import 'package:feriavirtual/screens/test.dart';
-import 'package:feriavirtual/screens/universities.dart';
+import 'package:feriavirtual/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../constants/global_variables.dart';
-import 'homePageLogged.dart';
-
-import 'package:feriavirtual/screens/university.dart';
 
 class MainPageLogged extends StatefulWidget {
   static const String routeName = '/mainPageLogged';
