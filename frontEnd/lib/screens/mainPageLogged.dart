@@ -7,6 +7,7 @@ import '../constants/global_variables.dart';
 import 'homePageLogged.dart';
 
 class MainPageLogged extends StatefulWidget {
+  static const String routeName = '/mainPageLogged';
   const MainPageLogged({Key? key}) : super(key: key);
 
   @override

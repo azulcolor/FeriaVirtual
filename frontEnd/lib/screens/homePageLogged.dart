@@ -36,14 +36,15 @@ class ScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 100),
       width: screenWidth * 0.9,
       color: GlobalVariables.backgroundColor,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const ImageWidget(),
           TitleWidget(screenWidth: screenWidth),
-          const BodyTextWidget(),
+          const BodyTextWidget()
         ],
       ),
     );
@@ -127,7 +128,6 @@ class ImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 40),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Image.asset(

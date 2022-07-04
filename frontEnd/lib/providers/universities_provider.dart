@@ -14,7 +14,7 @@ class UniversitiesProvider extends ChangeNotifier {
   }
 
   getOnDisplayUniversities() async {
-    var url = Uri.http(urlHost, '/v1/universidad/', {});
+    var url = Uri.https(urlHost, '/v1/universidad/', {});
     final response = await http.get(url);
 
     universitiesResponse = List<UniversitiesResponse>.from(json
