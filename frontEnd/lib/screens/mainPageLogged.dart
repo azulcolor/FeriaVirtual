@@ -6,6 +6,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../constants/global_variables.dart';
 import 'homePageLogged.dart';
 
+import 'package:feriavirtual/screens/university.dart';
+
 class MainPageLogged extends StatefulWidget {
   static const String routeName = '/mainPageLogged';
   const MainPageLogged({Key? key}) : super(key: key);
@@ -17,11 +19,7 @@ class MainPageLogged extends StatefulWidget {
 class _MainPageLoggedState extends State<MainPageLogged> {
   int currentIndex = 1;
 
-  List<Widget> screens = [
-    const Universities(),
-    const HomePageLogged(),
-    Test(),
-  ];
+  List<Widget> screens = [const Universities(), const HomePageLogged(), Test()];
 
   void onTap(int index) {
     setState(() {

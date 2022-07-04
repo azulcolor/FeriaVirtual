@@ -305,7 +305,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               ),
                               validator: (val) {
                                 if (val == null || val.isEmpty) {
-                                  return "Ingresa tu Área";
+                                  return "Ingresa un Motivo";
                                 }
                                 return null;
                               },
