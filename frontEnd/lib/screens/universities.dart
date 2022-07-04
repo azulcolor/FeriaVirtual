@@ -1,7 +1,11 @@
 import 'package:feriavirtual/components/header.dart';
+import 'package:feriavirtual/models/universities_model.dart';
+import 'package:feriavirtual/providers/universities_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class Universities extends StatefulWidget {
   const Universities({Key? key}) : super(key: key);
@@ -13,46 +17,54 @@ class Universities extends StatefulWidget {
 class _UniversitiesState extends State<Universities> {
   @override
   Widget build(BuildContext context) {
+    final universitiesProvider = Provider.of<UniversitiesProvider>(context);
+    List<UniversitiesResponse> university = universitiesProvider.universities;
     return Scaffold(
       appBar: const Header(),
       body: ListView.builder(
-        itemCount: 20,
-        itemBuilder: (_, int index) => const ShowUniversities(),
+        itemCount: university.length,
+        itemBuilder: (_, int index) => ShowUniversities(
+            universities: universitiesProvider.universities, index: index),
       ),
     );
   }
 }
 
 class EducativeOfferWidget extends StatelessWidget {
+  final List<UniversitiesResponse> universities;
+  final int index;
   final int kindOf;
-  final int number;
   const EducativeOfferWidget({
     Key? key,
+    required this.universities,
+    required this.index,
     required this.kindOf,
-    required this.number,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     String text = '';
+    int numberLic = universities[index].licenciatura;
+    int numberMas = universities[index].maestria;
+    int numberDoc = universities[index].doctorado;
 
     if (kindOf == 1) {
-      if (number == 1) {
-        text = '$number licenciatura';
+      if (universities[index].licenciatura == 1) {
+        text = '$numberLic licenciatura';
       } else {
-        text = '$number licenciaturas';
+        text = '$numberLic licenciaturas';
       }
     } else if (kindOf == 2) {
-      if (number == 1) {
-        text = '$number maestría';
+      if (universities[index].licenciatura == 1) {
+        text = '$numberMas maestría';
       } else {
-        text = '$number maestrías';
+        text = '$numberMas maestrías';
       }
     } else if (kindOf == 3) {
-      if (number == 1) {
-        text = '$number doctorado';
+      if (universities[index].licenciatura == 1) {
+        text = '$numberDoc doctorado';
       } else {
-        text = '$number doctorados';
+        text = '$numberDoc doctorados';
       }
     }
 
@@ -73,12 +85,44 @@ class EducativeOfferWidget extends StatelessWidget {
   }
 }
 
+class Becas extends StatelessWidget {
+  bool beca;
+  Becas({Key? key, required this.beca}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (beca == true) {
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          'Beca disponible',
+          style: GlobalVariables.mediumTextGreen,
+        ),
+      );
+    } else {
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          'Beca no disponible',
+          style: GlobalVariables.mediumTextRed,
+        ),
+      );
+    }
+  }
+}
+
 class ShowUniversities extends StatelessWidget {
-  const ShowUniversities({Key? key}) : super(key: key);
+  final List<UniversitiesResponse> universities;
+  final int index;
+
+  const ShowUniversities(
+      {Key? key, required this.universities, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+
     return Center(
       child: Container(
         width: screenWidth * 0.9,
@@ -86,28 +130,31 @@ class ShowUniversities extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Image.asset(
-              'assets/images/universidadTest.jpg',
+            SizedBox(
+              height: 150,
+              width: screenWidth * .5,
+              child: Image(
+                image: NetworkImage(universities[index].rutaEscudo),
+              ),
             ),
             const SizedBox(height: 5),
             Text(
-              'Universidad Partenón de Cozumel',
+              universities[index].nombre,
               textAlign: TextAlign.center,
               style: GlobalVariables.h3B,
             ),
             const SizedBox(height: 5),
-            const EducativeOfferWidget(kindOf: 1, number: 1),
+            EducativeOfferWidget(
+                universities: universities, index: index, kindOf: 1),
             const SizedBox(height: 5),
-            const EducativeOfferWidget(kindOf: 2, number: 4),
+            EducativeOfferWidget(
+                universities: universities, index: index, kindOf: 2),
             const SizedBox(height: 5),
-            const EducativeOfferWidget(kindOf: 3, number: 0),
+            EducativeOfferWidget(
+                universities: universities, index: index, kindOf: 3),
             const SizedBox(height: 5),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Beca disponible',
-                style: GlobalVariables.mediumTextGreen,
-              ),
+            Becas(
+              beca: false,
             ),
             const SizedBox(height: 5),
             Align(

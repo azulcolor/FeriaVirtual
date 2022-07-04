@@ -58,8 +58,8 @@ class _MyAppState extends State<MyApp> {
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const MainPage()
-          : const MainPageLogged(),
+          ? const MainPageLogged()
+          : const MainPage(),
     );
   }
 }

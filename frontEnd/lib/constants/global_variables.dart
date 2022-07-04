@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 String uri = 'http://192.168.1.64:4000/v1';
+String urlHost = '192.168.1.64:4000';
 
 class GlobalVariables {
   // COLORS
@@ -92,6 +93,11 @@ class GlobalVariables {
   static var mediumTextGreen = GoogleFonts.inter(
     fontSize: 12,
     color: greenColor,
+    fontWeight: FontWeight.w500,
+  );
+  static var mediumTextRed = GoogleFonts.inter(
+    fontSize: 12,
+    color: Color.fromARGB(255, 180, 62, 54),
     fontWeight: FontWeight.w500,
   );
   static var smallTextB = GoogleFonts.inter(
