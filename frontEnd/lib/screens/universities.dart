@@ -148,56 +148,73 @@ class ShowUniversities extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Center(
-      child: Container(
-        width: screenWidth * 0.9,
-        color: GlobalVariables.backgroundColor,
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            SizedBox(
-              height: 150,
-              width: screenWidth * .5,
-              child: Image(
-                image: NetworkImage(universities[index].rutaEscudo),
-              ),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              universities[index].nombre,
-              textAlign: TextAlign.center,
-              style: GlobalVariables.h3B,
-            ),
-            const SizedBox(height: 5),
-            EducativeOfferWidget(
-                universities: universities, index: index, kindOf: 1),
-            const SizedBox(height: 5),
-            EducativeOfferWidget(
-                universities: universities, index: index, kindOf: 2),
-            const SizedBox(height: 5),
-            EducativeOfferWidget(
-                universities: universities, index: index, kindOf: 3),
-            const SizedBox(height: 5),
-            Tipo(tipo: universities[index].tipo),
-            const SizedBox(height: 5),
-            Becas(
-              beca: false,
-            ),
-            const SizedBox(height: 5),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Wrap(spacing: 5, runSpacing: 5, children: [
-                for (int i = 0; i <= 4; i++)
-                  const AreaWidget(
-                    text: "Humanidades",
-                  )
-              ]),
-            ),
-            const SizedBox(height: 10),
-          ],
+    if (universities.length < 20) {
+      return SizedBox(
+        width: double.infinity,
+        height: screenWidth * 0.5,
+        child: const Center(
+          child: CircularProgressIndicator(),
         ),
-      ),
-    );
+      );
+    }
+
+    if (universities[index].getUniversities == null) {
+      return Container();
+    } else {
+      return Center(
+        child: Container(
+          width: screenWidth * 0.9,
+          color: GlobalVariables.backgroundColor,
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              SizedBox(
+                  height: 150,
+                  width: screenWidth * .5,
+                  child: universities[index].rutaEscudo != "NA"
+                      ? Image(
+                          image: NetworkImage(universities[index].rutaEscudo),
+                        )
+                      : const Image(
+                          image: AssetImage('assets/images/logo.png'),
+                        )),
+              const SizedBox(height: 5),
+              Text(
+                universities[index].nombre,
+                textAlign: TextAlign.center,
+                style: GlobalVariables.h3B,
+              ),
+              const SizedBox(height: 5),
+              EducativeOfferWidget(
+                  universities: universities, index: index, kindOf: 1),
+              const SizedBox(height: 5),
+              EducativeOfferWidget(
+                  universities: universities, index: index, kindOf: 2),
+              const SizedBox(height: 5),
+              EducativeOfferWidget(
+                  universities: universities, index: index, kindOf: 3),
+              const SizedBox(height: 5),
+              Tipo(tipo: universities[index].tipo),
+              const SizedBox(height: 5),
+              Becas(
+                beca: false,
+              ),
+              const SizedBox(height: 5),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Wrap(spacing: 5, runSpacing: 5, children: [
+                  for (int i = 0; i <= 4; i++)
+                    const AreaWidget(
+                      text: "Humanidades",
+                    )
+                ]),
+              ),
+              const SizedBox(height: 10),
+            ],
+          ),
+        ),
+      );
+    }
   }
 }
 
