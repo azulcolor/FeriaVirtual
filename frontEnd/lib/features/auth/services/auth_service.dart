@@ -6,10 +6,7 @@ import 'dart:io';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:feriavirtual/constants/utils.dart';
 import 'package:feriavirtual/constants/error_handling.dart';
-//import 'package:feriavirtual/features/auth/test_screens/widgets_test/bottom_bar.dart';
 import 'package:feriavirtual/models/user.dart';
-import 'package:feriavirtual/screens/homePage.dart';
-import 'package:feriavirtual/screens/mainPage.dart';
 import 'package:feriavirtual/screens/mainPageLogged.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -41,7 +38,6 @@ class AuthService {
         Motivo: Motivo,
         token: '',
       );
-      print('xd');
       http.Response res = await http.post(
         Uri.parse('$uri/auth/signup'),
         body: user.toJson(),
@@ -58,7 +54,7 @@ class AuthService {
               context,
               'Usuario registrado correctamente',
             );
-
+            sleep(Duration(seconds: 1));
             Navigator.pushNamedAndRemoveUntil(
               context,
               MainPageLogged.routeName,
@@ -83,7 +79,6 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      print(res);
 
       httpErrorHandle(
         response: res,
@@ -92,6 +87,7 @@ class AuthService {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
+          sleep(Duration(seconds: 1));
           Navigator.pushNamedAndRemoveUntil(
             context,
             MainPageLogged.routeName,
