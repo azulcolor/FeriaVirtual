@@ -87,8 +87,8 @@ class AuthService {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
-          sleep(Duration(seconds: 1));
-          Navigator.pushNamedAndRemoveUntil(
+          sleep(const Duration(seconds: 1));
+          await Navigator.pushNamedAndRemoveUntil(
             context,
             MainPageLogged.routeName,
             (route) => false,
@@ -124,7 +124,7 @@ class AuthService {
 
       if (response == true) {
         http.Response userRes = await http.get(
-          Uri.parse('$uri/users'),
+          Uri.parse('$uri/usuarios'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'x-auth-token': token
