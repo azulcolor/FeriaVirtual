@@ -28,6 +28,7 @@ class GlobalVariables {
   static const grayColor = Color(0xFF565254);
   static const greenColor = Color(0xFF558B6E);
   static const yellowColor = Color(0xFFFFD166);
+  //hola
 
   static var h1B = GoogleFonts.quicksand(
     fontSize: 32,
