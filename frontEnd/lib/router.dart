@@ -1,7 +1,4 @@
-import 'package:feriavirtual/screens/authScreen.dart';
-import 'package:feriavirtual/screens/homePage.dart';
-import 'package:feriavirtual/screens/mainPage.dart';
-import 'package:feriavirtual/screens/mainPageLogged.dart';
+import 'package:feriavirtual/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -28,6 +25,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const HomePage(),
+      );
+
+    case University.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const University(),
       );
 
     default:

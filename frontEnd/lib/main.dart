@@ -1,8 +1,7 @@
 import 'package:feriavirtual/features/auth/services/auth_service.dart';
 import 'package:feriavirtual/providers/universities_provider.dart';
 import 'package:feriavirtual/providers/user_provider.dart';
-import 'package:feriavirtual/screens/mainPage.dart';
-import 'package:feriavirtual/screens/mainPageLogged.dart';
+import 'package:feriavirtual/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:feriavirtual/router.dart';
@@ -13,7 +12,7 @@ import 'package:feriavirtual/constants/global_variables.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => UserProvider()),
-    ChangeNotifierProvider(create: (_) => UniversitiesProvider(), lazy: false),
+    ChangeNotifierProvider(create: (_) => UniversitiesProvider()),
   ], child: const MyApp()));
 }
 
@@ -51,6 +50,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        'details': (_) => const University(),
+      },
       debugShowCheckedModeBanner: false,
       title: 'Feria Virtual',
       theme: ThemeData.light().copyWith(
@@ -58,8 +60,8 @@ class _MyAppState extends State<MyApp> {
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const MainPage()
-          : const MainPageLogged(),
+          ? const MainPageLogged()
+          : const MainPage(),
     );
   }
 }

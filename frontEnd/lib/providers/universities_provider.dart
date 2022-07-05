@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class UniversitiesProvider extends ChangeNotifier {
-  List<UniversitiesResponse> universitiesResponse = [];
   List<UniversitiesResponse> universities = [];
   UniversitiesProvider() {
     print('UnivertiesProvider inicializado');
@@ -13,15 +12,25 @@ class UniversitiesProvider extends ChangeNotifier {
     getOnDisplayUniversities();
   }
 
-  getOnDisplayUniversities() async {
-    var url = Uri.https(urlHost, '/v1/universidad/', {});
+  Future<String> _getJsonData(String endPoint) async {
+    var url = Uri.https(urlHost, endPoint, {});
     final response = await http.get(url);
 
-    universitiesResponse = List<UniversitiesResponse>.from(json
-        .decode(response.body)
+    return response.body;
+  }
+
+  getOnDisplayUniversities() async {
+    final jsonData = await _getJsonData('/v1/universidad/');
+
+    universities = List<UniversitiesResponse>.from(json
+        .decode(jsonData)
         .map((data) => UniversitiesResponse.fromJson(data)));
 
-    universities = universitiesResponse;
+    notifyListeners();
+  }
+
+  prueba(String texto) {
+    print(texto);
 
     notifyListeners();
   }
