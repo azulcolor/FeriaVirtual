@@ -1,9 +1,7 @@
-import 'package:feriavirtual/components/customButton.dart';
-import 'package:feriavirtual/components/customTextfield.dart';
+import 'package:feriavirtual/components/components.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:feriavirtual/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 
 enum Auth {
@@ -229,16 +227,16 @@ class _AuthScreenState extends State<AuthScreen> {
                               singleController: _cntController,
                               clearOption: false,
                               enableSearch: true,
-                              textFieldDecoration: InputDecoration(
+                              textFieldDecoration: const InputDecoration(
                                 fillColor: GlobalVariables.yellowColor,
                                 filled: true,
                                 hintText: 'Area de interes',
                                 prefixIcon: Icon(Icons.book),
-                                border: const OutlineInputBorder(
+                                border: OutlineInputBorder(
                                     borderSide: BorderSide(
                                   color: Colors.black,
                                 )),
-                                enabledBorder: const OutlineInputBorder(
+                                enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.black,
                                   ),
@@ -285,16 +283,16 @@ class _AuthScreenState extends State<AuthScreen> {
                               singleController: _mtvController,
                               clearOption: false,
                               enableSearch: false,
-                              textFieldDecoration: InputDecoration(
+                              textFieldDecoration: const InputDecoration(
                                 fillColor: GlobalVariables.yellowColor,
                                 filled: true,
                                 hintText: 'Motivo',
                                 prefixIcon: Icon(Icons.collections_bookmark),
-                                border: const OutlineInputBorder(
+                                border: OutlineInputBorder(
                                     borderSide: BorderSide(
                                   color: Colors.black,
                                 )),
-                                enabledBorder: const OutlineInputBorder(
+                                enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.black,
                                   ),

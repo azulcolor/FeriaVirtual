@@ -1,9 +1,7 @@
-import 'package:feriavirtual/components/header.dart';
-import 'package:feriavirtual/components/headerPrueba.dart';
+import 'package:feriavirtual/components/components.dart';
 import 'package:feriavirtual/models/universities_model.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class University extends StatelessWidget {
   static const String routeName = '/details';
@@ -17,11 +15,11 @@ class University extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        appBar: HeaderPrueba(university: university.nombre),
+        appBar: const HeaderInfo(),
         body: Center(
           child: ListView(
             children: [
-              Image.network(university.rutaEscudo),
+              UniversityImage(image: university.rutaEscudo),
               Text(
                 university.nombre,
                 textAlign: TextAlign.center,
