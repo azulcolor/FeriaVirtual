@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:feriavirtual/components/downloadButton.dart';
+import 'package:feriavirtual/components/universityInfo.dart';
 
 class University extends StatelessWidget {
   static const String routeName = '/details';
@@ -33,17 +35,14 @@ class University extends StatelessWidget {
             child: ListView(
               children: [
                 const SizedBox(height: 40),
-                Image.network(
-                  university.rutaEscudo,
-                  height: 200,
-                ),
+                UniversityImage(image: university.rutaEscudo),
                 const SizedBox(height: 10),
                 Text(
                   university.nombre,
                   textAlign: TextAlign.center,
                   style: GlobalVariables.h2B,
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 Text(
                   'Bienvenida',
                   textAlign: TextAlign.center,
@@ -52,9 +51,44 @@ class University extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                YoutubePlayer(
-                  controller: controller,
-                  liveUIColor: Colors.amber,
+                YoutubePlayerBuilder(
+                    player: YoutubePlayer(
+                      controller: controller,
+                      liveUIColor: Colors.amber,
+                    ),
+                    builder: (context, player) {
+                      return Container(
+                        child: player,
+                      );
+                    }),
+                const SizedBox(
+                  height: 40,
+                ),
+                Text(
+                  'Oferta educativa',
+                  textAlign: TextAlign.center,
+                  style: GlobalVariables.h2B,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Licenciatura',
+                  textAlign: TextAlign.center,
+                  style: GlobalVariables.h3Blue,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const DownloadButton(
+                  url:
+                      "https://feriavirtual-upqroo.ozelot.it/SeccionAdministrativa/docs_Unis/carreras/1645197930.pdf",
+                  fileName: "LICENCIATURA EN ADMINISTRACIÓN",
+                ),
+                const DownloadButton(
+                  url:
+                      "https://feriavirtual-upqroo.ozelot.it/SeccionAdministrativa/docs_Unis/carreras/1645197930.pdf",
+                  fileName: "LICENCIATURA EN ADMINISTRACIÓN",
                 ),
               ],
             ),
