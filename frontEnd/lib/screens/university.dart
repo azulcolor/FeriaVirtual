@@ -4,6 +4,7 @@ import 'package:feriavirtual/models/universities_model.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class University extends StatelessWidget {
   static const String routeName = '/details';
@@ -15,6 +16,8 @@ class University extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as UniversitiesResponse;
 
     double screenWidth = MediaQuery.of(context).size.width;
+    String? videoId =
+        YoutubePlayer.convertUrlToId("https://youtu.be/rR3rH75kp6w");
 
     return Scaffold(
         appBar: HeaderPrueba(university: university.nombre),
@@ -45,4 +48,10 @@ class University extends StatelessWidget {
           ),
         ));
   }
+}
+
+String getVideoID(String url) {
+  url = url.replaceAll("https://www.youtube.com/watch?v=", "");
+  url = url.replaceAll("https://m.youtube.com/watch?v=", "");
+  return url;
 }
