@@ -2,11 +2,8 @@ import 'package:feriavirtual/components/components.dart';
 import 'package:feriavirtual/models/universities_model.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
-<<<<<<< HEAD
-=======
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
->>>>>>> 265855a51e7afb4d1d15e111333cbca4e37db3d5
 
 class University extends StatelessWidget {
   static const String routeName = '/details';
@@ -31,17 +28,6 @@ class University extends StatelessWidget {
     return Scaffold(
         appBar: const HeaderInfo(),
         body: Center(
-<<<<<<< HEAD
-          child: ListView(
-            children: [
-              UniversityImage(image: university.rutaEscudo),
-              Text(
-                university.nombre,
-                textAlign: TextAlign.center,
-                style: GlobalVariables.h3B,
-              )
-            ],
-=======
           child: Container(
             width: screenWidth * 0.9,
             child: ListView(
@@ -72,7 +58,6 @@ class University extends StatelessWidget {
                 ),
               ],
             ),
->>>>>>> 265855a51e7afb4d1d15e111333cbca4e37db3d5
           ),
         ));
   }
