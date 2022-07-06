@@ -19,15 +19,29 @@ class University extends StatelessWidget {
     return Scaffold(
         appBar: HeaderPrueba(university: university.nombre),
         body: Center(
-          child: ListView(
-            children: [
-              Image.network(university.rutaEscudo),
-              Text(
-                university.nombre,
-                textAlign: TextAlign.center,
-                style: GlobalVariables.h3B,
-              )
-            ],
+          child: Container(
+            width: screenWidth * 0.9,
+            child: ListView(
+              children: [
+                const SizedBox(height: 40),
+                Image.network(
+                  university.rutaEscudo,
+                  height: 200,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  university.nombre,
+                  textAlign: TextAlign.center,
+                  style: GlobalVariables.h2B,
+                ),
+                const SizedBox(height: 30),
+                Text(
+                  'Bienvenida',
+                  textAlign: TextAlign.center,
+                  style: GlobalVariables.h3Blue,
+                )
+              ],
+            ),
           ),
         ));
   }
