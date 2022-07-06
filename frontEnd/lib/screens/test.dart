@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
-import '../components/header.dart';
+import '../components/headers.dart';
 
 class Test extends StatelessWidget {
   const Test({Key? key}) : super(key: key);
@@ -10,7 +10,7 @@ class Test extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
         backgroundColor: GlobalVariables.primaryColor,
-        appBar: const Header(),
+        appBar: Header(),
         body: PageView(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -37,15 +37,14 @@ class Page1 extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                    Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                      "Test Vocacional",
-                      style: GlobalVariables.h2B,
-                      textAlign: TextAlign.center,
-                    ),
-                    ),
-
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "Test Vocacional",
+                            style: GlobalVariables.h2B,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                         Text(
                           "Elegir una carrera profesional es una decisión muy importante y conocerte mejor es un elemento clave para elegirla.",
                           style: GlobalVariables.bodyTextB,
@@ -56,9 +55,7 @@ class Page1 extends StatelessWidget {
                     ))),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children:  const [
-                FlechaAnimada()
-              ],
+              children: const [FlechaAnimada()],
             ),
           ],
         ),
@@ -66,8 +63,6 @@ class Page1 extends StatelessWidget {
     );
   }
 }
-
-
 
 class FlechaAnimada extends StatefulWidget {
   const FlechaAnimada({Key? key}) : super(key: key);
@@ -100,13 +95,15 @@ class _FlechaAnimada extends State<FlechaAnimada>
       color: Colors.white,
       child: FadeTransition(
         opacity: _animation,
-        child: const Padding(padding: EdgeInsets.all(8), child: Icon(Icons.arrow_forward_rounded,
-            size: 50, color: GlobalVariables.yellowColor),),
+        child: const Padding(
+          padding: EdgeInsets.all(8),
+          child: Icon(Icons.arrow_forward_rounded,
+              size: 50, color: GlobalVariables.yellowColor),
+        ),
       ),
     );
   }
 }
-
 
 class AnimacionEntrada extends StatefulWidget {
   const AnimacionEntrada({Key? key}) : super(key: key);
@@ -144,15 +141,15 @@ class _AnimacionEntrada extends State<AnimacionEntrada>
       color: Colors.white,
       child: FadeTransition(
         opacity: _animation,
-        child: const Padding(padding: EdgeInsets.all(8), child: Icon(Icons.assignment, size: 100, color: GlobalVariables.primaryColor),),
+        child: const Padding(
+          padding: EdgeInsets.all(8),
+          child: Icon(Icons.assignment,
+              size: 100, color: GlobalVariables.primaryColor),
+        ),
       ),
     );
   }
 }
-
-
-
-
 
 class RadioButton extends StatefulWidget {
   RadioButton({Key? key}) : super(key: key);

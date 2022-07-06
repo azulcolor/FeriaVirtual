@@ -1,4 +1,4 @@
-import 'package:feriavirtual/components/header.dart';
+import 'package:feriavirtual/components/headers.dart';
 import 'package:feriavirtual/models/universities_model.dart';
 import 'package:feriavirtual/providers/universities_provider.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class _UniversitiesState extends State<Universities> {
     List<UniversitiesResponse> university = universitiesProvider.universities;
     universitiesProvider.prueba('Funcionó');
     return Scaffold(
-      appBar: const Header(),
+      appBar: HeaderSearch(universities: university),
       body: ListView.builder(
         itemCount: university.length,
         itemBuilder: (_, int index) => ShowUniversities(
@@ -149,16 +149,6 @@ class ShowUniversities extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-
-    if (universities.length < 20) {
-      return SizedBox(
-        width: double.infinity,
-        height: screenWidth * 0.5,
-        child: const Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
 
     if (universities[index].getUniversities == null) {
       return Container();

@@ -1,6 +1,5 @@
 import 'package:feriavirtual/screens/screens.dart';
 import 'package:flutter/material.dart';
-import 'package:feriavirtual/components/header.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

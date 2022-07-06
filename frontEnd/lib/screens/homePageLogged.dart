@@ -1,4 +1,4 @@
-import 'package:feriavirtual/components/header.dart';
+import 'package:feriavirtual/components/components.dart';
 import 'package:feriavirtual/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
@@ -15,7 +15,7 @@ class _HomePageLoggedState extends State<HomePageLogged> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: const Header(),
+      appBar: Header(),
       body: Center(
         child: ScreenWidget(screenWidth: screenWidth),
       ),
@@ -33,9 +33,8 @@ class ScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: screenWidth * 0.9,
-      color: GlobalVariables.backgroundColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

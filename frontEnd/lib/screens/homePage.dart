@@ -1,4 +1,4 @@
-import 'package:feriavirtual/components/header.dart';
+import 'package:feriavirtual/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
       'assets/images/feriaVirtual5.jpg',
     ];
     return Scaffold(
-      appBar: const Header(),
+      appBar: Header(),
       body: Center(
         child: CarouselSlider.builder(
             options: CarouselOptions(
