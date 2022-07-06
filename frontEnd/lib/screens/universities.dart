@@ -227,7 +227,7 @@ class AreaWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(50)),
       child: Text(
         text,
-        style: GlobalVariables.smallTextB,
+        style: GlobalVariables.smallTextG,
       ),
     );
   }
