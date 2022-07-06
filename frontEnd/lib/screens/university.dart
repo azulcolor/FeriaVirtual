@@ -9,15 +9,22 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class University extends StatelessWidget {
   static const String routeName = '/details';
   const University({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final UniversitiesResponse university =
         ModalRoute.of(context)!.settings.arguments as UniversitiesResponse;
 
-    double screenWidth = MediaQuery.of(context).size.width;
     String? videoId =
         YoutubePlayer.convertUrlToId("https://youtu.be/rR3rH75kp6w");
+    final YoutubePlayerController controller = YoutubePlayerController(
+      initialVideoId: videoId.toString(),
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        mute: true,
+      ),
+    );
+
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
         appBar: HeaderPrueba(university: university.nombre),
@@ -42,16 +49,17 @@ class University extends StatelessWidget {
                   'Bienvenida',
                   textAlign: TextAlign.center,
                   style: GlobalVariables.h3Blue,
-                )
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                YoutubePlayer(
+                  controller: controller,
+                  liveUIColor: Colors.amber,
+                ),
               ],
             ),
           ),
         ));
   }
-}
-
-String getVideoID(String url) {
-  url = url.replaceAll("https://www.youtube.com/watch?v=", "");
-  url = url.replaceAll("https://m.youtube.com/watch?v=", "");
-  return url;
 }
