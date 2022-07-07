@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:feriavirtual/components/downloadButton.dart';
 import 'package:feriavirtual/components/universityInfo.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import '../models/models.dart';
 
@@ -35,14 +36,13 @@ class University extends StatelessWidget {
 
           final university = snapshot.data!;
 
-          String? videoId =
-              YoutubePlayer.convertUrlToId(university.videos[1].recurso);
-
-          final YoutubePlayerController controller = YoutubePlayerController(
-            initialVideoId: videoId.toString(),
-            flags: const YoutubePlayerFlags(
-              autoPlay: false,
-              mute: false,
+          //Configuración para los videos
+          YoutubePlayerController controller = YoutubePlayerController(
+            initialVideoId: YoutubePlayerController.convertUrlToId(
+                    "https://www.youtube.com/watch?v=s9GuRtbE8E4")
+                .toString(),
+            params: const YoutubePlayerParams(
+              showFullscreenButton: true,
             ),
           );
           return Scaffold(
@@ -56,12 +56,61 @@ class University extends StatelessWidget {
                       WelcomeWidget(
                           university: university, controller: controller),
                       const SizedBox(height: 40),
-                      EducationWidget(university: university)
+                      EducationWidget(university: university),
+                      const SizedBox(height: 40),
+                      VideosWidget(
+                          university: university, controller: controller),
+                      const SizedBox(height: 40),
+                      Text(
+                        'Fotos',
+                        textAlign: TextAlign.center,
+                        style: GlobalVariables.h2B,
+                      ),
+                      const SizedBox(height: 20),
+                      CarouselSlider.builder(
+                        options: CarouselOptions(
+                            autoPlay: true, enlargeCenterPage: true),
+                        itemCount: university.fotos.length,
+                        itemBuilder: (context, index, realIndex) =>
+                            Image.network(university.fotos[index].recurso),
+                      )
                     ],
                   ),
                 ),
               ));
         });
+  }
+}
+
+class VideosWidget extends StatelessWidget {
+  const VideosWidget({
+    Key? key,
+    required this.university,
+    required this.controller,
+  }) : super(key: key);
+
+  final UniversityInfo university;
+  final YoutubePlayerController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'Videos',
+          textAlign: TextAlign.center,
+          style: GlobalVariables.h2B,
+        ),
+        const SizedBox(height: 20),
+        ListView.builder(
+            itemCount: university.videos.length,
+            shrinkWrap: true,
+            itemBuilder: (_, int index) => YoutubePlayerIFrame(
+                  controller: controller,
+                  aspectRatio: 16 / 9,
+                )),
+      ],
+    );
   }
 }
 
@@ -135,16 +184,10 @@ class WelcomeWidget extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        YoutubePlayerBuilder(
-            player: YoutubePlayer(
-              controller: controller,
-              liveUIColor: Colors.amber,
-            ),
-            builder: (context, player) {
-              return Container(
-                child: player,
-              );
-            }),
+        YoutubePlayerIFrame(
+          controller: controller,
+          aspectRatio: 16 / 9,
+        ),
       ],
     );
   }
