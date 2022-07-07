@@ -21,16 +21,6 @@ class University extends StatelessWidget {
 
     final int idUniversity = ModalRoute.of(context)!.settings.arguments as int;
 
-    String? videoId =
-        YoutubePlayer.convertUrlToId("https://youtu.be/rR3rH75kp6w");
-    final YoutubePlayerController controller = YoutubePlayerController(
-      initialVideoId: videoId.toString(),
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        mute: true,
-      ),
-    );
-
     double screenWidth = MediaQuery.of(context).size.width;
 
     return FutureBuilder(
@@ -44,10 +34,21 @@ class University extends StatelessWidget {
           }
 
           final university = snapshot.data!;
+
+          String? videoId =
+              YoutubePlayer.convertUrlToId(university.videos[1].recurso);
+
+          final YoutubePlayerController controller = YoutubePlayerController(
+            initialVideoId: videoId.toString(),
+            flags: const YoutubePlayerFlags(
+              autoPlay: false,
+              mute: true,
+            ),
+          );
           return Scaffold(
               appBar: const HeaderInfo(),
               body: Center(
-                child: Container(
+                child: SizedBox(
                   width: screenWidth * 0.9,
                   child: ListView(
                     children: [
@@ -98,12 +99,11 @@ class University extends StatelessWidget {
                         height: 10,
                       ),
                       ListView.builder(
-                          itemCount: 8,
+                          itemCount: university.carreras.length,
                           shrinkWrap: true,
-                          itemBuilder: (_, int index) => const DownloadButton(
-                                url:
-                                    "https://feriavirtual-upqroo.ozelot.it/SeccionAdministrativa/docs_Unis/carreras/1645197930.pdf",
-                                fileName: "LICENCIATURA EN ADMINISTRACIÓN",
+                          itemBuilder: (_, int index) => DownloadButton(
+                                url: university.carreras[index].recurso,
+                                fileName: university.carreras[index].nombre,
                               )),
                     ],
                   ),
