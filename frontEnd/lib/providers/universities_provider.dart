@@ -1,5 +1,5 @@
 import 'package:feriavirtual/constants/global_variables.dart';
-import 'package:feriavirtual/models/universities_model.dart';
+import 'package:feriavirtual/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -29,9 +29,11 @@ class UniversitiesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  prueba(String texto) {
-    print(texto);
+  Future<UniversityInfo> getOnDisplayUniversityInfo(int id) async {
+    final jsonData = await _getJsonData('/v1/universidad/$id');
 
-    notifyListeners();
+    UniversityInfo universityInfo = UniversityInfo.fromJson(jsonData);
+
+    return universityInfo;
   }
 }

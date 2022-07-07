@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:feriavirtual/features/auth/services/auth_service.dart';
 import 'package:feriavirtual/providers/universities_provider.dart';
 import 'package:feriavirtual/providers/user_provider.dart';
@@ -12,7 +14,7 @@ import 'package:feriavirtual/constants/global_variables.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => UserProvider()),
-    ChangeNotifierProvider(create: (_) => UniversitiesProvider()),
+    ChangeNotifierProvider(create: (_) => UniversitiesProvider(), lazy: false),
   ], child: const MyApp()));
 }
 
@@ -60,8 +62,8 @@ class _MyAppState extends State<MyApp> {
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const MainPage()
-          : const MainPageLogged(),
+          ? const MainPageLogged()
+          : const MainPage(),
     );
   }
 }
