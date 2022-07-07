@@ -18,27 +18,40 @@ class DownloadButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: _downloadFile,
-      style: ElevatedButton.styleFrom(
-          primary: GlobalVariables.primaryColor,
-          onPrimary: GlobalVariables.backgroundColor),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(right: 5),
-            child: const Icon(
-              FontAwesomeIcons.filePdf,
-              size: 20,
+    return Row(
+      children: [
+        Expanded(
+            child: SizedBox(
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 10),
+            child: ElevatedButton(
+              onPressed: _downloadFile,
+              style: ElevatedButton.styleFrom(
+                  primary: GlobalVariables.primaryColor,
+                  onPrimary: GlobalVariables.backgroundColor),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      child: const Icon(
+                        FontAwesomeIcons.filePdf,
+                        size: 20,
+                      ),
+                    ),
+                    Text(
+                      fileName,
+                      style: GlobalVariables.smallTextW,
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
-          Text(
-            fileName,
-            style: GlobalVariables.smallTextW,
-          ),
-        ],
-      ),
+        ))
+      ],
     );
   }
 }

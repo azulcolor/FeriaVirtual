@@ -80,16 +80,14 @@ class University extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const DownloadButton(
-                  url:
-                      "https://feriavirtual-upqroo.ozelot.it/SeccionAdministrativa/docs_Unis/carreras/1645197930.pdf",
-                  fileName: "LICENCIATURA EN ADMINISTRACIÓN",
-                ),
-                const DownloadButton(
-                  url:
-                      "https://feriavirtual-upqroo.ozelot.it/SeccionAdministrativa/docs_Unis/carreras/1645197930.pdf",
-                  fileName: "LICENCIATURA EN ADMINISTRACIÓN",
-                ),
+                ListView.builder(
+                    itemCount: 8,
+                    shrinkWrap: true,
+                    itemBuilder: (_, int index) => const DownloadButton(
+                          url:
+                              "https://feriavirtual-upqroo.ozelot.it/SeccionAdministrativa/docs_Unis/carreras/1645197930.pdf",
+                          fileName: "LICENCIATURA EN ADMINISTRACIÓN",
+                        )),
               ],
             ),
           ),
