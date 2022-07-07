@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 String uri = 'https://app-feria-virtual2.herokuapp.com/v1';
-String urlHost = 'app-feria-virtual.herokuapp.com';
+String urlHost = 'app-feria-virtual2.herokuapp.com';
 
 class GlobalVariables {
   // COLORS

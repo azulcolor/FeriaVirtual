@@ -1,3 +1,16 @@
+// To parse this JSON data, do
+//
+//     final universitiesResponse = universitiesResponseFromJson(jsonString);
+
+import 'dart:convert';
+
+List<UniversitiesResponse> universitiesResponseFromJson(String str) =>
+    List<UniversitiesResponse>.from(
+        json.decode(str).map((x) => UniversitiesResponse.fromJson(x)));
+
+String universitiesResponseToJson(List<UniversitiesResponse> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class UniversitiesResponse {
   UniversitiesResponse({
     required this.universidadId,
@@ -7,15 +20,19 @@ class UniversitiesResponse {
     required this.licenciatura,
     required this.maestria,
     required this.doctorado,
+    required this.beca,
+    required this.carreras,
   });
 
   int universidadId;
   String nombre;
-  String rutaEscudo = '';
+  String rutaEscudo;
   String tipo;
   int licenciatura;
   int maestria;
   int doctorado;
+  int beca;
+  List<String> carreras;
 
   get getUniversities {
     if (this.universidadId == 17 || this.universidadId == 23) {
@@ -33,6 +50,8 @@ class UniversitiesResponse {
         licenciatura: json["LICENCIATURA"],
         maestria: json["MAESTRIA"],
         doctorado: json["DOCTORADO"],
+        beca: json["BECA"],
+        carreras: List<String>.from(json["Carreras"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,5 +62,7 @@ class UniversitiesResponse {
         "LICENCIATURA": licenciatura,
         "MAESTRIA": maestria,
         "DOCTORADO": doctorado,
+        "BECA": beca,
+        "Carreras": List<dynamic>.from(carreras.map((x) => x)),
       };
 }
