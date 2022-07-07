@@ -36,10 +36,12 @@ class University extends StatelessWidget {
 
           final university = snapshot.data!;
 
+          int welcomeId = university.videos.indexWhere((e) => e.seccionId == 1);
+
           //Configuración para los videos
           YoutubePlayerController controller = YoutubePlayerController(
             initialVideoId: YoutubePlayerController.convertUrlToId(
-                    "https://www.youtube.com/watch?v=s9GuRtbE8E4")
+                    university.videos[welcomeId].recurso)
                 .toString(),
             params: const YoutubePlayerParams(
               showFullscreenButton: true,
@@ -61,24 +63,47 @@ class University extends StatelessWidget {
                       VideosWidget(
                           university: university, controller: controller),
                       const SizedBox(height: 40),
+                      CarouselWidget(university: university),
+                      const SizedBox(height: 40),
                       Text(
-                        'Fotos',
+                        'Contacto',
                         textAlign: TextAlign.center,
                         style: GlobalVariables.h2B,
                       ),
-                      const SizedBox(height: 20),
-                      CarouselSlider.builder(
-                        options: CarouselOptions(
-                            autoPlay: true, enlargeCenterPage: true),
-                        itemCount: university.fotos.length,
-                        itemBuilder: (context, index, realIndex) =>
-                            Image.network(university.fotos[index].recurso),
-                      )
                     ],
                   ),
                 ),
               ));
         });
+  }
+}
+
+class CarouselWidget extends StatelessWidget {
+  const CarouselWidget({
+    Key? key,
+    required this.university,
+  }) : super(key: key);
+
+  final UniversityInfo university;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'Fotos',
+          textAlign: TextAlign.center,
+          style: GlobalVariables.h2B,
+        ),
+        const SizedBox(height: 20),
+        CarouselSlider.builder(
+          options: CarouselOptions(autoPlay: true, enlargeCenterPage: true),
+          itemCount: university.fotos.length,
+          itemBuilder: (context, index, realIndex) =>
+              Image.network(university.fotos[index].recurso),
+        )
+      ],
+    );
   }
 }
 

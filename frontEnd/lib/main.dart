@@ -14,7 +14,7 @@ import 'package:feriavirtual/constants/global_variables.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => UserProvider()),
-    ChangeNotifierProvider(create: (_) => UniversitiesProvider(), lazy: false),
+    ChangeNotifierProvider(create: (_) => UniversitiesProvider()),
   ], child: const MyApp()));
 }
 
