@@ -19,8 +19,6 @@ class _UniversitiesState extends State<Universities> {
     final universitiesProvider = Provider.of<UniversitiesProvider>(context);
     List<UniversitiesResponse> university = universitiesProvider.universities;
 
-    print(university[1].carreras[1]);
-
     return Scaffold(
       appBar: HeaderSearch(universities: university),
       body: ListView.builder(
@@ -150,6 +148,7 @@ class ShowUniversities extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    final int length = universities[index].carreras.length;
 
     if (universities[index].getUniversities == null) {
       return Container();
@@ -199,9 +198,7 @@ class ShowUniversities extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Wrap(spacing: 5, runSpacing: 5, children: [
-                    for (int i = 0;
-                        i == universities[index].carreras.length;
-                        i++)
+                    for (int i = 0; i <= 0; i++)
                       AreaWidget(
                         text: universities[index].carreras[i],
                       )
