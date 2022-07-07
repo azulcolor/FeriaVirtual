@@ -1,11 +1,10 @@
 import 'package:feriavirtual/components/headers.dart';
-import 'package:feriavirtual/models/universities_model.dart';
+import 'package:feriavirtual/models/models.dart';
 import 'package:feriavirtual/providers/universities_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:feriavirtual/router.dart';
 
 class Universities extends StatefulWidget {
   const Universities({Key? key}) : super(key: key);
@@ -19,7 +18,7 @@ class _UniversitiesState extends State<Universities> {
   Widget build(BuildContext context) {
     final universitiesProvider = Provider.of<UniversitiesProvider>(context);
     List<UniversitiesResponse> university = universitiesProvider.universities;
-    universitiesProvider.prueba('Funcionó');
+
     return Scaffold(
       appBar: HeaderSearch(universities: university),
       body: ListView.builder(
@@ -156,7 +155,7 @@ class ShowUniversities extends StatelessWidget {
       return Center(
         child: GestureDetector(
           onTap: () => Navigator.pushNamed(context, 'details',
-              arguments: universities[index]),
+              arguments: universities[index].universidadId),
           child: Container(
             width: screenWidth * 0.9,
             color: GlobalVariables.backgroundColor,
