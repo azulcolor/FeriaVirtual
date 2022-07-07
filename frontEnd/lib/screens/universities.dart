@@ -19,6 +19,8 @@ class _UniversitiesState extends State<Universities> {
     final universitiesProvider = Provider.of<UniversitiesProvider>(context);
     List<UniversitiesResponse> university = universitiesProvider.universities;
 
+    print(university[1].carreras[1]);
+
     return Scaffold(
       appBar: HeaderSearch(universities: university),
       body: ListView.builder(
@@ -86,12 +88,12 @@ class EducativeOfferWidget extends StatelessWidget {
 }
 
 class Becas extends StatelessWidget {
-  bool beca;
+  int beca;
   Becas({Key? key, required this.beca}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (beca == true) {
+    if (beca == 1) {
       return Align(
         alignment: Alignment.centerLeft,
         child: Text(
@@ -191,15 +193,17 @@ class ShowUniversities extends StatelessWidget {
                 Tipo(tipo: universities[index].tipo),
                 const SizedBox(height: 5),
                 Becas(
-                  beca: false,
+                  beca: universities[index].beca,
                 ),
                 const SizedBox(height: 5),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Wrap(spacing: 5, runSpacing: 5, children: [
-                    for (int i = 0; i <= 4; i++)
-                      const AreaWidget(
-                        text: "Humanidades",
+                    for (int i = 0;
+                        i == universities[index].carreras.length;
+                        i++)
+                      AreaWidget(
+                        text: universities[index].carreras[i],
                       )
                   ]),
                 ),
