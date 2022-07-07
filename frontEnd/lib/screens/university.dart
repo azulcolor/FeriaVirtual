@@ -42,7 +42,7 @@ class University extends StatelessWidget {
             initialVideoId: videoId.toString(),
             flags: const YoutubePlayerFlags(
               autoPlay: false,
-              mute: true,
+              mute: false,
             ),
           );
           return Scaffold(
@@ -53,62 +53,99 @@ class University extends StatelessWidget {
                   child: ListView(
                     children: [
                       const SizedBox(height: 40),
-                      UniversityImage(image: university.rutaEscudo),
-                      const SizedBox(height: 10),
-                      Text(
-                        university.nombre,
-                        textAlign: TextAlign.center,
-                        style: GlobalVariables.h2B,
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        'Bienvenida',
-                        textAlign: TextAlign.center,
-                        style: GlobalVariables.h3Blue,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      YoutubePlayerBuilder(
-                          player: YoutubePlayer(
-                            controller: controller,
-                            liveUIColor: Colors.amber,
-                          ),
-                          builder: (context, player) {
-                            return Container(
-                              child: player,
-                            );
-                          }),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      Text(
-                        'Oferta educativa',
-                        textAlign: TextAlign.center,
-                        style: GlobalVariables.h2B,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Licenciatura',
-                        textAlign: TextAlign.center,
-                        style: GlobalVariables.h3Blue,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      ListView.builder(
-                          itemCount: university.carreras.length,
-                          shrinkWrap: true,
-                          itemBuilder: (_, int index) => DownloadButton(
-                                url: university.carreras[index].recurso,
-                                fileName: university.carreras[index].nombre,
-                              )),
+                      WelcomeWidget(
+                          university: university, controller: controller),
+                      const SizedBox(height: 40),
+                      EducationWidget(university: university)
                     ],
                   ),
                 ),
               ));
         });
+  }
+}
+
+class EducationWidget extends StatelessWidget {
+  const EducationWidget({
+    Key? key,
+    required this.university,
+  }) : super(key: key);
+
+  final UniversityInfo university;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'Oferta educativa',
+          textAlign: TextAlign.center,
+          style: GlobalVariables.h2B,
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Text(
+          'Licenciatura',
+          textAlign: TextAlign.center,
+          style: GlobalVariables.h3Blue,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        ListView.builder(
+            itemCount: university.carreras.length,
+            shrinkWrap: true,
+            itemBuilder: (_, int index) => DownloadButton(
+                  url: university.carreras[index].recurso,
+                  fileName: university.carreras[index].nombre,
+                )),
+      ],
+    );
+  }
+}
+
+class WelcomeWidget extends StatelessWidget {
+  const WelcomeWidget({
+    Key? key,
+    required this.university,
+    required this.controller,
+  }) : super(key: key);
+
+  final UniversityInfo university;
+  final YoutubePlayerController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        UniversityImage(image: university.rutaEscudo),
+        const SizedBox(height: 10),
+        Text(
+          university.nombre,
+          textAlign: TextAlign.center,
+          style: GlobalVariables.h2B,
+        ),
+        const SizedBox(height: 20),
+        Text(
+          'Bienvenida',
+          textAlign: TextAlign.center,
+          style: GlobalVariables.h3Blue,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        YoutubePlayerBuilder(
+            player: YoutubePlayer(
+              controller: controller,
+              liveUIColor: Colors.amber,
+            ),
+            builder: (context, player) {
+              return Container(
+                child: player,
+              );
+            }),
+      ],
+    );
   }
 }
