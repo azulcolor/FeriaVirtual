@@ -1,6 +1,10 @@
+import 'dart:ffi';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import '../components/headers.dart';
+import './paginas_Test.dart';
 
 class Test extends StatelessWidget {
   const Test({Key? key}) : super(key: key);
@@ -10,11 +14,11 @@ class Test extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
         backgroundColor: GlobalVariables.primaryColor,
-        appBar: Header(),
+        appBar: const Header(),
         body: PageView(
             physics: const BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            children: [Page1(), Page1()]));
+            scrollDirection: Axis.vertical,
+            children: [Page1(), const Page2(),const Page3()]));
   }
 }
 
@@ -27,37 +31,41 @@ class Page1 extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          verticalDirection: VerticalDirection.up,
-          children: [
-            Expanded(
-                child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Text(
-                            "Test Vocacional",
-                            style: GlobalVariables.h2B,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Text(
-                          "Elegir una carrera profesional es una decisión muy importante y conocerte mejor es un elemento clave para elegirla.",
-                          style: GlobalVariables.bodyTextB,
-                          textAlign: TextAlign.center,
-                        ),
-                        const AnimacionEntrada(),
-                      ],
-                    ))),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [FlechaAnimada()],
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: 10,
+            top: 10,
+            right: 10,
+            bottom: 0.0,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(flex: 2,child: Container(),),
+              Padding(
+                  padding: const EdgeInsets.all(10),
+                  child:
+                  Text(
+                    "Test Vocacional",
+                    style: GlobalVariables.h2B,
+                    textAlign: TextAlign.center,
+                  )),
+              Text(
+                "Elegir una carrera profesional es una decisión muy importante y conocerte mejor es un elemento clave para elegirla.",
+                style: GlobalVariables.bodyTextB,
+                textAlign: TextAlign.center,
+              ),
+               const AnimacionEntrada(icono: Icons.assignment, tamano: 70),
+              Text(
+                "Es por ello que se ha diseñado este test especialmente para ti con el propósito de que identifiques tus intereses y habilidades vocacionale",
+                style: GlobalVariables.bodyTextB,
+                textAlign: TextAlign.center,
+              ),
+              const AnimacionEntrada(icono: Icons.auto_stories, tamano: 90),
+              Expanded(child: Container()),
+              const FlechaAnimada()
+            ],
+          ),
         ),
       ),
     );
@@ -97,8 +105,7 @@ class _FlechaAnimada extends State<FlechaAnimada>
         opacity: _animation,
         child: const Padding(
           padding: EdgeInsets.all(8),
-          child: Icon(Icons.arrow_forward_rounded,
-              size: 50, color: GlobalVariables.yellowColor),
+          child: Icon(Icons.keyboard_arrow_down, size: 100, color: GlobalVariables.yellowColor),
         ),
       ),
     );
@@ -106,7 +113,9 @@ class _FlechaAnimada extends State<FlechaAnimada>
 }
 
 class AnimacionEntrada extends StatefulWidget {
-  const AnimacionEntrada({Key? key}) : super(key: key);
+   const AnimacionEntrada( {Key? key, required this.icono,required this.tamano}) : super(key: key);
+  final IconData icono;
+  final double tamano;
 
   @override
   State<AnimacionEntrada> createState() => _AnimacionEntrada();
@@ -123,10 +132,19 @@ class _AnimacionEntrada extends State<AnimacionEntrada>
     parent: _controller,
     curve: Curves.easeIn,
   );
+  var icono ;
+  var tamano ;
+  //IconData? get icono2 => widget.icono;
+
   @override
   void initState() {
     super.initState();
     _controller.forward();
+    icono = widget.icono;
+    tamano = widget.tamano;
+    if (kDebugMode) {
+      print(widget.icono);
+    }
   }
 
   @override
@@ -141,10 +159,10 @@ class _AnimacionEntrada extends State<AnimacionEntrada>
       color: Colors.white,
       child: FadeTransition(
         opacity: _animation,
-        child: const Padding(
-          padding: EdgeInsets.all(8),
-          child: Icon(Icons.assignment,
-              size: 100, color: GlobalVariables.primaryColor),
+        child:  Padding(
+          padding: const EdgeInsets.all(8),
+          child: Icon(icono,
+              size: tamano, color: GlobalVariables.primaryColor),
         ),
       ),
     );
@@ -164,3 +182,5 @@ class _RadioButtonState extends State<RadioButton> {
     return Container();
   }
 }
+
+
