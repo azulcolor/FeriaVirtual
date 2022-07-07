@@ -48,34 +48,32 @@ class University extends StatelessWidget {
           return Scaffold(
               appBar: const HeaderInfo(),
               body: Center(
-                child: SizedBox(
-                  width: screenWidth * 0.9,
-                  child: ListView(
-                    children: [
-                      const SizedBox(height: 40),
-                      WelcomeWidget(
-                          university: university, controller: controller),
-                      const SizedBox(height: 40),
-                      EducationWidget(university: university),
-                      const SizedBox(height: 40),
-                      VideosWidget(
-                          university: university, controller: controller),
-                      const SizedBox(height: 40),
-                      Text(
-                        'Fotos',
-                        textAlign: TextAlign.center,
-                        style: GlobalVariables.h2B,
-                      ),
-                      const SizedBox(height: 20),
-                      CarouselSlider.builder(
-                        options: CarouselOptions(
-                            autoPlay: true, enlargeCenterPage: true),
-                        itemCount: university.fotos.length,
-                        itemBuilder: (context, index, realIndex) =>
-                            Image.network(university.fotos[index].recurso),
-                      )
-                    ],
-                  ),
+                child: ListView(
+                  children: [
+                    ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        WelcomeWidget(
+                            university: university, controller: controller),
+                        EducationWidget(university: university),
+                        VideosWidget(
+                            university: university, controller: controller),
+                      ],
+                    ),
+                    Text(
+                      'Fotos',
+                      textAlign: TextAlign.center,
+                      style: GlobalVariables.h2B,
+                    ),
+                    const SizedBox(height: 20),
+                    CarouselSlider.builder(
+                      options: CarouselOptions(
+                          autoPlay: true, enlargeCenterPage: true),
+                      itemCount: university.fotos.length,
+                      itemBuilder: (context, index, realIndex) =>
+                          Image.network(university.fotos[index].recurso),
+                    )
+                  ],
                 ),
               ));
         });
