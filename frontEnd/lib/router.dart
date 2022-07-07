@@ -33,6 +33,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         builder: (_) => const University(),
       );
 
+    case Formulario.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const Formulario(),
+      );
+
     default:
       return MaterialPageRoute(
         settings: routeSettings,

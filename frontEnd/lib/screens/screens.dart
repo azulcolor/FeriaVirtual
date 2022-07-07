@@ -6,3 +6,4 @@ export 'package:feriavirtual/screens/mainPageLogged.dart';
 export 'package:feriavirtual/screens/test.dart';
 export 'package:feriavirtual/screens/university.dart';
 export 'package:feriavirtual/screens/universities.dart';
+export '../screens/TestFormulario.dart';
