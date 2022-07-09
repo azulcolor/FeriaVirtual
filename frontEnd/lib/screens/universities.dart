@@ -14,17 +14,87 @@ class Universities extends StatefulWidget {
 }
 
 class _UniversitiesState extends State<Universities> {
+  String? selectedKind = 'Tipo';
   @override
   Widget build(BuildContext context) {
     final universitiesProvider = Provider.of<UniversitiesProvider>(context);
     List<UniversitiesResponse> university = universitiesProvider.universities;
+    List<String> kindOf = ['Tipo', 'Privada', 'Publica'];
+
+    if (selectedKind == 'Tipo') {
+      university = universitiesProvider.universities;
+    } else {
+      university = university.where((university) {
+        return university.tipo
+            .toLowerCase()
+            .contains(selectedKind!.toLowerCase());
+      }).toList();
+    }
 
     return Scaffold(
       appBar: HeaderSearch(universities: university),
-      body: ListView.builder(
-        itemCount: university.length,
-        itemBuilder: (_, int index) => ShowUniversities(
-            universities: universitiesProvider.universities, index: index),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Center(
+                  child: DropdownButton<String>(
+                    icon: const Icon(Icons.arrow_downward),
+                    underline: Container(
+                        height: 2, color: GlobalVariables.yellowColor),
+                    style: GlobalVariables.bodyTextB,
+                    value: selectedKind,
+                    items: kindOf
+                        .map((value) => DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value,
+                                  style: const TextStyle(fontSize: 24)),
+                            ))
+                        .toList(),
+                    onChanged: (newValue) {
+                      setState(() {
+                        selectedKind = newValue;
+                        print(selectedKind);
+                      });
+                    },
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Center(
+                  child: DropdownButton<String>(
+                    icon: const Icon(Icons.arrow_downward),
+                    style: GlobalVariables.bodyTextB,
+                    underline: Container(
+                        height: 2, color: GlobalVariables.yellowColor),
+                    value: selectedKind,
+                    items: kindOf
+                        .map((value) => DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value,
+                                  style: const TextStyle(fontSize: 24)),
+                            ))
+                        .toList(),
+                    onChanged: (newValue) {
+                      setState(() {
+                        selectedKind = newValue;
+                        print(selectedKind);
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: university.length,
+              itemBuilder: (_, int index) =>
+                  ShowUniversities(universities: university, index: index),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -193,16 +263,6 @@ class ShowUniversities extends StatelessWidget {
                 const SizedBox(height: 5),
                 Becas(
                   beca: universities[index].beca,
-                ),
-                const SizedBox(height: 5),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Wrap(spacing: 5, runSpacing: 5, children: [
-                    for (int i = 0; i <= 0; i++)
-                      AreaWidget(
-                        text: universities[index].carreras[i],
-                      )
-                  ]),
                 ),
                 const SizedBox(height: 10),
               ],

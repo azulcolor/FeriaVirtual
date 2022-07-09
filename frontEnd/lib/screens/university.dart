@@ -50,34 +50,6 @@ class University extends StatelessWidget {
           return Scaffold(
               appBar: const HeaderInfo(),
               body: Center(
-<<<<<<< HEAD
-                child: ListView(
-                  children: [
-                    ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        WelcomeWidget(
-                            university: university, controller: controller),
-                        EducationWidget(university: university),
-                        VideosWidget(
-                            university: university, controller: controller),
-                      ],
-                    ),
-                    Text(
-                      'Fotos',
-                      textAlign: TextAlign.center,
-                      style: GlobalVariables.h2B,
-                    ),
-                    const SizedBox(height: 20),
-                    CarouselSlider.builder(
-                      options: CarouselOptions(
-                          autoPlay: true, enlargeCenterPage: true),
-                      itemCount: university.fotos.length,
-                      itemBuilder: (context, index, realIndex) =>
-                          Image.network(university.fotos[index].recurso),
-                    )
-                  ],
-=======
                 child: SizedBox(
                   width: screenWidth * 0.9,
                   child: ListView(
@@ -100,7 +72,6 @@ class University extends StatelessWidget {
                       ),
                     ],
                   ),
->>>>>>> 792c318c2e85098574ce1ec8db665baddf9402a4
                 ),
               ));
         });
