@@ -26,6 +26,8 @@ class UniversitiesProvider extends ChangeNotifier {
         .decode(jsonData)
         .map((data) => UniversitiesResponse.fromJson(data)));
 
+    print(universities);
+
     notifyListeners();
   }
 
@@ -35,5 +37,39 @@ class UniversitiesProvider extends ChangeNotifier {
     UniversityInfo universityInfo = UniversityInfo.fromJson(jsonData);
 
     return universityInfo;
+  }
+
+  filter(String? selectedKind, String? selectedArea,
+      List<UniversitiesResponse> university) {
+    List<UniversitiesResponse> filter;
+
+    if (selectedKind == 'Mostrar ambas' && selectedArea == 'Mostrar todas') {
+      filter = university;
+      return filter;
+    } else if (selectedKind != 'Mostrar ambas' &&
+        selectedArea == 'Mostrar todas') {
+      filter = university;
+      filter = filter.where((filter) {
+        return filter.tipo.toLowerCase().contains(selectedKind!.toLowerCase());
+      }).toList();
+      return filter;
+    } else if (selectedKind == 'Mostrar ambas' &&
+        selectedArea != 'Mostrar todas') {
+      filter = university;
+      filter = filter.where((filter) {
+        return filter.area.toLowerCase().contains(selectedArea!.toLowerCase());
+      }).toList();
+      return filter;
+    } else if (selectedKind != 'Mostrar ambas' &&
+        selectedArea != 'Mostrar todas') {
+      filter = university;
+      filter = filter.where((filter) {
+        return filter.area.toLowerCase().contains(selectedArea!.toLowerCase());
+      }).toList();
+      filter = filter.where((filter) {
+        return filter.tipo.toLowerCase().contains(selectedKind!.toLowerCase());
+      }).toList();
+      return filter;
+    }
   }
 }

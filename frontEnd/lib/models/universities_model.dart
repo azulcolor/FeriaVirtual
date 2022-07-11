@@ -21,7 +21,7 @@ class UniversitiesResponse {
     required this.maestria,
     required this.doctorado,
     required this.beca,
-    required this.carreras,
+    required this.area,
   });
 
   int universidadId;
@@ -32,7 +32,7 @@ class UniversitiesResponse {
   int maestria;
   int doctorado;
   int beca;
-  List<String> carreras;
+  String area;
 
   get getUniversities {
     if (this.universidadId == 17 || this.universidadId == 23) {
@@ -51,7 +51,7 @@ class UniversitiesResponse {
         maestria: json["MAESTRIA"],
         doctorado: json["DOCTORADO"],
         beca: json["BECA"],
-        carreras: List<String>.from(json["Carreras"].map((x) => x)),
+        area: json["area"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -63,6 +63,6 @@ class UniversitiesResponse {
         "MAESTRIA": maestria,
         "DOCTORADO": doctorado,
         "BECA": beca,
-        "Carreras": List<dynamic>.from(carreras.map((x) => x)),
+        "area": area,
       };
 }

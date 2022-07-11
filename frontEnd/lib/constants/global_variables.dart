@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-String uri = 'https://app-feria-virtual2.herokuapp.com/v1';
-String urlHost = 'app-feria-virtual2.herokuapp.com';
+String uri = 'https://app-feria-virtual.herokuapp.com/v1';
+String urlHost = 'app-feria-virtual.herokuapp.com';
 
 class GlobalVariables {
   // COLORS
@@ -13,6 +13,30 @@ class GlobalVariables {
     ],
     stops: [0.5, 1.0],
   );
+
+  static const List<String> kindOf = ['Mostrar ambas', 'Privada', 'Publica'];
+  static const List<String> area = [
+    'Mostrar todas',
+    'Negocios',
+    'Comercio',
+    'Contabilidad',
+    'Turismo',
+    'Ingeniería',
+    'Tecnologías de la información',
+    'Arquitectura',
+    'Educación',
+    'Psicología',
+    'Gestión',
+    'Idiomas',
+    'Ciencias de la salud',
+    'Humanidades',
+    'Derecho',
+    'Economía',
+    'Gastronomía',
+    'Diseño gráfico',
+    'Logística',
+    'Finanzas'
+  ];
 
   static const secondaryColor = Color.fromRGBO(255, 153, 0, 1);
   static const Color greyBackgroundCOlor = Color(0xffebecee);
@@ -74,6 +98,7 @@ class GlobalVariables {
     color: blackColor,
     fontWeight: FontWeight.w400,
   );
+
   static var bodyTextG = GoogleFonts.inter(
     fontSize: 14,
     color: grayColor,

@@ -14,84 +14,74 @@ class Universities extends StatefulWidget {
 }
 
 class _UniversitiesState extends State<Universities> {
-  String? selectedKind = 'Tipo';
+  String? selectedKind = 'Mostrar ambas';
+  String? selectedArea = 'Mostrar todas';
   @override
   Widget build(BuildContext context) {
     final universitiesProvider = Provider.of<UniversitiesProvider>(context);
     List<UniversitiesResponse> university = universitiesProvider.universities;
-    List<String> kindOf = ['Tipo', 'Privada', 'Publica'];
 
-    if (selectedKind == 'Tipo') {
-      university = universitiesProvider.universities;
-    } else {
-      university = university.where((university) {
-        return university.tipo
-            .toLowerCase()
-            .contains(selectedKind!.toLowerCase());
-      }).toList();
-    }
+    List<UniversitiesResponse> filter =
+        universitiesProvider.filter(selectedKind, selectedArea, university);
+    print(filter);
 
     return Scaffold(
       appBar: HeaderSearch(universities: university),
       body: Column(
         children: [
-          Row(
+          Column(
             children: [
-              Expanded(
-                child: Center(
-                  child: DropdownButton<String>(
-                    icon: const Icon(Icons.arrow_downward),
-                    underline: Container(
-                        height: 2, color: GlobalVariables.yellowColor),
-                    style: GlobalVariables.bodyTextB,
-                    value: selectedKind,
-                    items: kindOf
-                        .map((value) => DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value,
-                                  style: const TextStyle(fontSize: 24)),
-                            ))
-                        .toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        selectedKind = newValue;
-                        print(selectedKind);
-                      });
-                    },
-                  ),
+              Center(
+                child: DropdownButton<String>(
+                  icon: const Icon(Icons.arrow_downward),
+                  underline:
+                      Container(height: 2, color: GlobalVariables.yellowColor),
+                  style: GlobalVariables.bodyTextB,
+                  value: selectedKind,
+                  items: GlobalVariables.kindOf
+                      .map((value) => DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value,
+                                style: const TextStyle(fontSize: 24)),
+                          ))
+                      .toList(),
+                  onChanged: (newValue) {
+                    setState(() {
+                      selectedKind = newValue;
+                      print(selectedKind);
+                    });
+                  },
                 ),
               ),
-              Expanded(
-                child: Center(
-                  child: DropdownButton<String>(
-                    icon: const Icon(Icons.arrow_downward),
-                    style: GlobalVariables.bodyTextB,
-                    underline: Container(
-                        height: 2, color: GlobalVariables.yellowColor),
-                    value: selectedKind,
-                    items: kindOf
-                        .map((value) => DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value,
-                                  style: const TextStyle(fontSize: 24)),
-                            ))
-                        .toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        selectedKind = newValue;
-                        print(selectedKind);
-                      });
-                    },
-                  ),
+              Center(
+                child: DropdownButton<String>(
+                  icon: const Icon(Icons.arrow_downward),
+                  style: GlobalVariables.bodyTextB,
+                  underline:
+                      Container(height: 2, color: GlobalVariables.yellowColor),
+                  value: selectedArea,
+                  items: GlobalVariables.area
+                      .map((value) => DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value,
+                                style: const TextStyle(fontSize: 24)),
+                          ))
+                      .toList(),
+                  onChanged: (newValue) {
+                    setState(() {
+                      selectedArea = newValue;
+                      print(selectedArea);
+                    });
+                  },
                 ),
               ),
             ],
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: university.length,
+              itemCount: filter.length,
               itemBuilder: (_, int index) =>
-                  ShowUniversities(universities: university, index: index),
+                  ShowUniversities(universities: filter, index: index),
             ),
           ),
         ],
@@ -218,7 +208,6 @@ class ShowUniversities extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    final int length = universities[index].carreras.length;
 
     if (universities[index].getUniversities == null) {
       return Container();
