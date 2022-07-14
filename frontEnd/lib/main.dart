@@ -9,8 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:feriavirtual/router.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 
-//firmao
-
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => UserProvider()),
