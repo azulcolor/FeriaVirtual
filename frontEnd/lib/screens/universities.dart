@@ -1,10 +1,12 @@
 import 'package:feriavirtual/components/headers.dart';
+import 'package:feriavirtual/components/snapping.dart';
 import 'package:feriavirtual/models/models.dart';
 import 'package:feriavirtual/providers/universities_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:snapping_sheet/snapping_sheet.dart';
 
 class Universities extends StatefulWidget {
   const Universities({Key? key}) : super(key: key);
@@ -14,21 +16,96 @@ class Universities extends StatefulWidget {
 }
 
 class _UniversitiesState extends State<Universities> {
+  String? selectedKind = 'Mostrar ambas';
+  String? selectedArea = 'Mostrar todas';
   @override
   Widget build(BuildContext context) {
     final universitiesProvider = Provider.of<UniversitiesProvider>(context);
     List<UniversitiesResponse> university = universitiesProvider.universities;
-
-    List<UniversitiesResponse> filter = universitiesProvider.prueba;
-
-    print(filter);
+    List<UniversitiesResponse> filter = universitiesProvider.filter(
+        selectedKind, selectedArea, universitiesProvider.universities);
 
     return Scaffold(
-        appBar: HeaderSearch(universities: university),
-        body: ListView.builder(
+      appBar: HeaderSearch(universities: university),
+      body: SnappingSheet(
+        lockOverflowDrag: true,
+        snappingPositions: const [
+          SnappingPosition.factor(
+            grabbingContentOffset: GrabbingContentOffset.bottom,
+            positionFactor: 1.0,
+          ),
+          SnappingPosition.factor(
+              snappingCurve: Curves.elasticOut,
+              snappingDuration: Duration(milliseconds: 1750),
+              positionFactor: 0.75),
+          SnappingPosition.factor(
+            positionFactor: 0.70,
+            grabbingContentOffset: GrabbingContentOffset.top,
+          ),
+        ],
+        grabbing: const DefaultGrabbing(reverse: true),
+        grabbingHeight: 29,
+        sheetAbove: SnappingSheetContent(
+            draggable: true,
+            child: Container(
+              color: Colors.white,
+              child: SingleChildScrollView(
+                reverse: true,
+                padding: const EdgeInsets.only(bottom: 11),
+                child: Column(children: [
+                  Text('Tipo de universidad', style: GlobalVariables.bodyTextB),
+                  Center(
+                    child: DropdownButton<String>(
+                      icon: const Icon(Icons.arrow_downward),
+                      underline: Container(
+                          height: 2, color: GlobalVariables.yellowColor),
+                      style: GlobalVariables.bodyTextB,
+                      value: selectedKind,
+                      items: GlobalVariables.kindOf
+                          .map((value) => DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value,
+                                    style: const TextStyle(fontSize: 24)),
+                              ))
+                          .toList(),
+                      onChanged: (newValue) {
+                        setState(() {
+                          selectedKind = newValue;
+                        });
+                      },
+                    ),
+                  ),
+                  Text('Areas', style: GlobalVariables.bodyTextB),
+                  Center(
+                    child: DropdownButton<String>(
+                      icon: const Icon(Icons.arrow_downward),
+                      style: GlobalVariables.bodyTextB,
+                      underline: Container(
+                          height: 2, color: GlobalVariables.yellowColor),
+                      value: selectedArea,
+                      items: GlobalVariables.area
+                          .map((value) => DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value,
+                                    style: const TextStyle(fontSize: 24)),
+                              ))
+                          .toList(),
+                      onChanged: (newValue) {
+                        setState(() {
+                          selectedArea = newValue;
+                        });
+                      },
+                    ),
+                  ),
+                ]),
+              ),
+            )),
+        child: ListView.builder(
             itemCount: filter.length,
             itemBuilder: (_, int index) =>
-                ShowUniversities(universities: filter, index: index)));
+                ShowUniversities(universities: filter, index: index)),
+      ),
+    );
   }
 }
 
@@ -152,73 +229,17 @@ class ShowUniversities extends StatefulWidget {
 }
 
 class _ShowUniversitiesState extends State<ShowUniversities> {
-  String? selectedKind = 'Mostrar ambas';
-  String? selectedArea = 'Mostrar todas';
   @override
   Widget build(BuildContext context) {
-    final universitiesProvider = Provider.of<UniversitiesProvider>(context);
-    universitiesProvider.prueba = universitiesProvider.filter(
-        selectedKind, selectedArea, universitiesProvider.universities);
     double screenWidth = MediaQuery.of(context).size.width;
-    print(universitiesProvider.prueba);
 
     if (widget.universities[widget.index].getUniversities == null) {
       return Container();
     } else {
-      return Column(
-        children: [
-          Text('Tipo de universidad', style: GlobalVariables.bodyTextB),
-          Center(
-            child: DropdownButton<String>(
-              icon: const Icon(Icons.arrow_downward),
-              underline:
-                  Container(height: 2, color: GlobalVariables.yellowColor),
-              style: GlobalVariables.bodyTextB,
-              value: selectedKind,
-              items: GlobalVariables.kindOf
-                  .map((value) => DropdownMenuItem<String>(
-                        value: value,
-                        child:
-                            Text(value, style: const TextStyle(fontSize: 24)),
-                      ))
-                  .toList(),
-              onChanged: (newValue) {
-                setState(() {
-                  selectedKind = newValue;
-                  print(selectedKind);
-                });
-              },
-            ),
-          ),
-          Text('Areas', style: GlobalVariables.bodyTextB),
-          Center(
-            child: DropdownButton<String>(
-              icon: const Icon(Icons.arrow_downward),
-              style: GlobalVariables.bodyTextB,
-              underline:
-                  Container(height: 2, color: GlobalVariables.yellowColor),
-              value: selectedArea,
-              items: GlobalVariables.area
-                  .map((value) => DropdownMenuItem<String>(
-                        value: value,
-                        child:
-                            Text(value, style: const TextStyle(fontSize: 24)),
-                      ))
-                  .toList(),
-              onChanged: (newValue) {
-                setState(() {
-                  selectedArea = newValue;
-                  print(selectedArea);
-                });
-              },
-            ),
-          ),
-          UniversityCard(
-              universities: widget.universities,
-              index: widget.index,
-              screenWidth: screenWidth),
-        ],
-      );
+      return UniversityCard(
+          universities: widget.universities,
+          index: widget.index,
+          screenWidth: screenWidth);
     }
   }
 }

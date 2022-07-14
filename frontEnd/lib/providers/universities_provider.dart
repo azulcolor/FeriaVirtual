@@ -6,20 +6,9 @@ import 'dart:convert';
 
 class UniversitiesProvider extends ChangeNotifier {
   List<UniversitiesResponse> universities = [];
-  List<UniversitiesResponse> _prueba = [];
   UniversitiesProvider() {
     print('UnivertiesProvider inicializado');
-    _prueba = universities;
     getOnDisplayUniversities();
-  }
-
-  List<UniversitiesResponse> get prueba {
-    return _prueba;
-  }
-
-  set prueba(List<UniversitiesResponse> hola) {
-    this._prueba = hola;
-    notifyListeners();
   }
 
   Future<String> _getJsonData(String endPoint) async {
