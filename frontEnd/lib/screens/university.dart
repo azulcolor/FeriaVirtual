@@ -52,25 +52,28 @@ class University extends StatelessWidget {
               body: Center(
                 child: SizedBox(
                   width: screenWidth * 0.9,
-                  child: ListView(
-                    children: [
-                      const SizedBox(height: 40),
-                      WelcomeWidget(
-                          university: university, controller: controller),
-                      const SizedBox(height: 40),
-                      EducationWidget(university: university),
-                      const SizedBox(height: 40),
-                      VideosWidget(
-                          university: university, controller: controller),
-                      const SizedBox(height: 40),
-                      CarouselWidget(university: university),
-                      const SizedBox(height: 40),
-                      Text(
-                        'Contacto',
-                        textAlign: TextAlign.center,
-                        style: GlobalVariables.h2B,
-                      ),
-                    ],
+                  height: MediaQuery.of(context).size.height,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 40),
+                        WelcomeWidget(
+                            university: university, controller: controller),
+                        const SizedBox(height: 40),
+                        EducationWidget(university: university),
+                        const SizedBox(height: 40),
+                        VideosWidget(
+                            university: university, controller: controller),
+                        const SizedBox(height: 40),
+                        CarouselWidget(university: university),
+                        const SizedBox(height: 40),
+                        Text(
+                          'Contacto',
+                          textAlign: TextAlign.center,
+                          style: GlobalVariables.h2B,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ));
@@ -128,6 +131,7 @@ class VideosWidget extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         ListView.builder(
+            controller: ScrollController(),
             itemCount: university.videos.length,
             shrinkWrap: true,
             itemBuilder: (_, int index) => YoutubePlayerIFrame(
@@ -167,13 +171,17 @@ class EducationWidget extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        ListView.builder(
-            itemCount: university.carreras.length,
-            shrinkWrap: true,
-            itemBuilder: (_, int index) => DownloadButton(
-                  url: university.carreras[index].recurso,
-                  fileName: university.carreras[index].nombre,
-                )),
+        SizedBox(
+          height: 30,
+          child: ListView.builder(
+              controller: ScrollController(),
+              itemCount: university.carreras.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (_, int index) => DownloadButton(
+                    url: university.carreras[index].recurso,
+                    fileName: university.carreras[index].nombre,
+                  )),
+        ),
       ],
     );
   }
