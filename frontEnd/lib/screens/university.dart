@@ -99,11 +99,16 @@ class CarouselWidget extends StatelessWidget {
           style: GlobalVariables.h2B,
         ),
         const SizedBox(height: 20),
-        CarouselSlider.builder(
-          options: CarouselOptions(autoPlay: true, enlargeCenterPage: true),
-          itemCount: university.fotos.length,
-          itemBuilder: (context, index, realIndex) =>
-              Image.network(university.fotos[index].recurso),
+        InteractiveViewer(
+          minScale: 0.1,
+          maxScale: 3,
+          scaleEnabled: true,
+          child: CarouselSlider.builder(
+            options: CarouselOptions(autoPlay: true, enlargeCenterPage: true),
+            itemCount: university.fotos.length,
+            itemBuilder: (context, index, realIndex) =>
+                Image.network(university.fotos[index].recurso),
+          ),
         )
       ],
     );
@@ -130,14 +135,17 @@ class VideosWidget extends StatelessWidget {
           style: GlobalVariables.h2B,
         ),
         const SizedBox(height: 20),
-        ListView.builder(
-            controller: ScrollController(),
-            itemCount: university.videos.length,
-            shrinkWrap: true,
-            itemBuilder: (_, int index) => YoutubePlayerIFrame(
-                  controller: controller,
-                  aspectRatio: 16 / 9,
-                )),
+        SizedBox(
+          height: 200,
+          child: ListView.builder(
+              controller: ScrollController(),
+              itemCount: university.videos.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (_, int index) => YoutubePlayerIFrame(
+                    controller: controller,
+                    aspectRatio: 16 / 9,
+                  )),
+        ),
       ],
     );
   }

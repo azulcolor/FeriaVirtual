@@ -19,40 +19,38 @@ class DownloadButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-              child: SizedBox(
-            child: Container(
-              child: ElevatedButton(
-                onPressed: _downloadFile,
-                style: ElevatedButton.styleFrom(
-                    primary: GlobalVariables.primaryColor,
-                    onPrimary: GlobalVariables.backgroundColor),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(right: 5),
-                        child: const Icon(
-                          FontAwesomeIcons.filePdf,
-                          size: 20,
-                        ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            width: MediaQuery.of(context).size.width * 0.9,
+            child: ElevatedButton(
+              onPressed: _downloadFile,
+              style: ElevatedButton.styleFrom(
+                  primary: GlobalVariables.primaryColor,
+                  onPrimary: GlobalVariables.backgroundColor),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      child: const Icon(
+                        FontAwesomeIcons.filePdf,
+                        size: 20,
                       ),
-                      Text(
-                        fileName,
-                        style: GlobalVariables.smallTextW,
-                      ),
-                    ],
-                  ),
+                    ),
+                    Text(
+                      fileName,
+                      style: GlobalVariables.smallTextW,
+                    ),
+                  ],
                 ),
               ),
             ),
-          ))
+          ),
         ],
       ),
     );
