@@ -31,7 +31,7 @@ class DownloadButton extends StatelessWidget {
                   primary: GlobalVariables.primaryColor,
                   onPrimary: GlobalVariables.backgroundColor),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
