@@ -10,6 +10,7 @@ class UniversityInfo {
     required this.nombre,
     required this.rutaEscudo,
     required this.telefono,
+    required this.admision,
     required this.correoElectronico,
     required this.tipo,
     required this.carreras,
@@ -24,6 +25,7 @@ class UniversityInfo {
   String nombre;
   String rutaEscudo;
   String telefono;
+  String admision;
   String correoElectronico;
   String tipo;
   List<Carrera> carreras;
@@ -43,6 +45,7 @@ class UniversityInfo {
         nombre: json["Nombre"],
         rutaEscudo: json["Ruta_Escudo"],
         telefono: json["Telefono"],
+        admision: json["Proceso_Admision"],
         correoElectronico: json["Correo_Electronico"],
         tipo: json["Tipo"],
         carreras:
@@ -60,6 +63,7 @@ class UniversityInfo {
         "Nombre": nombre,
         "Ruta_Escudo": rutaEscudo,
         "Telefono": telefono,
+        "Proceso_Admision": admision,
         "Correo_Electronico": correoElectronico,
         "Tipo": tipo,
         "Carreras": List<dynamic>.from(carreras.map((x) => x.toMap())),

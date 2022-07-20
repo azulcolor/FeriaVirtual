@@ -68,77 +68,102 @@ class University extends StatelessWidget {
                         const SizedBox(height: 40),
                         CarouselWidget(university: university),
                         const SizedBox(height: 40),
-                        Text(
-                          'Contacto',
-                          textAlign: TextAlign.center,
-                          style: GlobalVariables.h2B,
-                        ),
-                        const SizedBox(height: 20),
-                        Container(
-                          width: screenWidth * 0.8,
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Icon(
-                                    FontAwesomeIcons.phone,
-                                    size: 20,
-                                    color: GlobalVariables.primaryColor,
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    university.telefono,
-                                    style: GlobalVariables.bodyTextB,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 20),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Icon(
-                                    FontAwesomeIcons.at,
-                                    size: 20,
-                                    color: GlobalVariables.primaryColor,
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    university.correoElectronico,
-                                    style: GlobalVariables.bodyTextB,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 20),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Icon(
-                                    FontAwesomeIcons.locationDot,
-                                    size: 20,
-                                    color: GlobalVariables.primaryColor,
-                                  ),
-                                  SizedBox(width: 10),
-                                  Flexible(
-                                    child: Text(
-                                      university.direccion,
-                                      style: GlobalVariables.bodyTextB,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
+                        DownloadButton(
+                            url: university.admision,
+                            fileName: "PROCESO DE ADMISIÓN"),
+                        const SizedBox(height: 40),
+                        ContactWidget(
+                            screenWidth: screenWidth, university: university)
                       ],
                     ),
                   ),
                 ),
               ));
         });
+  }
+}
+
+class ContactWidget extends StatelessWidget {
+  const ContactWidget({
+    Key? key,
+    required this.screenWidth,
+    required this.university,
+  }) : super(key: key);
+
+  final double screenWidth;
+  final UniversityInfo university;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'Contacto',
+          textAlign: TextAlign.center,
+          style: GlobalVariables.h2B,
+        ),
+        const SizedBox(height: 20),
+        Container(
+          width: screenWidth * 0.8,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    FontAwesomeIcons.phone,
+                    size: 20,
+                    color: GlobalVariables.primaryColor,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    university.telefono,
+                    style: GlobalVariables.bodyTextB,
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    FontAwesomeIcons.at,
+                    size: 20,
+                    color: GlobalVariables.primaryColor,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    university.correoElectronico,
+                    style: GlobalVariables.bodyTextB,
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    FontAwesomeIcons.locationDot,
+                    size: 20,
+                    color: GlobalVariables.primaryColor,
+                  ),
+                  SizedBox(width: 10),
+                  Flexible(
+                    child: Text(
+                      university.direccion,
+                      style: GlobalVariables.bodyTextB,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
 
