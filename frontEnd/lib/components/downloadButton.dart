@@ -40,6 +40,7 @@ class DownloadButton extends StatelessWidget {
                       child: const Icon(
                         FontAwesomeIcons.filePdf,
                         size: 20,
+                        color: GlobalVariables.backgroundColor,
                       ),
                     ),
                     Text(

@@ -1,6 +1,7 @@
 import 'package:feriavirtual/components/components.dart';
 import 'package:feriavirtual/models/universities_model.dart';
 import 'package:feriavirtual/providers/universities_provider.dart';
+import 'package:feriavirtual/screens/test.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
@@ -72,6 +73,66 @@ class University extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: GlobalVariables.h2B,
                         ),
+                        const SizedBox(height: 20),
+                        Container(
+                          width: screenWidth * 0.8,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Icon(
+                                    FontAwesomeIcons.phone,
+                                    size: 20,
+                                    color: GlobalVariables.primaryColor,
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    university.telefono,
+                                    style: GlobalVariables.bodyTextB,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 20),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Icon(
+                                    FontAwesomeIcons.at,
+                                    size: 20,
+                                    color: GlobalVariables.primaryColor,
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    university.correoElectronico,
+                                    style: GlobalVariables.bodyTextB,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 20),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Icon(
+                                    FontAwesomeIcons.locationDot,
+                                    size: 20,
+                                    color: GlobalVariables.primaryColor,
+                                  ),
+                                  SizedBox(width: 10),
+                                  Flexible(
+                                    child: Text(
+                                      university.direccion,
+                                      style: GlobalVariables.bodyTextB,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -103,6 +164,7 @@ class CarouselWidget extends StatelessWidget {
           minScale: 0.1,
           maxScale: 3,
           scaleEnabled: true,
+          panEnabled: false,
           child: CarouselSlider.builder(
             options: CarouselOptions(autoPlay: true, enlargeCenterPage: true),
             itemCount: university.fotos.length,
@@ -171,16 +233,16 @@ class EducationWidget extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        Text(
+        /*Text(
           'Licenciatura',
           textAlign: TextAlign.center,
           style: GlobalVariables.h3Blue,
         ),
         const SizedBox(
           height: 10,
-        ),
+        ),*/
         SizedBox(
-          height: 30,
+          height: 40,
           child: ListView.builder(
               controller: ScrollController(),
               itemCount: university.carreras.length,
