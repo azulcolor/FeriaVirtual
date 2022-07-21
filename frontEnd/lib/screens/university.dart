@@ -239,31 +239,37 @@ class Information extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(
-                FontAwesomeIcons.phone,
-                size: 20,
-                color: GlobalVariables.primaryColor,
+              IconButton(
+                icon: Icon(
+                  FontAwesomeIcons.phone,
+                  size: 20,
+                  color: GlobalVariables.primaryColor,
+                ),
+                onPressed: () =>
+                    launchUrl(Uri.parse("tel:" + university.telefono)),
               ),
-              SizedBox(width: 10),
               Text(
                 university.telefono,
                 style: GlobalVariables.bodyTextB,
               ),
             ],
           ),
-          SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(
-                FontAwesomeIcons.at,
-                size: 20,
-                color: GlobalVariables.primaryColor,
+              IconButton(
+                icon: Icon(
+                  FontAwesomeIcons.at,
+                  size: 20,
+                  color: GlobalVariables.primaryColor,
+                ),
+                onPressed: () => launchUrl(Uri.parse("mailto:" +
+                    university.correoElectronico +
+                    "?subject=Acerca de la universidad&body=Hola, me gustaría solicitar más información sobre...")),
               ),
-              SizedBox(width: 10),
               Flexible(
                 child: Text(
                   university.correoElectronico,
@@ -272,17 +278,18 @@ class Information extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(
-                FontAwesomeIcons.locationDot,
-                size: 20,
-                color: GlobalVariables.primaryColor,
+              IconButton(
+                icon: Icon(
+                  FontAwesomeIcons.locationDot,
+                  size: 20,
+                  color: GlobalVariables.primaryColor,
+                ),
+                onPressed: null,
               ),
-              SizedBox(width: 10),
               Flexible(
                 child: Text(
                   university.direccion,
