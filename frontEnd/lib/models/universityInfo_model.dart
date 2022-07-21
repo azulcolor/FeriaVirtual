@@ -157,11 +157,11 @@ class Beca {
 
 class RedesSociales {
   RedesSociales({
-    required this.redSocial,
+    required this.nombre,
     required this.recurso,
   });
 
-  String redSocial;
+  String nombre;
   String recurso;
 
   factory RedesSociales.fromJson(String str) =>
@@ -170,12 +170,12 @@ class RedesSociales {
   String toJson() => json.encode(toMap());
 
   factory RedesSociales.fromMap(Map<String, dynamic> json) => RedesSociales(
-        redSocial: json["Red_social"],
+        nombre: json["Nombre"],
         recurso: json["Recurso"],
       );
 
   Map<String, dynamic> toMap() => {
-        "Red_social": redSocial,
+        "Nombre": nombre,
         "Recurso": recurso,
       };
 }
