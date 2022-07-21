@@ -69,7 +69,10 @@ class University extends StatelessWidget {
                           ScholarShipsWidget(university: university),
                         const SizedBox(height: 40),
                         VideosWidget(
-                            university: university, controller: controller),
+                          university: university,
+                          controller: controller,
+                          screenWidth: screenWidth,
+                        ),
                         const SizedBox(height: 40),
                         CarouselWidget(university: university),
                         const SizedBox(height: 40),
@@ -338,15 +341,16 @@ class VideosWidget extends StatelessWidget {
     Key? key,
     required this.university,
     required this.controller,
+    required this.screenWidth,
   }) : super(key: key);
 
   final UniversityInfo university;
   final YoutubePlayerController controller;
+  final double screenWidth;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 5),
       child: Column(
         children: [
           Text(
@@ -361,9 +365,19 @@ class VideosWidget extends StatelessWidget {
                 controller: ScrollController(),
                 itemCount: university.videos.length,
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (_, int index) => YoutubePlayerIFrame(
-                      controller: controller,
-                      aspectRatio: 16 / 9,
+                itemBuilder: (_, int index) => Container(
+                      width: screenWidth * 0.75,
+                      margin: EdgeInsets.symmetric(horizontal: 15),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          YoutubePlayerIFrame(
+                            controller: controller,
+                            aspectRatio: 16 / 9,
+                          ),
+                        ],
+                      ),
                     )),
           ),
         ],
