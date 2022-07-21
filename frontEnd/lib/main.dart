@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:feriavirtual/features/auth/services/auth_service.dart';
 import 'package:feriavirtual/providers/universities_provider.dart';
 import 'package:feriavirtual/providers/user_provider.dart';
-import 'package:feriavirtual/constants/utils.dart';
 import 'package:feriavirtual/screens/IntroScreen.dart';
 import 'package:feriavirtual/screens/screens.dart';
 import 'package:flutter/material.dart';

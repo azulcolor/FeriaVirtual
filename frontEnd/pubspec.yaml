@@ -59,6 +59,7 @@ dependencies:
    url_launcher: ^6.1.5
    open_whatsapp: ^0.0.1
    photo_view: ^0.14.0
+   is_first_run: ^1.0.0
 
 dev_dependencies:
    flutter_test:
