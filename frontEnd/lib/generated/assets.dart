@@ -7,7 +7,12 @@ class Assets {
   static const String imagesFeriaVirtual3 = 'assets/images/feriaVirtual3.jpg';
   static const String imagesFeriaVirtual4 = 'assets/images/feriaVirtual4.jpg';
   static const String imagesFeriaVirtual5 = 'assets/images/feriaVirtual5.jpg';
+  static const String imagesIntroSlider1 = 'assets/images/intro_slider_1.png';
+  static const String imagesKey = 'assets/images/key.png';
   static const String imagesLogo = 'assets/images/logo.png';
+  static const String imagesLogoxdpi = 'assets/images/logoxdpi.png';
+  static const String imagesSchool = 'assets/images/school.png';
+  static const String imagesTest = 'assets/images/test.png';
   static const String imagesUniversidadTest = 'assets/images/universidadTest.jpg';
   static const String imagesVideogiffinal = 'assets/images/videogiffinal.gif';
 

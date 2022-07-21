@@ -1,8 +1,9 @@
 import 'dart:async';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:feriavirtual/features/auth/services/auth_service.dart';
 import 'package:feriavirtual/providers/universities_provider.dart';
 import 'package:feriavirtual/providers/user_provider.dart';
+import 'package:feriavirtual/screens/IntroScreen.dart';
 import 'package:feriavirtual/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,12 +41,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final AuthService authService = AuthService();
-
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<int> _counter;
   @override
   void initState() {
     super.initState();
-    authService.getUserData(context);
+    _counter = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('counter') ?? 0;
+    });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +64,9 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: GlobalVariables.backgroundColor,
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const MainPageLogged()
-          : const MainPage(),
+      home: ( 0/*_counter as int */) > 0 ? const HomePage() : IntroScreen(),
     );
   }
 }
+
+

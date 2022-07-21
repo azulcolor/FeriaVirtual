@@ -146,4 +146,9 @@ class GlobalVariables {
     color: backgroundColor,
     fontWeight: FontWeight.w500,
   );
+  static var smallTextW2 = GoogleFonts.inter(
+    fontSize: 16,
+    color: backgroundColor,
+    fontWeight: FontWeight.w500,
+  );
 }
