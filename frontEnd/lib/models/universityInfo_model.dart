@@ -16,6 +16,7 @@ class UniversityInfo {
     required this.carreras,
     required this.videos,
     required this.fotos,
+    required this.becas,
     required this.urlMaps,
     required this.direccion,
     required this.redesSociales,
@@ -31,6 +32,7 @@ class UniversityInfo {
   List<Carrera> carreras;
   List<Foto> videos;
   List<Foto> fotos;
+  List<Beca> becas;
   String urlMaps;
   String direccion;
   List<RedesSociales> redesSociales;
@@ -52,6 +54,7 @@ class UniversityInfo {
             List<Carrera>.from(json["Carreras"].map((x) => Carrera.fromMap(x))),
         videos: List<Foto>.from(json["Videos"].map((x) => Foto.fromMap(x))),
         fotos: List<Foto>.from(json["Fotos"].map((x) => Foto.fromMap(x))),
+        becas: List<Beca>.from(json["Becas"].map((x) => Beca.fromMap(x))),
         urlMaps: json["url_Maps"],
         direccion: json["Direccion"],
         redesSociales: List<RedesSociales>.from(
@@ -124,6 +127,30 @@ class Foto {
   Map<String, dynamic> toMap() => {
         "Seccion_ID": seccionId,
         "Titulo": titulo,
+        "Recurso": recurso,
+      };
+}
+
+class Beca {
+  Beca({
+    required this.nombre,
+    required this.recurso,
+  });
+
+  String nombre;
+  String recurso;
+
+  factory Beca.fromJson(String str) => Beca.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Beca.fromMap(Map<String, dynamic> json) => Beca(
+        nombre: json["Nombre"],
+        recurso: json["Recurso"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "Nombre": nombre,
         "Recurso": recurso,
       };
 }

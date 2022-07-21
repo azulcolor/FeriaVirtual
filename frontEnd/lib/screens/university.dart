@@ -65,6 +65,9 @@ class University extends StatelessWidget {
                         const SizedBox(height: 40),
                         EducationWidget(university: university),
                         const SizedBox(height: 40),
+                        if (university.becas[0].recurso != "NA")
+                          ScholarShipsWidget(university: university),
+                        const SizedBox(height: 40),
                         VideosWidget(
                             university: university, controller: controller),
                         const SizedBox(height: 40),
@@ -387,6 +390,50 @@ class EducationWidget extends StatelessWidget {
               itemBuilder: (_, int index) => DownloadButton(
                     url: university.carreras[index].recurso,
                     fileName: university.carreras[index].nombre,
+                  )),
+        ),
+      ],
+    );
+  }
+}
+
+class ScholarShipsWidget extends StatelessWidget {
+  const ScholarShipsWidget({
+    Key? key,
+    required this.university,
+  }) : super(key: key);
+
+  final UniversityInfo university;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'Becas',
+          textAlign: TextAlign.center,
+          style: GlobalVariables.h2B,
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        /*Text(
+          'Licenciatura',
+          textAlign: TextAlign.center,
+          style: GlobalVariables.h3Blue,
+        ),
+        const SizedBox(
+          height: 10,
+        ),*/
+        SizedBox(
+          height: 40,
+          child: ListView.builder(
+              controller: ScrollController(),
+              itemCount: university.becas.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (_, int index) => DownloadButton(
+                    url: university.becas[index].recurso,
+                    fileName: university.becas[index].nombre,
                   )),
         ),
       ],
