@@ -18,10 +18,13 @@ class _HomePageLoggedState extends State<HomePageLogged> {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: Header(),
-      body: SingleChildScrollView(
-        child: Center(
-          child: ScreenWidget(screenWidth: screenWidth),
-        ),
+      body: PageView(
+        scrollDirection: Axis.vertical,
+        children: [
+          PageLogged1(),
+          PageLogged2(),
+          PageLogged3(),
+        ],
       ),
     );
   }
@@ -42,49 +45,90 @@ class ScreenWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //Container(child: Image.asset('assets/images/banner.jpg')),
-          TitleWidget(
-            screenWidth: screenWidth,
-            title: "Bienvenido a la feria virtual 2022",
-          ),
-          SizedBox(height: 50),
-          CarouselSlider.builder(
-              options: CarouselOptions(
-                height: 150,
-                autoPlay: true,
-              ),
-              itemCount: GlobalVariables.imagesRoutes.length,
-              itemBuilder: (context, index, realIndex) {
-                final imagesRoute = GlobalVariables.imagesRoutes[index];
-
-                return buildImage(imagesRoute, index);
-              }),
-          SizedBox(height: 20),
-          BodyTextWidget(
-            text:
-                'La Feria Virtual Universitaria es un evento estatal que reúne a todos los programas educativos de nivel superior,en un esfuerzo por acercar la Oferta Educativa a todos los jóvenes que quieren continuar su formación cursando una carrera universitaria.',
-          ),
-          Container(
-              child: Image.asset('assets/images/school.png', height: 200)),
-          TitleWidget(
-            screenWidth: screenWidth,
-            title: "¿Qué es la feria virtual?",
-          ),
-          BodyTextWidget(
-            text:
-                'El gobierno del estado de quintana roo, a través de la secretaría de educación y la comisión estatal para la planeación de la educación superior (coepes), realizan un evento virtual en el que se promociona la oferta educativa de más de 60 instituciones para estudiantes de educación media superior e interesados en cursar estudios de nivel técnico superior, licenciatura o posgrado.',
-          ),
-          Container(child: Image.asset('assets/images/info.png', height: 200)),
-          TitleWidget(
-            screenWidth: screenWidth,
-            title: "Información de la feria virtual",
-          ),
-          SizedBox(height: 10),
-          ButtonWidget(link: '', text: 'Aviso de Privacidad'),
-          ButtonWidget(link: '', text: 'Mapa de sitio'),
-          ButtonWidget(link: 'https://qroo.gob.mx/seq/', text: 'Ir a la SEQ'),
-          SizedBox(height: 10),
         ],
       ),
+    );
+  }
+}
+
+class PageLogged1 extends StatelessWidget {
+  const PageLogged1({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TitleWidget(
+          screenWidth: screenWidth,
+          title: "Bienvenido a la feria virtual 2022",
+        ),
+        SizedBox(height: 50),
+        CarouselSlider.builder(
+            options: CarouselOptions(
+              height: 150,
+              autoPlay: true,
+            ),
+            itemCount: GlobalVariables.imagesRoutes.length,
+            itemBuilder: (context, index, realIndex) {
+              final imagesRoute = GlobalVariables.imagesRoutes[index];
+
+              return buildImage(imagesRoute, index);
+            }),
+        SizedBox(height: 20),
+        BodyTextWidget(
+          text:
+              'La Feria Virtual Universitaria es un evento estatal que reúne a todos los programas educativos de nivel superior,en un esfuerzo por acercar la Oferta Educativa a todos los jóvenes que quieren continuar su formación cursando una carrera universitaria.',
+        ),
+      ],
+    );
+  }
+}
+
+class PageLogged2 extends StatelessWidget {
+  const PageLogged2({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(child: Image.asset('assets/images/school.png', height: 200)),
+        TitleWidget(
+          screenWidth: screenWidth,
+          title: "¿Qué es la feria virtual?",
+        ),
+        BodyTextWidget(
+          text:
+              'El gobierno del estado de quintana roo, a través de la secretaría de educación y la comisión estatal para la planeación de la educación superior (coepes), realizan un evento virtual en el que se promociona la oferta educativa de más de 60 instituciones para estudiantes de educación media superior e interesados en cursar estudios de nivel técnico superior, licenciatura o posgrado.',
+        ),
+      ],
+    );
+  }
+}
+
+class PageLogged3 extends StatelessWidget {
+  const PageLogged3({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(child: Image.asset('assets/images/info.png', height: 200)),
+        TitleWidget(
+          screenWidth: screenWidth,
+          title: "Información de la feria virtual",
+        ),
+        SizedBox(height: 10),
+        ButtonWidget(link: '', text: 'Aviso de Privacidad'),
+        ButtonWidget(link: '', text: 'Mapa de sitio'),
+        ButtonWidget(link: 'https://qroo.gob.mx/seq/', text: 'Ir a la SEQ'),
+        SizedBox(height: 10),
+      ],
     );
   }
 }
