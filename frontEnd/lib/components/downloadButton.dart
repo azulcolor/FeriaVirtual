@@ -20,11 +20,12 @@ class DownloadButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             padding: EdgeInsets.symmetric(horizontal: 5),
-            width: MediaQuery.of(context).size.width * 0.9,
+            width: MediaQuery.of(context).size.width * 0.8,
             child: ElevatedButton(
               onPressed: _downloadFile,
               style: ElevatedButton.styleFrom(
@@ -34,6 +35,7 @@ class DownloadButton extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       margin: const EdgeInsets.only(right: 5),
@@ -43,9 +45,11 @@ class DownloadButton extends StatelessWidget {
                         color: GlobalVariables.backgroundColor,
                       ),
                     ),
-                    Text(
-                      fileName,
-                      style: GlobalVariables.smallTextW,
+                    Flexible(
+                      child: Text(
+                        fileName,
+                        style: GlobalVariables.smallTextW,
+                      ),
                     ),
                   ],
                 ),

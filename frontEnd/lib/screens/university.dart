@@ -69,7 +69,10 @@ class University extends StatelessWidget {
                           ScholarShipsWidget(university: university),
                         const SizedBox(height: 40),
                         VideosWidget(
-                            university: university, controller: controller),
+                          university: university,
+                          controller: controller,
+                          screenWidth: screenWidth,
+                        ),
                         const SizedBox(height: 40),
                         CarouselWidget(university: university),
                         const SizedBox(height: 40),
@@ -135,13 +138,20 @@ class Social extends StatelessWidget {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 5),
               child: IconButton(
-                icon: Icon(
-                  FontAwesomeIcons.facebookF,
-                  size: 30,
-                  color: Color.fromARGB(255, 24, 119, 242),
-                ),
-                onPressed: () => launch(item.recurso),
-              ),
+                  icon: Icon(
+                    FontAwesomeIcons.facebookF,
+                    size: 30,
+                    color: Color.fromARGB(255, 24, 119, 242),
+                  ),
+                  onPressed: () {
+                    if (item.recurso.startsWith('https') ||
+                        item.recurso.startsWith('www.')) {
+                      launch(item.recurso);
+                    } else {
+                      launch('https://www.facebook.com/' +
+                          item.recurso.substring(1));
+                    }
+                  }),
             )
           else if (item.redSocial == "INSTAGRAM")
             Container(
@@ -152,7 +162,15 @@ class Social extends StatelessWidget {
                   size: 30,
                   color: Color.fromARGB(255, 225, 48, 108),
                 ),
-                onPressed: () => launch(item.recurso),
+                onPressed: () {
+                  if (item.recurso.startsWith('https') ||
+                      item.recurso.startsWith('www.')) {
+                    launch(item.recurso);
+                  } else {
+                    launch('https://www.instagram.com/' +
+                        item.recurso.substring(1));
+                  }
+                },
               ),
             )
           else if (item.redSocial == "WHATSAPP")
@@ -165,7 +183,8 @@ class Social extends StatelessWidget {
                     color: Color.fromARGB(255, 7, 94, 84),
                   ),
                   onPressed: () {
-                    if (item.recurso.startsWith('https')) {
+                    if (item.recurso.startsWith('https') ||
+                        item.recurso.startsWith('www.')) {
                       launch(item.recurso);
                     } else {
                       FlutterOpenWhatsapp.sendSingleMessage(item.recurso,
@@ -322,33 +341,47 @@ class VideosWidget extends StatelessWidget {
     Key? key,
     required this.university,
     required this.controller,
+    required this.screenWidth,
   }) : super(key: key);
 
   final UniversityInfo university;
   final YoutubePlayerController controller;
+  final double screenWidth;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          'Videos',
-          textAlign: TextAlign.center,
-          style: GlobalVariables.h2B,
-        ),
-        const SizedBox(height: 20),
-        SizedBox(
-          height: 200,
-          child: ListView.builder(
-              controller: ScrollController(),
-              itemCount: university.videos.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (_, int index) => YoutubePlayerIFrame(
-                    controller: controller,
-                    aspectRatio: 16 / 9,
-                  )),
-        ),
-      ],
+    return Container(
+      child: Column(
+        children: [
+          Text(
+            'Videos',
+            textAlign: TextAlign.center,
+            style: GlobalVariables.h2B,
+          ),
+          const SizedBox(height: 20),
+          SizedBox(
+            height: 200,
+            child: ListView.builder(
+                controller: ScrollController(),
+                itemCount: university.videos.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (_, int index) => Container(
+                      width: screenWidth * 0.75,
+                      margin: EdgeInsets.symmetric(horizontal: 15),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          YoutubePlayerIFrame(
+                            controller: controller,
+                            aspectRatio: 16 / 9,
+                          ),
+                        ],
+                      ),
+                    )),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -382,7 +415,7 @@ class EducationWidget extends StatelessWidget {
           height: 10,
         ),*/
         SizedBox(
-          height: 40,
+          height: 50,
           child: ListView.builder(
               controller: ScrollController(),
               itemCount: university.carreras.length,
@@ -426,7 +459,7 @@ class ScholarShipsWidget extends StatelessWidget {
           height: 10,
         ),*/
         SizedBox(
-          height: 40,
+          height: 50,
           child: ListView.builder(
               controller: ScrollController(),
               itemCount: university.becas.length,
