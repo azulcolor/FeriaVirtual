@@ -12,6 +12,7 @@ import 'package:feriavirtual/components/universityInfo.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:open_whatsapp/open_whatsapp.dart';
 
 import '../models/models.dart';
 
@@ -154,11 +155,20 @@ class Social extends StatelessWidget {
           else if (item.redSocial == "WHATSAPP")
             Container(
               margin: EdgeInsets.symmetric(horizontal: 5),
-              child: const Icon(
-                FontAwesomeIcons.whatsapp,
-                size: 30,
-                color: Color.fromARGB(255, 7, 94, 84),
-              ),
+              child: IconButton(
+                  icon: Icon(
+                    FontAwesomeIcons.whatsapp,
+                    size: 30,
+                    color: Color.fromARGB(255, 7, 94, 84),
+                  ),
+                  onPressed: () {
+                    if (item.recurso.startsWith('https')) {
+                      launch(item.recurso);
+                    } else {
+                      FlutterOpenWhatsapp.sendSingleMessage(item.recurso,
+                          "Hola, me gustaría solicitar información respecto a...");
+                    }
+                  }),
             )
           else if (item.redSocial == "TWITTER")
             Container(
