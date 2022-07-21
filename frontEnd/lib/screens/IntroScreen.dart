@@ -85,7 +85,7 @@ class _IntroScreenState extends State<IntroScreen> {
       Navigator.pushNamed(context,'mainPage');
     }*/
     _incrementCounter();
-    Navigator.pushNamed(context,'/mainPage');
+    Navigator.pushNamed(context,'/auth-screen');
     print("End of slides");
   }
 

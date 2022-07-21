@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: GlobalVariables.backgroundColor,
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: ( 0/*_counter as int */) > 0 ? const HomePage() : IntroScreen(),
+      home: ( 0/*_counter as int */) > 0 ? const AuthScreen() : IntroScreen(),
     );
   }
 }
