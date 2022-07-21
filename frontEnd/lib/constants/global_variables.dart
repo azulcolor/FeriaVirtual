@@ -17,24 +17,24 @@ class GlobalVariables {
   static const List<String> kindOf = ['Mostrar ambas', 'Privada', 'Publica'];
   static const List<String> area = [
     'Mostrar todas',
-    'Negocios',
+    'Arquitectura',
+    'Ciencias de la salud',
     'Comercio',
     'Contabilidad',
-    'Turismo',
-    'Ingeniería',
-    'Arquitectura',
-    'Educación',
-    'Psicología',
-    'Gestión',
-    'Idiomas',
-    'Ciencias de la salud',
-    'Humanidades',
     'Derecho',
-    'Economía',
-    'Gastronomía',
     'Diseño gráfico',
+    'Economía',
+    'Educación',
+    'Finanzas',
+    'Gestión',
+    'Gastronomía',
+    'Humanidades',
+    'Idiomas',
+    'Ingeniería',
     'Logística',
-    'Finanzas'
+    'Negocios',
+    'Psicología',
+    'Turismo',
   ];
 
   static const secondaryColor = Color.fromRGBO(255, 153, 0, 1);
