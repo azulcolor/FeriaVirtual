@@ -22,7 +22,6 @@ class GlobalVariables {
     'Contabilidad',
     'Turismo',
     'Ingeniería',
-    'Tecnologías de la información',
     'Arquitectura',
     'Educación',
     'Psicología',
