@@ -33,7 +33,7 @@ class UniversityInfo {
   List<Foto> fotos;
   String urlMaps;
   String direccion;
-  List<RedesSociale> redesSociales;
+  List<RedesSociales> redesSociales;
 
   factory UniversityInfo.fromJson(String str) =>
       UniversityInfo.fromMap(json.decode(str));
@@ -54,8 +54,8 @@ class UniversityInfo {
         fotos: List<Foto>.from(json["Fotos"].map((x) => Foto.fromMap(x))),
         urlMaps: json["url_Maps"],
         direccion: json["Direccion"],
-        redesSociales: List<RedesSociale>.from(
-            json["redesSociales"].map((x) => RedesSociale.fromMap(x))),
+        redesSociales: List<RedesSociales>.from(
+            json["redesSociales"].map((x) => RedesSociales.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
@@ -128,8 +128,8 @@ class Foto {
       };
 }
 
-class RedesSociale {
-  RedesSociale({
+class RedesSociales {
+  RedesSociales({
     required this.redSocial,
     required this.recurso,
   });
@@ -137,12 +137,12 @@ class RedesSociale {
   String redSocial;
   String recurso;
 
-  factory RedesSociale.fromJson(String str) =>
-      RedesSociale.fromMap(json.decode(str));
+  factory RedesSociales.fromJson(String str) =>
+      RedesSociales.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory RedesSociale.fromMap(Map<String, dynamic> json) => RedesSociale(
+  factory RedesSociales.fromMap(Map<String, dynamic> json) => RedesSociales(
         redSocial: json["Red_social"],
         recurso: json["Recurso"],
       );

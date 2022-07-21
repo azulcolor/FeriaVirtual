@@ -73,7 +73,8 @@ class University extends StatelessWidget {
                             fileName: "PROCESO DE ADMISIÓN"),
                         const SizedBox(height: 40),
                         ContactWidget(
-                            screenWidth: screenWidth, university: university)
+                            screenWidth: screenWidth, university: university),
+                        const SizedBox(height: 40),
                       ],
                     ),
                   ),
@@ -134,9 +135,11 @@ class ContactWidget extends StatelessWidget {
                     color: GlobalVariables.primaryColor,
                   ),
                   SizedBox(width: 10),
-                  Text(
-                    university.correoElectronico,
-                    style: GlobalVariables.bodyTextB,
+                  Flexible(
+                    child: Text(
+                      university.correoElectronico,
+                      style: GlobalVariables.bodyTextB,
+                    ),
                   ),
                 ],
               ),
@@ -162,6 +165,58 @@ class ContactWidget extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            for (var item in university.redesSociales)
+              if (item.redSocial == "FACEBOOK")
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 5),
+                  child: const Icon(
+                    FontAwesomeIcons.facebookF,
+                    size: 30,
+                    color: Color.fromARGB(255, 24, 119, 242),
+                  ),
+                )
+              else if (item.redSocial == "INSTAGRAM")
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 5),
+                  child: const Icon(
+                    FontAwesomeIcons.instagram,
+                    size: 30,
+                    color: Color.fromARGB(255, 225, 48, 108),
+                  ),
+                )
+              else if (item.redSocial == "WHATSAPP")
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 5),
+                  child: const Icon(
+                    FontAwesomeIcons.whatsapp,
+                    size: 30,
+                    color: Color.fromARGB(255, 7, 94, 84),
+                  ),
+                )
+              else if (item.redSocial == "TWITTER")
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 5),
+                  child: const Icon(
+                    FontAwesomeIcons.twitter,
+                    size: 30,
+                    color: Color.fromARGB(255, 29, 160, 242),
+                  ),
+                )
+              else if (item.redSocial == "PAGINA WEB")
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 5),
+                  child: const Icon(
+                    FontAwesomeIcons.globe,
+                    size: 30,
+                    color: GlobalVariables.primaryColor,
+                  ),
+                )
+          ],
+        )
       ],
     );
   }
@@ -193,8 +248,12 @@ class CarouselWidget extends StatelessWidget {
           child: CarouselSlider.builder(
             options: CarouselOptions(autoPlay: true, enlargeCenterPage: true),
             itemCount: university.fotos.length,
-            itemBuilder: (context, index, realIndex) =>
-                Image.network(university.fotos[index].recurso),
+            itemBuilder: (context, index, realIndex) {
+              if (university.fotos[index].recurso == "NA")
+                return Image.network(university.rutaEscudo);
+              else
+                return Image.network(university.fotos[index].recurso);
+            },
           ),
         )
       ],
