@@ -3,6 +3,7 @@ import 'package:feriavirtual/components/components.dart';
 import 'package:feriavirtual/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePageLogged extends StatefulWidget {
   const HomePageLogged({Key? key}) : super(key: key);
@@ -17,8 +18,10 @@ class _HomePageLoggedState extends State<HomePageLogged> {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: Header(),
-      body: Center(
-        child: ScreenWidget(screenWidth: screenWidth),
+      body: SingleChildScrollView(
+        child: Center(
+          child: ScreenWidget(screenWidth: screenWidth),
+        ),
       ),
     );
   }
@@ -36,9 +39,14 @@ class ScreenWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          //Container(child: Image.asset('assets/images/banner.jpg')),
+          TitleWidget(
+            screenWidth: screenWidth,
+            title: "Bienvenido a la feria virtual 2022",
+          ),
+          SizedBox(height: 50),
           CarouselSlider.builder(
               options: CarouselOptions(
                 height: 150,
@@ -50,8 +58,31 @@ class ScreenWidget extends StatelessWidget {
 
                 return buildImage(imagesRoute, index);
               }),
-          TitleWidget(screenWidth: screenWidth),
-          const BodyTextWidget()
+          SizedBox(height: 20),
+          BodyTextWidget(
+            text:
+                'La Feria Virtual Universitaria es un evento estatal que reúne a todos los programas educativos de nivel superior,en un esfuerzo por acercar la Oferta Educativa a todos los jóvenes que quieren continuar su formación cursando una carrera universitaria.',
+          ),
+          Container(
+              child: Image.asset('assets/images/school.png', height: 200)),
+          TitleWidget(
+            screenWidth: screenWidth,
+            title: "¿Qué es la feria virtual?",
+          ),
+          BodyTextWidget(
+            text:
+                'El gobierno del estado de quintana roo, a través de la secretaría de educación y la comisión estatal para la planeación de la educación superior (coepes), realizan un evento virtual en el que se promociona la oferta educativa de más de 60 instituciones para estudiantes de educación media superior e interesados en cursar estudios de nivel técnico superior, licenciatura o posgrado.',
+          ),
+          Container(child: Image.asset('assets/images/info.png', height: 200)),
+          TitleWidget(
+            screenWidth: screenWidth,
+            title: "Información de la feria virtual",
+          ),
+          SizedBox(height: 10),
+          ButtonWidget(link: '', text: 'Aviso de Privacidad'),
+          ButtonWidget(link: '', text: 'Mapa de sitio'),
+          ButtonWidget(link: 'https://qroo.gob.mx/seq/', text: 'Ir a la SEQ'),
+          SizedBox(height: 10),
         ],
       ),
     );
@@ -59,16 +90,15 @@ class ScreenWidget extends StatelessWidget {
 }
 
 class BodyTextWidget extends StatelessWidget {
-  const BodyTextWidget({
-    Key? key,
-  }) : super(key: key);
+  String text;
+  BodyTextWidget({Key? key, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 20, bottom: 40),
+      margin: const EdgeInsets.only(top: 30, bottom: 60),
       child: Text(
-        'La Feria Virtual Universitaria es un evento estatal que reúne a todos los programas educativos de nivel superior,en un esfuerzo por acercar la Oferta Educativa a todos los jóvenes que quieren continuar su formación cursando una carrera universitaria.',
+        text,
         textAlign: TextAlign.center,
         style: GlobalVariables.bodyTextB,
       ),
@@ -77,8 +107,10 @@ class BodyTextWidget extends StatelessWidget {
 }
 
 class TitleWidget extends StatelessWidget {
-  const TitleWidget({
+  String title;
+  TitleWidget({
     Key? key,
+    required this.title,
     required this.screenWidth,
   }) : super(key: key);
 
@@ -88,9 +120,9 @@ class TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: screenWidth * 0.5,
-      margin: const EdgeInsets.only(top: 40),
+      margin: const EdgeInsets.only(top: 30),
       child: Text(
-        "Bienvenido a la feria virtual 2022",
+        title,
         textAlign: TextAlign.center,
         style: GlobalVariables.h2B,
       ),
@@ -99,30 +131,35 @@ class TitleWidget extends StatelessWidget {
 }
 
 class ButtonWidget extends StatelessWidget {
-  const ButtonWidget({
-    Key? key,
-  }) : super(key: key);
+  String link;
+  String text;
+  ButtonWidget({Key? key, required this.link, required this.text})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () => {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Universities()),
-        )
-      },
-      style: ButtonStyle(
-          foregroundColor:
-              MaterialStateProperty.all<Color>(GlobalVariables.backgroundColor),
-          backgroundColor:
-              MaterialStateProperty.all<Color>(GlobalVariables.primaryColor),
-          padding:
-              MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(20))),
-      child: Text(
-        'Universidades',
-        style: GlobalVariables.bigTextW,
-      ),
+    return Column(
+      children: [
+        SizedBox(height: 10),
+        SizedBox(
+          width: 280,
+          child: ElevatedButton(
+            onPressed: () => {launch(link)},
+            style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(
+                    GlobalVariables.backgroundColor),
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    GlobalVariables.primaryColor),
+                padding: MaterialStateProperty.all<EdgeInsets>(
+                    const EdgeInsets.all(20))),
+            child: Text(
+              text,
+              style: GlobalVariables.bigTextW,
+            ),
+          ),
+        ),
+        SizedBox(height: 10),
+      ],
     );
   }
 }
