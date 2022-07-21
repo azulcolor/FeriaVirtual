@@ -130,21 +130,21 @@ class EducativeOfferWidget extends StatelessWidget {
     if (kindOf == 1) {
       if (universities[index].licenciatura == 1) {
         text = '$numberLic licenciatura';
-      } else {
+      } else if (universities[index].licenciatura > 1) {
         text = '$numberLic licenciaturas';
-      }
+      } else {}
     } else if (kindOf == 2) {
       if (universities[index].licenciatura == 1) {
         text = '$numberMas maestría';
-      } else {
+      } else if (universities[index].licenciatura > 1) {
         text = '$numberMas maestrías';
-      }
+      } else {}
     } else if (kindOf == 3) {
       if (universities[index].licenciatura == 1) {
         text = '$numberDoc doctorado';
-      } else {
+      } else if (universities[index].licenciatura > 1) {
         text = '$numberDoc doctorados';
-      }
+      } else {}
     }
 
     return Row(
@@ -284,15 +284,21 @@ class UniversityCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: GlobalVariables.h3B,
               ),
+              const SizedBox(height: 15),
+              universities[index].licenciatura > 0
+                  ? EducativeOfferWidget(
+                      universities: universities, index: index, kindOf: 1)
+                  : SizedBox(),
               const SizedBox(height: 5),
-              EducativeOfferWidget(
-                  universities: universities, index: index, kindOf: 1),
+              universities[index].maestria > 0
+                  ? EducativeOfferWidget(
+                      universities: universities, index: index, kindOf: 2)
+                  : SizedBox(),
               const SizedBox(height: 5),
-              EducativeOfferWidget(
-                  universities: universities, index: index, kindOf: 2),
-              const SizedBox(height: 5),
-              EducativeOfferWidget(
-                  universities: universities, index: index, kindOf: 3),
+              universities[index].doctorado > 0
+                  ? EducativeOfferWidget(
+                      universities: universities, index: index, kindOf: 3)
+                  : SizedBox(),
               const SizedBox(height: 5),
               Tipo(tipo: universities[index].tipo),
               const SizedBox(height: 5),
