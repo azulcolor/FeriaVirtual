@@ -77,7 +77,7 @@ class _AuthScreenState extends State<AuthScreen> {
     _cntController = SingleValueDropDownController();
     super.initState();
   }
-
+  bool _isActivated = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -325,6 +325,22 @@ class _AuthScreenState extends State<AuthScreen> {
                               onChanged: (val) {},
                             ),
                             const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Checkbox(
+                                    value: _isActivated,
+                                    onChanged: (bool? value){
+                                      setState(() {
+                                        _isActivated = value!;
+                                      });
+                                    },
+                                ),
+                                Text(
+                                  'Acepto los terminos y condiciones',
+                                  style: GlobalVariables.h3B,
+                                ),
+                              ],
+                            ),
                             CustomButton(
                               text: 'Registrarte',
                               onTap: () {

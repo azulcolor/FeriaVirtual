@@ -22,7 +22,6 @@ class GlobalVariables {
     'Contabilidad',
     'Turismo',
     'Ingeniería',
-    'Tecnologías de la información',
     'Arquitectura',
     'Educación',
     'Psicología',
@@ -143,6 +142,11 @@ class GlobalVariables {
 
   static var smallTextW = GoogleFonts.inter(
     fontSize: 10,
+    color: backgroundColor,
+    fontWeight: FontWeight.w500,
+  );
+  static var smallTextW2 = GoogleFonts.inter(
+    fontSize: 16,
     color: backgroundColor,
     fontWeight: FontWeight.w500,
   );
