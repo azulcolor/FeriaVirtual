@@ -15,7 +15,6 @@ class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
 
   List<Widget> screens = [
-    const HomePage(),
     const AuthScreen(),
   ];
 

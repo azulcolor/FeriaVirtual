@@ -14,6 +14,14 @@ class GlobalVariables {
     stops: [0.5, 1.0],
   );
 
+  static final imagesRoutes = [
+    'assets/images/feriaVirtual1.jpg',
+    'assets/images/feriaVirtual2.jpg',
+    'assets/images/feriaVirtual3.jpg',
+    'assets/images/feriaVirtual4.jpg',
+    'assets/images/feriaVirtual5.jpg',
+  ];
+
   static const List<String> kindOf = ['Mostrar ambas', 'Privada', 'Publica'];
   static const List<String> area = [
     'Mostrar todas',

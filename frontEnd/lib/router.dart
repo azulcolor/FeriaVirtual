@@ -21,12 +21,6 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         builder: (_) => const MainPageLogged(),
       );
 
-    case HomePage.routeName:
-      return MaterialPageRoute(
-        settings: routeSettings,
-        builder: (_) => const HomePage(),
-      );
-
     case University.routeName:
       return MaterialPageRoute(
         settings: routeSettings,

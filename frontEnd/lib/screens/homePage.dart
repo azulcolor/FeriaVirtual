@@ -1,4 +1,4 @@
-import 'package:feriavirtual/components/components.dart';
+/*import 'package:feriavirtual/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -43,4 +43,4 @@ Widget buildImage(String imageRoute, int index) => Container(
             fit: BoxFit.fill,
           )),
       margin: const EdgeInsets.symmetric(horizontal: 12),
-    );
+    );*/

@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:feriavirtual/components/components.dart';
 import 'package:feriavirtual/screens/screens.dart';
 import 'package:flutter/material.dart';
@@ -34,12 +35,21 @@ class ScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: screenWidth * 0.9,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const ImageWidget(),
+          CarouselSlider.builder(
+              options: CarouselOptions(
+                height: 150,
+                autoPlay: true,
+              ),
+              itemCount: GlobalVariables.imagesRoutes.length,
+              itemBuilder: (context, index, realIndex) {
+                final imagesRoute = GlobalVariables.imagesRoutes[index];
+
+                return buildImage(imagesRoute, index);
+              }),
           TitleWidget(screenWidth: screenWidth),
           const BodyTextWidget()
         ],
@@ -117,17 +127,13 @@ class ButtonWidget extends StatelessWidget {
   }
 }
 
-class ImageWidget extends StatelessWidget {
-  const ImageWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Image.asset(
-          'assets/images/feriaVirtual1.jpg',
-        ));
-  }
-}
+Widget buildImage(String imageRoute, int index) => Container(
+      decoration: BoxDecoration(
+          color: Colors.grey,
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          image: DecorationImage(
+            image: AssetImage(imageRoute),
+            fit: BoxFit.fill,
+          )),
+      margin: const EdgeInsets.symmetric(horizontal: 12),
+    );
