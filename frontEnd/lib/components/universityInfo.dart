@@ -7,9 +7,7 @@ class UniversityImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (image != "NA") {
-      return Image(
-        image: NetworkImage(image),
-      );
+      return Image.network(image, height: 250,);
     }
     return const Image(
       image: AssetImage('assets/images/logo.png'),
