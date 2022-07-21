@@ -3,12 +3,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:feriavirtual/features/auth/services/auth_service.dart';
 import 'package:feriavirtual/providers/universities_provider.dart';
 import 'package:feriavirtual/providers/user_provider.dart';
+import 'package:feriavirtual/constants/utils.dart';
 import 'package:feriavirtual/screens/IntroScreen.dart';
 import 'package:feriavirtual/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:feriavirtual/router.dart';
 import 'package:feriavirtual/constants/global_variables.dart';
+
+import 'package:is_first_run/is_first_run.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -40,17 +43,21 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool _isFirstRun = true;
   final AuthService authService = AuthService();
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  late Future<int> _counter;
   @override
   void initState() {
     super.initState();
-    _counter = _prefs.then((SharedPreferences prefs) {
-      return prefs.getInt('counter') ?? 0;
-    });
+    _checkFirstRun();
+    authService.getUserData(context); //comprueba el token y mantiene la sesion
   }
 
+  void _checkFirstRun() async {
+    bool ifr = await IsFirstRun.isFirstRun();
+    setState(() {
+      _isFirstRun = ifr;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +71,13 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: GlobalVariables.backgroundColor,
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: ( 0/*_counter as int */) > 0 ? const AuthScreen() : IntroScreen(),
+      home: _isFirstRun
+          ? IntroScreen()
+          /*: _isLogged
+              ? MainPageLogged()*/
+          : Provider.of<UserProvider>(context).user.token.isNotEmpty
+              ? MainPageLogged()
+              : MainPage(),
     );
   }
 }
-
-
