@@ -135,15 +135,22 @@ class Social extends StatelessWidget {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 5),
               child: IconButton(
-                icon: Icon(
-                  FontAwesomeIcons.facebookF,
-                  size: 30,
-                  color: Color.fromARGB(255, 24, 119, 242),
-                ),
-                onPressed: () => launch(item.recurso),
-              ),
+                  icon: Icon(
+                    FontAwesomeIcons.facebookF,
+                    size: 30,
+                    color: Color.fromARGB(255, 24, 119, 242),
+                  ),
+                  onPressed: () {
+                    if (item.recurso.startsWith('https') ||
+                        item.recurso.startsWith('www.')) {
+                      launch(item.recurso);
+                    } else {
+                      launch('https://www.facebook.com/' +
+                          item.recurso.substring(1));
+                    }
+                  }),
             )
-          else if (item.redSocial == "INSTAGRAM")
+          else if (item.redSocial == "INSTAGRAM" || item.redSocial != "Vacio")
             Container(
               margin: EdgeInsets.symmetric(horizontal: 5),
               child: IconButton(
@@ -152,7 +159,15 @@ class Social extends StatelessWidget {
                   size: 30,
                   color: Color.fromARGB(255, 225, 48, 108),
                 ),
-                onPressed: () => launch(item.recurso),
+                onPressed: () {
+                  if (item.recurso.startsWith('https') ||
+                      item.recurso.startsWith('www.')) {
+                    launch(item.recurso);
+                  } else {
+                    launch('https://www.instagram.com/' +
+                        item.recurso.substring(1));
+                  }
+                },
               ),
             )
           else if (item.redSocial == "WHATSAPP")
@@ -165,7 +180,8 @@ class Social extends StatelessWidget {
                     color: Color.fromARGB(255, 7, 94, 84),
                   ),
                   onPressed: () {
-                    if (item.recurso.startsWith('https')) {
+                    if (item.recurso.startsWith('https') ||
+                        item.recurso.startsWith('www.')) {
                       launch(item.recurso);
                     } else {
                       FlutterOpenWhatsapp.sendSingleMessage(item.recurso,

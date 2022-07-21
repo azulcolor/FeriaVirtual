@@ -43,9 +43,11 @@ class DownloadButton extends StatelessWidget {
                         color: GlobalVariables.backgroundColor,
                       ),
                     ),
-                    Text(
-                      fileName,
-                      style: GlobalVariables.smallTextW,
+                    Flexible(
+                      child: Text(
+                        fileName,
+                        style: GlobalVariables.smallTextW,
+                      ),
                     ),
                   ],
                 ),
