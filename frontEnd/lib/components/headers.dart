@@ -11,7 +11,6 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
           color: GlobalVariables.primaryColor,
@@ -47,38 +46,42 @@ class HeaderSearch extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
           color: GlobalVariables.primaryColor,
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
           child: SafeArea(
-            child: Row(children: [
-              //Logo
-              Image.asset(
-                'assets/images/logo.png',
-                width: 50,
-              ),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //Logo
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/logo.png',
+                        width: 50,
+                      ),
 
-              //App Name
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text(
-                  'Feria virtual',
-                  style: GlobalVariables.h2W,
-                ),
-              ),
+                      //App Name
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Text(
+                          'Feria virtual',
+                          style: GlobalVariables.h2W,
+                        ),
+                      ),
+                    ],
+                  ),
 
-              IconButton(
-                icon: const Icon(Icons.search_outlined),
-                padding: EdgeInsets.only(left: width - 240),
-                color: GlobalVariables.backgroundColor,
-                iconSize: 28,
-                onPressed: () => showSearch(
-                    context: context,
-                    delegate: UniversitySearchDelegate(universities)),
-              )
-            ]),
+                  IconButton(
+                    icon: const Icon(Icons.search_outlined),
+                    color: GlobalVariables.backgroundColor,
+                    iconSize: 28,
+                    onPressed: () => showSearch(
+                        context: context,
+                        delegate: UniversitySearchDelegate(universities)),
+                  )
+                ]),
           )),
     );
   }
