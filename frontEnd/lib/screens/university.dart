@@ -11,6 +11,7 @@ import 'package:feriavirtual/components/downloadButton.dart';
 import 'package:feriavirtual/components/universityInfo.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/models.dart';
 
@@ -104,120 +105,162 @@ class ContactWidget extends StatelessWidget {
           style: GlobalVariables.h2B,
         ),
         const SizedBox(height: 20),
-        Container(
-          width: screenWidth * 0.8,
-          child: Column(
+        Information(screenWidth: screenWidth, university: university),
+        const SizedBox(height: 20),
+        Social(university: university)
+      ],
+    );
+  }
+}
+
+class Social extends StatelessWidget {
+  const Social({
+    Key? key,
+    required this.university,
+  }) : super(key: key);
+
+  final UniversityInfo university;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        for (var item in university.redesSociales)
+          if (item.redSocial == "FACEBOOK")
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 5),
+              child: IconButton(
+                icon: Icon(
+                  FontAwesomeIcons.facebookF,
+                  size: 30,
+                  color: Color.fromARGB(255, 24, 119, 242),
+                ),
+                onPressed: () => launch(item.recurso),
+              ),
+            )
+          else if (item.redSocial == "INSTAGRAM")
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 5),
+              child: IconButton(
+                icon: Icon(
+                  FontAwesomeIcons.instagram,
+                  size: 30,
+                  color: Color.fromARGB(255, 225, 48, 108),
+                ),
+                onPressed: () => launch(item.recurso),
+              ),
+            )
+          else if (item.redSocial == "WHATSAPP")
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 5),
+              child: const Icon(
+                FontAwesomeIcons.whatsapp,
+                size: 30,
+                color: Color.fromARGB(255, 7, 94, 84),
+              ),
+            )
+          else if (item.redSocial == "TWITTER")
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 5),
+              child: IconButton(
+                icon: Icon(
+                  FontAwesomeIcons.twitter,
+                  size: 30,
+                  color: Color.fromARGB(255, 29, 160, 242),
+                ),
+                onPressed: () => launch(item.recurso),
+              ),
+            )
+          else if (item.redSocial == "PAGINA WEB")
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 5),
+              child: IconButton(
+                icon: Icon(
+                  FontAwesomeIcons.globe,
+                  size: 30,
+                  color: GlobalVariables.primaryColor,
+                ),
+                onPressed: () => launch(item.recurso),
+              ),
+            )
+      ],
+    );
+  }
+}
+
+class Information extends StatelessWidget {
+  const Information({
+    Key? key,
+    required this.screenWidth,
+    required this.university,
+  }) : super(key: key);
+
+  final double screenWidth;
+  final UniversityInfo university;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: screenWidth * 0.8,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(
-                    FontAwesomeIcons.phone,
-                    size: 20,
-                    color: GlobalVariables.primaryColor,
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    university.telefono,
-                    style: GlobalVariables.bodyTextB,
-                  ),
-                ],
+              const Icon(
+                FontAwesomeIcons.phone,
+                size: 20,
+                color: GlobalVariables.primaryColor,
               ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(
-                    FontAwesomeIcons.at,
-                    size: 20,
-                    color: GlobalVariables.primaryColor,
-                  ),
-                  SizedBox(width: 10),
-                  Flexible(
-                    child: Text(
-                      university.correoElectronico,
-                      style: GlobalVariables.bodyTextB,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(
-                    FontAwesomeIcons.locationDot,
-                    size: 20,
-                    color: GlobalVariables.primaryColor,
-                  ),
-                  SizedBox(width: 10),
-                  Flexible(
-                    child: Text(
-                      university.direccion,
-                      style: GlobalVariables.bodyTextB,
-                    ),
-                  ),
-                ],
+              SizedBox(width: 10),
+              Text(
+                university.telefono,
+                style: GlobalVariables.bodyTextB,
               ),
             ],
           ),
-        ),
-        const SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            for (var item in university.redesSociales)
-              if (item.redSocial == "FACEBOOK")
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5),
-                  child: const Icon(
-                    FontAwesomeIcons.facebookF,
-                    size: 30,
-                    color: Color.fromARGB(255, 24, 119, 242),
-                  ),
-                )
-              else if (item.redSocial == "INSTAGRAM")
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5),
-                  child: const Icon(
-                    FontAwesomeIcons.instagram,
-                    size: 30,
-                    color: Color.fromARGB(255, 225, 48, 108),
-                  ),
-                )
-              else if (item.redSocial == "WHATSAPP")
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5),
-                  child: const Icon(
-                    FontAwesomeIcons.whatsapp,
-                    size: 30,
-                    color: Color.fromARGB(255, 7, 94, 84),
-                  ),
-                )
-              else if (item.redSocial == "TWITTER")
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5),
-                  child: const Icon(
-                    FontAwesomeIcons.twitter,
-                    size: 30,
-                    color: Color.fromARGB(255, 29, 160, 242),
-                  ),
-                )
-              else if (item.redSocial == "PAGINA WEB")
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5),
-                  child: const Icon(
-                    FontAwesomeIcons.globe,
-                    size: 30,
-                    color: GlobalVariables.primaryColor,
-                  ),
-                )
-          ],
-        )
-      ],
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(
+                FontAwesomeIcons.at,
+                size: 20,
+                color: GlobalVariables.primaryColor,
+              ),
+              SizedBox(width: 10),
+              Flexible(
+                child: Text(
+                  university.correoElectronico,
+                  style: GlobalVariables.bodyTextB,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(
+                FontAwesomeIcons.locationDot,
+                size: 20,
+                color: GlobalVariables.primaryColor,
+              ),
+              SizedBox(width: 10),
+              Flexible(
+                child: Text(
+                  university.direccion,
+                  style: GlobalVariables.bodyTextB,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
